@@ -1,0 +1,8 @@
+\begin{center}\small\begin{tabular}{@{}lrrr@{}}\toprule Component & p50 (ms) & p95 (ms) & Max (ms)\\\midrule
+scene renderer & 0.009 & 0.010 & 0.236 \\
+analysis FFT $\times$4 & 0.060 & 0.101 & 0.351 \\
+spatial filtering & 0.010 & 0.011 & 0.133 \\
+synthesis IFFT $\times$2 & 0.034 & 0.056 & 0.310 \\
+RNNoise $\times$2 (including framing) & 0.002 & 1.268 & 2.451 \\
+level + digital ceiling & 0.001 & 0.001 & 0.040 \\
+total audio block & 0.123 & 1.404 & 2.619 \\\bottomrule\end{tabular}\end{center}

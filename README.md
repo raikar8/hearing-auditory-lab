@@ -117,3 +117,15 @@ The lab is not a clinical device or fitting prescription. Audiogram values do no
 Byrne & Dillon (1986), DOI: [10.1097/00003446-198608000-00007](https://doi.org/10.1097/00003446-198608000-00007); Kates (2005), DOI: [10.1177/108471380500900202](https://doi.org/10.1177/108471380500900202); [MIT KEMAR](https://sound.media.mit.edu/resources/KEMAR.html), Gardner & Martin; [LibriSpeech](https://www.openslr.org/12), Panayotov et al. (2015), CC BY 4.0; [Clarity](https://github.com/claritychallenge/clarity), pyclarity 0.9.0; [HASPI/HASQI overview](https://pubmed.ncbi.nlm.nih.gov/36137862/), Kates & Arehart (2022).
 
 For broader methods, see the paper and `dist/survey-data.json`. No neural checkpoint is shipped or claimed to have been reproduced.
+
+### Compile the extension paper
+
+With a standard TeX Live or MiKTeX installation, from the repository root:
+
+```bash
+python research/array-paper-tables.py
+pdflatex -interaction=nonstopmode -halt-on-error -output-directory dist dist/array-supplement.tex
+pdflatex -interaction=nonstopmode -halt-on-error -output-directory dist dist/array-supplement.tex
+```
+
+Tables are generated from committed benchmark/evaluation JSON, not manually typed results.

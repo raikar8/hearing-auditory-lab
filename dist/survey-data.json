@@ -141,5 +141,40 @@
     "issue": "Follow task-specific data licenses, split definitions and latency rules. Prediction challenges evaluate metrics, not enhancement systems.",
     "status": "Proposed main benchmark; not downloaded",
     "run": null
+  },
+  {
+    "name": "Microphone-array DS / MVDR",
+    "family": "Spatial",
+    "year": "1969 / lab 0.3",
+    "authors": "Capon; local regularized implementation",
+    "url": "https://doi.org/10.1109/PROC.1969.7278",
+    "idea": "Spatial filtering of four microphone mixtures with known manual steering and measured noise-only covariance.",
+    "issue": "Ideal free-field geometry, frozen noise statistics; residual noise cues are mapped toward the target. Not measured BTE acoustics.",
+    "status": "Live array baseline + engineering evaluation",
+    "run": "mvdr",
+    "page": "array.html"
+  },
+  {
+    "name": "RNNoise pretrained streaming baseline",
+    "family": "Neural",
+    "year": "2018 / pinned later implementation",
+    "authors": "Valin; Jitsi/Xiph pinned runtime",
+    "url": "https://jmvalin.ca/papers/rnnoise_mmsp2018.pdf",
+    "idea": "Hybrid DSP/neural processing, real pretrained WASM model, persistent state per ear, 480-sample frames.",
+    "issue": "Two independent monaural processors; 30 ms adapter delay; not the original paper checkpoint. No hearing-aware quality ranking yet.",
+    "status": "Live pretrained model + runtime/latency measurements",
+    "run": "rnnoise",
+    "page": "array.html"
+  },
+  {
+    "name": "Moving-target localization and steering",
+    "family": "Spatial",
+    "year": "2015",
+    "authors": "Adiloğlu et al.",
+    "url": "https://doi.org/10.1177/2331216515618903",
+    "idea": "Estimate source direction and steer a beamformer as the target moves.",
+    "issue": "Target association is distinct from localization; loudest direction may be an interferer. Control lag and audio delay must be measured separately.",
+    "status": "Literature reference; automatic localization not implemented",
+    "run": null
   }
 ]

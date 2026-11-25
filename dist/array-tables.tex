@@ -1,0 +1,9 @@
+\textbf{Host:} AMD EPYC 7763 64-Core Processor, Node v24.22.3.\par
+\begin{center}\small\begin{tabular}{@{}lrrrrrr@{}}\toprule Mode & p50 & p95 & p99 & Max & RTF & Overruns\\\midrule
+reference  & 0.118 & 0.282 & 0.557 & 2.915 & 0.059 & 1 \\
+reference + RNNoise & 0.141 & 1.587 & 1.956 & 3.934 & 0.192 & 7 \\
+das  & 0.119 & 0.296 & 0.845 & 2.218 & 0.060 & 0 \\
+das + RNNoise & 0.123 & 1.437 & 1.649 & 3.706 & 0.177 & 2 \\
+mvdr  & 0.116 & 0.193 & 0.252 & 1.738 & 0.049 & 0 \\
+mvdr + RNNoise & 0.123 & 1.404 & 1.556 & 2.619 & 0.172 & 0 \\\bottomrule\end{tabular}\end{center}
+Execution quantiles are milliseconds per 128-sample block. Overruns are measured over 1875 blocks per condition.

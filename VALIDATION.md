@@ -1,3 +1,22 @@
+# Edition 0.3 validation — 25 November 2026
+
+- Checkpoint d648391 restored from GitHub after workspace maintenance; all 25 tests passed again on the restored checkout.
+- New checks: radix-2 FFT, exact 512-sample reference reconstruction delay, distortionless complex constraints, coherent-noise rejection, target-muted calibration frame accounting/freeze, actual pretrained neural execution, and unique-buffer memory accounting.
+- Chromium preview: started the audio engine at 48 kHz, observed 371 frozen noise frames and zero solver fallback bins, selected MVDR, enabled RNNoise and verified delay/memory UI updates. This was UI/runtime QA, not a listening-quality test or acoustic loopback measurement.
+- AudioWorklet clock unavailable in that browser; fallback table explicitly identifies separate Node host measurements. Live numeric buffers and 16 MiB WASM reservation observed.
+- Six Node benchmark conditions (reference/DAS/MVDR, each with/without RNNoise); calibration 1 s, warmup 1 s, measured 5 s. Full component quantiles, initialization, RTF, overruns and memory in `dist/array-benchmark.json`.
+- RNNoise adapter lag measured on actual bundled speech: 1440 samples / 30 ms, correlation approximately 0.9665. Combined STFT + neural nominal alignment delay: 40.667 ms, excluding propagation and device I/O.
+- Frozen-linear-filter evaluation: 3 masker angles, 4 SNRs, 0/20-degree steering error (reference uses 0 only), 60 rows. Distinct training/evaluation noise seeds. At 0 dB scene SNR and a 90-degree masker, left-ear SNR gains were 3.463 dB (DAS) and 14.628 dB (MVDR). Colocated sources give approximately zero gain. This favorable idealized scene is not perceptual or population evidence.
+- Six-page LaTeX supplement compiled twice; citations resolved, no overfull boxes, all rendered pages visually reviewed. JavaScript syntax, local HTML links and pinned vendor SHA-256 verified.
+- Final preview also verified the 40.67 ms neural-path label and populated Node fallback table with its explicit timing-source notice.
+- Source and default model are bundled with wrapper and RNNoise licenses; exact package, submodule and SHA-256 provenance recorded.
+
+Not verified: automatic localization/tracking (not implemented); hearing-aware benefit of the neural or array pipeline; calibrated headphone SPL; acoustic end-to-end latency; sustained browser deadline performance; physical multichannel capture; room/BTE realism; wearer benefit. Source upload and JSON downloads have code paths but no browser interaction QA claim in this phase. No neural quality ranking is claimed.
+
+The original 0.2 validation record below applies only to its own implementation.
+
+---
+
 # Validation record — 25 November 2026
 
 Reconstructed version 0.2.0. Earlier uncommitted workspace files were removed by workspace maintenance; measurements below were rerun against this revision. Previous browser checks are not claimed as checks of this reconstructed version.

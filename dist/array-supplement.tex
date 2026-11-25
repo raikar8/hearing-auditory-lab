@@ -1,0 +1,117 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[margin=24mm]{geometry}
+\usepackage{amsmath,amssymb,booktabs,tabularx,array,xcolor}
+\usepackage[colorlinks=true,urlcolor=teal,linkcolor=teal]{hyperref}
+\usepackage{fancyhdr}
+\pagestyle{fancy}\fancyhf{}\lhead{Binaural Hearing Lab}\rhead{Implementation supplement 0.3}\cfoot{\thepage}
+\setlength{\headheight}{14pt}\setlength{\emergencystretch}{2em}\setlength{\parindent}{0pt}\setlength{\parskip}{6pt}
+\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
+\title{Array Processing, Neural Enhancement\\and Measured Runtime Costs}
+\author{Research implementation prepared for Aditya Raikar\\Implementation and documentation: Codex}
+\date{25 November 2026}
+\begin{document}\maketitle
+\begin{abstract}
+This supplement specifies the 0.3 extension to the Binaural Hearing Lab: four simulated microphone channels, normalized delay-and-sum, noise-calibrated minimum-variance distortionless response (MVDR) filtering, and pretrained RNNoise processing. It distinguishes simulated acoustics, literature-derived algorithms, actual executable components, local measurements and research still required. Component timing and memory measurements accompany spatial tests, including steering error and colocated-source controls. The resulting streaming browser experiment is a research instrument, not a validated wearable hearing aid. The original white paper covers hearing physiology, audibility, gain prescription and the offline hearing-model pilot; this supplement should be read with it.
+\end{abstract}
+\section{Purpose and relationship to hearing loss}
+Reduced audibility can motivate frequency-dependent amplification, while impaired frequency selectivity, recruitment and other cochlear deficits limit what amplification alone can restore. The original paper explains these mechanisms and carefully distinguishes an attenuation illustration from a hearing-loss model. This extension asks a separate question: can spatial and neural enhancement improve the signal presented to subsequent fitting?
+
+The array page isolates enhancement before fitting. It does not currently cascade the original audiogram-conditioned gain, educational compression, or hearing-loss illustration. Noise reduction is not a substitute for appropriate gain prescription, and a higher acoustic SNR is not proof of better intelligibility for a listener with hearing impairment. The existing offline HASPI/MSBG pilot is not an evaluation of this new array/neural chain.
+
+\textbf{Implemented:} streaming four-channel mixtures; reference ear pair; normalized delay-and-sum; regularized MVDR; two persistent pretrained neural states; manual steering; measured component compute and memory; deterministic spatial evaluation. \textbf{Not implemented:} automatic localization/target tracking, measured BTE array acoustics, room reverberation, binaural neural training, physical multichannel capture, feedback cancellation, AEC, or a validated perceptual ranking.
+
+\newpage
+\section{Acoustic and signal-processing specification}
+At $f_s=48\,$kHz, microphone positions $(x_m,y_m)$ in metres are $(-.09,.008)$, $(-.09,-.008)$, $(.09,.008)$ and $(.09,-.008)$. Positive $x$ points right and positive $y$ points forward. For a plane wave at head-relative azimuth $\theta$,
+\begin{equation}
+\tau_m=24-\frac{f_s}{343}(x_m\sin\theta+y_m\cos\theta)\quad\text{samples}.
+\end{equation}
+The common 24-sample offset makes the synthetic renderer causal. Linear interpolation produces approximately 0.24--0.77 ms of propagation delay. This is an ideal omnidirectional free-field model: no head scattering, pinnae, room response, microphone mismatch or sensor noise is included. The drawing is a geometry reference, not an acoustic head model. The original lab retains measured KEMAR HRIR rendering, but those ear responses do not constitute a four-microphone BTE dataset.
+
+For $n_m=\lfloor\tau_m\rfloor$, $a_m=\tau_m-n_m$ and $\omega_k=2\pi k/N$, the steering vector matches the interpolator:
+\begin{equation}
+d_m(k)=e^{-j\omega_k n_m}\big[(1-a_m)+a_me^{-j\omega_k}\big].
+\end{equation}
+Four analysis FFTs use $N=512$, hop $H=128$ and periodic square-root Hann windows. Two synthesis IFFTs overlap-add with scale $1/2$. The reference path has exactly 512 samples (10.667 ms) of delay, verified by reconstruction. All spatial modes use this same path.
+
+Delay-and-sum uses $\mathbf w_{DS}=\mathbf d/(\mathbf d^H\mathbf d)$. Following the minimum-variance constraint of Capon \cite{capon},
+\begin{equation}
+\mathbf w_{MVDR}=\frac{\widetilde{\mathbf R}_n^{-1}\mathbf d}{\mathbf d^H\widetilde{\mathbf R}_n^{-1}\mathbf d},\qquad
+\widetilde{\mathbf R}_n=\mathbf R_n+\max\!\left(10^{-10},\lambda\frac{\operatorname{tr}\mathbf R_n}{4}\right)\mathbf I.
+\end{equation}
+The default $\lambda=0.01$. Complex Gaussian elimination with pivoting solves the system; failed bins fall back to delay-and-sum and are counted. No explicit matrix inverse is formed.
+
+A one-second target-muted calibration estimates noise covariance from microphone mixtures. The first four STFT frames are discarded to avoid previous target leakage; 371 frames are averaged. Statistics then freeze. Scene/noise geometry changes require recalibration. This is supervised noise-only estimation, not blind adaptation. The filter API does not receive clean stems. Weights are recomputed on configuration change and at calibration completion, with solve spikes profiled separately.
+
+Enhanced ear outputs are $z_e=d_e\mathbf w^H\mathbf x$, using each front-ear transfer. This retains modeled target transfer functions under the frequency-domain constraint, with practical STFT approximation. Residual noise is mapped toward the target cues too: preservation of target cues must not be confused with preservation of the whole sound field.
+
+\newpage
+\section{Pretrained neural processing and latency}
+RNNoise provides a hybrid DSP/neural denoising baseline \cite{valin}. The unmodified synchronous bundle from \texttt{@jitsi/rnnoise-wasm@0.2.1} is vendored with licenses and SHA-256 provenance. It contains the default pretrained weights of the pinned later RNNoise revision; it is not the original 2018 checkpoint. The wrapper revision and RNNoise submodule revision are recorded in \texttt{dist/vendor/provenance.json} \cite{jitsi,xiph}.
+
+Two independent states process the ear signals after spatial filtering. The WASM module loads once, recurrent state persists, and 128-sample callbacks feed 480-sample inference frames. Inputs are scaled by 32768 for the library's amplitude convention; outputs are rescaled. Toggling neural processing resets state without reloading weights. This is two monaural denoisers, not a binaural neural network. Interaural cues may change, and no target identity or source separation is provided.
+
+\begin{center}\begin{tabularx}{\linewidth}{@{}l r Y@{}}\toprule
+Stage & Delay (ms) & Interpretation\\\midrule
+Synthetic propagation & 0.24--0.77 & Geometry-dependent renderer delay\\
+Array analysis/synthesis & 10.667 & One shared 512-sample delay\\
+Spatial matrix operations & 0 added queue & Compute must meet deadline\\
+Neural streaming adapter & 10 & One 480-sample output queue\\
+Pinned RNNoise internals & 20 & Overlap plus delayed spectral frame\\
+Output gain/ceiling & 0 & No added queue\\\midrule
+Array + neural processing & 40.667 & Excludes propagation and device\\\bottomrule
+\end{tabularx}\end{center}
+The pinned RNNoise source processes \texttt{delayed\_X}; a 10 ms inference frame does not imply 10 ms signal delay. Cross-correlation on the bundled speech independently measures 1440 samples (30 ms) through our neural adapter. The measurement includes a 10 ms adapter queue plus 20 ms internal alignment delay. It is a one-clip alignment check, not a universal perceptual or acoustic loopback measurement.
+
+Browser \texttt{baseLatency} and \texttt{outputLatency} are shown separately. They do not establish measured mouth-to-ear latency. In the tested browser they reported approximately 10.02 and 32 ms, respectively; these values are device/session dependent and are not hard-coded. No firmware, ADC/DAC or wireless-ear communication cost is inferred from Node execution speed.
+
+\section{Compute and memory measurement}
+The profiler records rendering, analysis FFTs, noise covariance, weight solving, spatial filtering, synthesis, neural processing, gain/ceiling and the whole 128-sample block. Statistics include p50/p95/p99/max; calls above 2.667 ms are counted. Component quantiles cannot be summed. RNNoise's 480-sample inference occurs in bursts, so average speed alone can conceal deadline misses. Calibration and initialization are reported separately.
+
+\newpage
+\section{Local measurements and interpretation}
+\small
+\input{dist/array-tables.tex}
+
+The benchmark runs one second of calibration, one second additional warmup and five seconds of measured processing for each mode. It uses the bundled speech and seeded noise, without audio-device I/O. Timers instrument the same DSP classes as the browser. Results reflect this host, its scheduling and runtime; they do not predict a wearable CPU, energy use, or guaranteed real-time scheduling.
+
+AudioWorklet lacked a high-resolution timing clock in the tested Chromium session. The page therefore labels fallback timing numbers as the separate Node host benchmark, while continuing to report live buffer sizes. It does not present the fallback as current browser performance. Telemetry serialization is outside the measured callback region.
+
+Typed-array memory is counted by unique underlying buffers: array state 190,208 bytes; scene delay lines 2,048; I/O buffers 3,072; neural adapter buffers 7,680. Two neural states share a reserved 16 MiB WASM heap. Reserved heap is not network-weight size. Source PCM, profiling rings, vendor transfer size and whole-process RSS are separate categories. JS object overhead, JIT code, browser/decoder memory and device buffers are excluded from numeric-buffer totals. The process RSS high-water mark spans all benchmark modes.
+
+The spatial results below are an engineering test of a favorable free-field stationary scene, not clinical or perceptual scores. Noise-only training and evaluation use distinct seeds. Frozen linear weights permit separate target/noise replay and component-energy SNR measurement. This decomposition is not valid for nonlinear RNNoise, WDRC or limiting. Startup 100 ms is excluded, and each scene uses three seconds of one speech clip loop.
+
+\input{dist/array-spatial-table.tex}
+
+The colocated condition is a negative control: spatial processing cannot separate sources sharing the same transfer vector. The full JSON also includes SNR 5/10/15 dB and 20-degree steering errors, with target-level changes reported alongside SNR. No RNNoise intelligibility advantage is claimed from execution or finite-output checks.
+
+\newpage
+\normalsize
+\section{Component profile and localization}
+For the MVDR plus RNNoise condition, the following component measurements show why burst compute matters. Neural median time is low because most 128-sample calls only move data; calls that fill the 480-sample frame execute inference. These measurements describe two ear streams together.
+\input{dist/array-components-table.tex}
+The separate noise-calibration report includes covariance updates and matrix solving; these operations are not counted as steady-state zero-cost work. Runtime initialization took about 9.55 ms on the recorded host. The full JSON retains p99, calibration distributions and counts. Quantile sums are not a total-time estimate.
+
+\subsection{Localization and research sequence}
+Automatic steering toward a moving voice needs a direction estimate, followed by a target-association rule. These are different problems: the strongest sound may be an unwanted talker. A manual direction is sufficient for the current controlled comparison, and known scene coordinates suffice for headphone rendering. Hearing-aid localization/steering research demonstrates the value of tracking moving targets \cite{adiloglu}; this implementation does not reproduce that entire system.
+
+The next experiment should compare fixed-front, known-direction and estimated-direction steering. Add a GCC/SRP-based localization baseline, confidence, target selection and temporal tracking. Report angular error, front/back confusion, target swaps and tracking lag, with moving sources and head turns. An estimator's observation window may create control lag without adding the same amount of buffered audio delay. Measure both, and profile localization as its own component. Physical arrays require synchronized channels and calibrated geometry.
+
+Next add measured BTE/BRIR scenes and reverberation, held-out speakers and noise, then a binaural neural model or a documented streaming DeepFilterNet adapter. Preserve causal state, weight provenance, exact delay alignment and output-level handling. Assess intelligibility, quality and interaural cue errors together; include hearing-model metrics and a listening protocol before ranking techniques. A native inference worker may be necessary to handle burst-compute overruns. Combining enhancement with the original gain/compression chain is a separate validation step.
+
+Acoustic feedback cancellation estimates receiver-to-microphone coupling. Echo cancellation uses a known external playback reference. Neither is implemented here, and localization replaces neither function. The headphone lab is not a calibrated assistive device.
+
+\newpage
+\section{Reproduction and verification}
+Serve \texttt{dist} with Python's HTTP server and open \texttt{array.html} on localhost or HTTPS. No npm installation or GPU is required for playback. Use headphones at low device volume. Run \texttt{npm test}, \texttt{npm run evaluate:array}, and \texttt{npm run benchmark:array} sequentially. Preserve the generated JSON with host details and timestamps; avoid concurrent workloads for benchmarking.
+
+The original and new tests total 25 at this checkpoint: FFT and reconstruction, MVDR constraints and rejection, covariance freeze, neural runtime, memory counting, and the existing hearing-lab/worklet checks. Browser QA verified start, frozen calibration and MVDR/neural selection. Node resampling is deterministic linear 16-to-48 kHz conversion; browser decoding uses its own resampler. These are not asserted to be bit-identical. Read \texttt{Skills.md} and \texttt{array-method.md} for limitations and reproduction details.
+
+\begin{thebibliography}{9}\small
+\bibitem{capon} J. Capon. High-resolution frequency-wavenumber spectrum analysis. \emph{Proceedings of the IEEE}, 57(8):1408--1418, 1969. \href{https://doi.org/10.1109/PROC.1969.7278}{doi:10.1109/PROC.1969.7278}.
+\bibitem{adiloglu} K. Adilo\u glu et al. A binaural steering beamformer system for enhancing a moving speech source. \emph{Trends in Hearing}, 19, 2015. \href{https://doi.org/10.1177/2331216515618903}{doi:10.1177/2331216515618903}.
+\bibitem{valin} J.-M. Valin. A hybrid DSP/deep learning approach to real-time full-band speech enhancement. \emph{MMSP}, 2018. \url{https://jmvalin.ca/papers/rnnoise_mmsp2018.pdf}.
+\bibitem{jitsi} Jitsi. RNNoise WASM, npm package 0.2.1. Wrapper commit \texttt{cb529a59a8478fe604e57986fc96afdaecfa6fb7}. \url{https://github.com/jitsi/rnnoise-wasm}.
+\bibitem{xiph} Xiph.Org. RNNoise submodule commit \texttt{372f7b4b76cde4ca1ec4605353dd17898a99de38}. \url{https://github.com/xiph/rnnoise}.
+\end{thebibliography}
+\end{document}

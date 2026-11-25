@@ -22,6 +22,32 @@ Open **http://localhost:8000**, click **Start listening**, and start at low devi
 
 Microphone capture is optional and requests browser permission. Use headphones to avoid acoustic feedback; disable the mic to return to file input. Files and mic audio are processed locally. Google Fonts is the only nonlocal UI resource; system fonts work offline.
 
+## New in 0.3: array and neural experiment
+
+Open **http://localhost:8000/array.html** (or **Array + neural** in the lab navigation).
+This separate 48 kHz experiment adds four simulated free-field microphones, normalized delay-and-sum,
+noise-calibrated MVDR, and real pretrained RNNoise WASM with two persistent ear states. There is no
+head scattering/HRTF in the array renderer; the original 44.1 kHz KEMAR/fitting lab remains available.
+
+- Start includes one second of noise-only learning. Change manual steering to test DOA errors.
+- Compare spatial modes, then enable RNNoise. Localization/target tracking is a documented next step.
+- Inspect component execution quantiles, allocated memory and delay. If the worklet lacks a timer,
+  the table explicitly uses the separate Node host benchmark. Browser I/O is shown separately.
+- STFT alignment delay is **10.67 ms**; RNNoise adds **30 ms** in this pinned adapter. The combined
+  path is **40.67 ms**, excluding propagation/device buffering. Throughput is not low wearable latency.
+- Some measured neural blocks exceed the 2.67 ms callback budget. See the full benchmark, not just RTF.
+
+```bash
+npm test
+npm run benchmark:array
+npm run evaluate:array
+```
+
+Run these sequentially. No GPU or npm install is needed. Vendored model/runtime provenance and licenses
+are in `dist/vendor/` and `THIRD_PARTY.md`. Read [the array method](dist/array-method.md) and
+[the LaTeX supplement](dist/array-supplement.tex) / [PDF](dist/array-supplement.pdf).
+The original white paper describes edition 0.2; the supplement specifies the 0.3 extension.
+
 ## Research environment
 
 Tested with Python 3.12, Node 24.22.3 on Linux. Python 3.12 is recommended for reproducing these exact pins. In a new virtual environment:

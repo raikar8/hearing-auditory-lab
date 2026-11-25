@@ -1,0 +1,11 @@
+{
+  "npm_package": "@jitsi/rnnoise-wasm",
+  "version": "0.2.1",
+  "npm_integrity": "sha512-iEj77www43pS2Yq+cfLZb+hFuI7L5ccisBzzPMcOjjLsG4/LAlkD1CY58/8gc84nHdLBGmD/OPIWGnvYnXvB0A==",
+  "wrapper_git_commit": "cb529a59a8478fe604e57986fc96afdaecfa6fb7",
+  "rnnoise_submodule_commit": "372f7b4b76cde4ca1ec4605353dd17898a99de38",
+  "bundle_sha256": "05a553f523d59502d133a6d05dbf1878137c9e7bcff06edf5561f7001b62f95f",
+  "bundle_bytes": 1933102,
+  "runtime": "sync ESM bundled default weights, 480 sample frames at 48000 Hz",
+  "note": "2018 paper is architectural background; this later pinned implementation is not the 2018 checkpoint."
+}

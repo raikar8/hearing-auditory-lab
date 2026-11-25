@@ -1,1 +1,12 @@
-{"name":"binaural-hearing-lab","version":"0.2.0","private":true,"type":"module","scripts":{"test":"node --test tests/*.test.mjs","benchmark":"node research/benchmark.mjs"}}
+{
+  "name": "binaural-hearing-lab",
+  "version": "0.3.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test tests/*.test.mjs",
+    "benchmark": "node research/benchmark.mjs",
+    "benchmark:array": "node research/array-benchmark.mjs",
+    "evaluate:array": "node research/array-evaluation.mjs"
+  }
+}

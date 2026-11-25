@@ -1,0 +1,831 @@
+{
+  "version": "0.3",
+  "utc": "2026-11-25T16:52:35.307Z",
+  "cpu": "AMD EPYC 7763 64-Core Processor",
+  "node": "v24.22.3",
+  "scope": "Instrumented Node DSP; 128 samples at 48 kHz. No browser/device I/O. RSS is whole process; high-water mark spans all runs. Per-component quantiles use latest 2048 calls; total RTF covers full 1875-block measurement.",
+  "source": "Bundled LibriSpeech speech, linear 16→48 kHz resampling for this benchmark; browser uses decodeAudioData resampling.",
+  "sample_rate": 48000,
+  "block_samples": 128,
+  "block_budget_ms": 2.6666666666666665,
+  "neural_init_ms": 9.552149999999997,
+  "neural_adapter_measured_lag": {
+    "lag_samples": 1440,
+    "correlation": 0.9665479110401507,
+    "lag_ms": 30
+  },
+  "peak_process_rss_bytes": 77516800,
+  "vendor_bundle_bytes": 1933102,
+  "runs": [
+    {
+      "method": "reference",
+      "neural": false,
+      "audio_seconds": 5,
+      "warmup_seconds": 1,
+      "calibration_seconds": 1,
+      "timings": {
+        "scene renderer": {
+          "calls": 1875,
+          "p50_ms": 0.008525999999960732,
+          "p95_ms": 0.009338000000013835,
+          "p99_ms": 0.07551200000000335,
+          "max_ms": 1.2938780000000065
+        },
+        "analysis FFT ×4": {
+          "calls": 1875,
+          "p50_ms": 0.05984300000000076,
+          "p95_ms": 0.15675500000008924,
+          "p99_ms": 0.30537600000002385,
+          "max_ms": 1.529280999999969
+        },
+        "spatial filtering": {
+          "calls": 1875,
+          "p50_ms": 0.010539999999991778,
+          "p95_ms": 0.014446999999961463,
+          "p99_ms": 0.06899999999995998,
+          "max_ms": 1.5208350000000337
+        },
+        "synthesis IFFT ×2": {
+          "calls": 1875,
+          "p50_ms": 0.033492000000023836,
+          "p95_ms": 0.11449599999997417,
+          "p99_ms": 0.1852089999999862,
+          "max_ms": 1.6870389999999702
+        },
+        "level + digital ceiling": {
+          "calls": 1875,
+          "p50_ms": 0.0011220000000093933,
+          "p95_ms": 0.007414000000039778,
+          "p99_ms": 0.0403660000000059,
+          "max_ms": 0.6047300000000178
+        },
+        "total audio block": {
+          "calls": 1875,
+          "p50_ms": 0.11846400000001722,
+          "p95_ms": 0.28230199999995875,
+          "p99_ms": 0.5570900000000165,
+          "max_ms": 2.914701999999977
+        }
+      },
+      "memory": {
+        "scene_state_bytes": 2048,
+        "source_PCM_bytes": 1309440,
+        "beamformer_numeric_bytes": 190208,
+        "io_numeric_bytes": 3072,
+        "neural_adapter_bytes": 7680,
+        "wasm_heap_reserved_bytes": 16777216,
+        "profiling_numeric_bytes": 98304
+      },
+      "calibration_remaining_ms": 0,
+      "noise_frames": 371,
+      "fallback_bins": 0,
+      "overruns": 1,
+      "timed_blocks": 1875,
+      "rtf": 0.05925882820000014,
+      "peak": 0.007727670017629862,
+      "algorithmic_delay_ms": 10.666666666666666,
+      "calibration_timings": {
+        "scene renderer": {
+          "calls": 375,
+          "p50_ms": 0.008697000000012167,
+          "p95_ms": 0.01734300000001099,
+          "p99_ms": 0.05480300000002103,
+          "max_ms": 1.3816559999999924
+        },
+        "analysis FFT ×4": {
+          "calls": 375,
+          "p50_ms": 0.06040400000000545,
+          "p95_ms": 0.3292509999999993,
+          "p99_ms": 1.5139130000000023,
+          "max_ms": 3.383154999999988
+        },
+        "noise covariance (calibration)": {
+          "calls": 375,
+          "p50_ms": 0.03098899999997684,
+          "p95_ms": 0.07154500000001462,
+          "p99_ms": 0.1627470000000244,
+          "max_ms": 2.5107810000000086
+        },
+        "weight solve (on change)": {
+          "calls": 2,
+          "p50_ms": 1.7152920000000051,
+          "p95_ms": 1.7152920000000051,
+          "p99_ms": 1.7152920000000051,
+          "max_ms": 1.7152920000000051
+        },
+        "spatial filtering": {
+          "calls": 375,
+          "p50_ms": 0.010609999999985575,
+          "p95_ms": 0.02789300000000594,
+          "p99_ms": 0.49215699999999174,
+          "max_ms": 0.5504669999999976
+        },
+        "synthesis IFFT ×2": {
+          "calls": 375,
+          "p50_ms": 0.03370400000000018,
+          "p95_ms": 0.1261480000000006,
+          "p99_ms": 0.8344629999999995,
+          "max_ms": 1.7793129999999735
+        },
+        "level + digital ceiling": {
+          "calls": 375,
+          "p50_ms": 0.006992999999994254,
+          "p95_ms": 0.030186999999983755,
+          "p99_ms": 0.08268599999999537,
+          "max_ms": 0.4231070000000159
+        },
+        "total audio block": {
+          "calls": 375,
+          "p50_ms": 0.1591489999999851,
+          "p95_ms": 0.515671999999995,
+          "p99_ms": 3.0676599999999894,
+          "max_ms": 9.026902000000007
+        }
+      },
+      "rss_before_bytes": 64278528,
+      "rss_after_bytes": 66768896
+    },
+    {
+      "method": "reference",
+      "neural": true,
+      "audio_seconds": 5,
+      "warmup_seconds": 1,
+      "calibration_seconds": 1,
+      "timings": {
+        "scene renderer": {
+          "calls": 1875,
+          "p50_ms": 0.00867700000003424,
+          "p95_ms": 0.009788999999955195,
+          "p99_ms": 0.057447999999794774,
+          "max_ms": 0.2055279999999584
+        },
+        "analysis FFT ×4": {
+          "calls": 1875,
+          "p50_ms": 0.06039299999997638,
+          "p95_ms": 0.16274699999985387,
+          "p99_ms": 0.3102440000000115,
+          "max_ms": 2.147517000000107
+        },
+        "spatial filtering": {
+          "calls": 1875,
+          "p50_ms": 0.010530000000017026,
+          "p95_ms": 0.011801999999988766,
+          "p99_ms": 0.054302000000006956,
+          "max_ms": 0.17825599999991937
+        },
+        "synthesis IFFT ×2": {
+          "calls": 1875,
+          "p50_ms": 0.033732999999983804,
+          "p95_ms": 0.11245199999984834,
+          "p99_ms": 0.18447800000012649,
+          "max_ms": 2.1624849999998332
+        },
+        "RNNoise ×2 (including framing)": {
+          "calls": 1875,
+          "p50_ms": 0.0015630000000328437,
+          "p95_ms": 1.4100559999999405,
+          "p99_ms": 1.7648859999999331,
+          "max_ms": 3.2837469999999485
+        },
+        "level + digital ceiling": {
+          "calls": 1875,
+          "p50_ms": 0.001142000000072585,
+          "p95_ms": 0.0076850000000376895,
+          "p99_ms": 0.0222519999999804,
+          "max_ms": 0.18673199999989265
+        },
+        "total audio block": {
+          "calls": 1875,
+          "p50_ms": 0.14112599999998565,
+          "p95_ms": 1.5869000000000142,
+          "p99_ms": 1.9555239999999685,
+          "max_ms": 3.934492999999975
+        }
+      },
+      "memory": {
+        "scene_state_bytes": 2048,
+        "source_PCM_bytes": 1309440,
+        "beamformer_numeric_bytes": 190208,
+        "io_numeric_bytes": 3072,
+        "neural_adapter_bytes": 7680,
+        "wasm_heap_reserved_bytes": 16777216,
+        "profiling_numeric_bytes": 114688
+      },
+      "calibration_remaining_ms": 0,
+      "noise_frames": 371,
+      "fallback_bins": 0,
+      "overruns": 7,
+      "timed_blocks": 1875,
+      "rtf": 0.1915305979999986,
+      "peak": 0.0000017586619378562318,
+      "algorithmic_delay_ms": 40.666666666666664,
+      "calibration_timings": {
+        "scene renderer": {
+          "calls": 375,
+          "p50_ms": 0.008777000000009139,
+          "p95_ms": 0.01361599999995633,
+          "p99_ms": 0.07847799999990457,
+          "max_ms": 0.37075800000002346
+        },
+        "analysis FFT ×4": {
+          "calls": 375,
+          "p50_ms": 0.06102500000008604,
+          "p95_ms": 0.17091200000004392,
+          "p99_ms": 0.33836700000006203,
+          "max_ms": 2.153628000000026
+        },
+        "noise covariance (calibration)": {
+          "calls": 375,
+          "p50_ms": 0.030909000000065134,
+          "p95_ms": 0.05369099999995797,
+          "p99_ms": 0.12421500000004926,
+          "max_ms": 0.7195380000000569
+        },
+        "weight solve (on change)": {
+          "calls": 2,
+          "p50_ms": 0.5827990000000227,
+          "p95_ms": 0.5827990000000227,
+          "p99_ms": 0.5827990000000227,
+          "max_ms": 0.5827990000000227
+        },
+        "spatial filtering": {
+          "calls": 375,
+          "p50_ms": 0.010459000000082597,
+          "p95_ms": 0.012583999999947082,
+          "p99_ms": 0.07870900000000347,
+          "max_ms": 0.11171000000001641
+        },
+        "synthesis IFFT ×2": {
+          "calls": 375,
+          "p50_ms": 0.03428500000006807,
+          "p95_ms": 0.12929300000007515,
+          "p99_ms": 0.22467300000005253,
+          "max_ms": 2.047011999999995
+        },
+        "RNNoise ×2 (including framing)": {
+          "calls": 375,
+          "p50_ms": 0.0018039999999928114,
+          "p95_ms": 1.4744389999999612,
+          "p99_ms": 2.2505499999999756,
+          "max_ms": 3.519853000000012
+        },
+        "level + digital ceiling": {
+          "calls": 375,
+          "p50_ms": 0.006963000000041575,
+          "p95_ms": 0.027441000000067106,
+          "p99_ms": 0.1218900000000076,
+          "max_ms": 0.892661999999973
+        },
+        "total audio block": {
+          "calls": 375,
+          "p50_ms": 0.1844180000000506,
+          "p95_ms": 1.762962000000016,
+          "p99_ms": 2.694708999999989,
+          "max_ms": 3.7190779999999677
+        }
+      },
+      "rss_before_bytes": 68603904,
+      "rss_after_bytes": 68734976
+    },
+    {
+      "method": "das",
+      "neural": false,
+      "audio_seconds": 5,
+      "warmup_seconds": 1,
+      "calibration_seconds": 1,
+      "timings": {
+        "scene renderer": {
+          "calls": 1875,
+          "p50_ms": 0.008646000000226195,
+          "p95_ms": 0.009667999999692256,
+          "p99_ms": 0.09036100000002989,
+          "max_ms": 0.3839439999997012
+        },
+        "analysis FFT ×4": {
+          "calls": 1875,
+          "p50_ms": 0.061084999999820866,
+          "p95_ms": 0.16964899999993577,
+          "p99_ms": 0.3611100000002807,
+          "max_ms": 1.4997060000000602
+        },
+        "spatial filtering": {
+          "calls": 1875,
+          "p50_ms": 0.010470000000168511,
+          "p95_ms": 0.01139100000000326,
+          "p99_ms": 0.08228500000041095,
+          "max_ms": 0.704185999999936
+        },
+        "synthesis IFFT ×2": {
+          "calls": 1875,
+          "p50_ms": 0.03391400000009526,
+          "p95_ms": 0.1154380000002675,
+          "p99_ms": 0.24899899999991248,
+          "max_ms": 1.7411809999998695
+        },
+        "level + digital ceiling": {
+          "calls": 1875,
+          "p50_ms": 0.0010319999996681872,
+          "p95_ms": 0.0015330000001085864,
+          "p99_ms": 0.01774299999988216,
+          "max_ms": 0.1091959999998835
+        },
+        "total audio block": {
+          "calls": 1875,
+          "p50_ms": 0.11922500000036962,
+          "p95_ms": 0.2963790000003428,
+          "p99_ms": 0.8447120000000723,
+          "max_ms": 2.2182189999998627
+        }
+      },
+      "memory": {
+        "scene_state_bytes": 2048,
+        "source_PCM_bytes": 1309440,
+        "beamformer_numeric_bytes": 190208,
+        "io_numeric_bytes": 3072,
+        "neural_adapter_bytes": 7680,
+        "wasm_heap_reserved_bytes": 16777216,
+        "profiling_numeric_bytes": 98304
+      },
+      "calibration_remaining_ms": 0,
+      "noise_frames": 371,
+      "fallback_bins": 0,
+      "overruns": 0,
+      "timed_blocks": 1875,
+      "rtf": 0.06046738240000077,
+      "peak": 0.0031015605200082064,
+      "algorithmic_delay_ms": 10.666666666666666,
+      "calibration_timings": {
+        "scene renderer": {
+          "calls": 375,
+          "p50_ms": 0.008726000000024214,
+          "p95_ms": 0.015209000000140804,
+          "p99_ms": 0.07807700000012119,
+          "max_ms": 0.14130599999998594
+        },
+        "analysis FFT ×4": {
+          "calls": 375,
+          "p50_ms": 0.0626670000001468,
+          "p95_ms": 0.19286400000009962,
+          "p99_ms": 0.3595380000001569,
+          "max_ms": 0.49526300000002266
+        },
+        "noise covariance (calibration)": {
+          "calls": 375,
+          "p50_ms": 0.03140899999971225,
+          "p95_ms": 0.11282200000005105,
+          "p99_ms": 0.2567040000003544,
+          "max_ms": 0.7449530000001232
+        },
+        "weight solve (on change)": {
+          "calls": 2,
+          "p50_ms": 0.3744360000000597,
+          "p95_ms": 0.3744360000000597,
+          "p99_ms": 0.3744360000000597,
+          "max_ms": 0.3744360000000597
+        },
+        "spatial filtering": {
+          "calls": 375,
+          "p50_ms": 0.010610000000269793,
+          "p95_ms": 0.033303000000159955,
+          "p99_ms": 0.3424250000000484,
+          "max_ms": 0.800117999999884
+        },
+        "synthesis IFFT ×2": {
+          "calls": 375,
+          "p50_ms": 0.034786000000167405,
+          "p95_ms": 0.14181700000017372,
+          "p99_ms": 0.39453299999968294,
+          "max_ms": 0.6207789999998568
+        },
+        "level + digital ceiling": {
+          "calls": 375,
+          "p50_ms": 0.0010819999999966967,
+          "p95_ms": 0.0016730000002098677,
+          "p99_ms": 0.0033669999997982814,
+          "max_ms": 0.06990200000018376
+        },
+        "total audio block": {
+          "calls": 375,
+          "p50_ms": 0.17301599999996142,
+          "p95_ms": 0.436142000000018,
+          "p99_ms": 1.3143170000000737,
+          "max_ms": 1.429173000000219
+        }
+      },
+      "rss_before_bytes": 70307840,
+      "rss_after_bytes": 70307840
+    },
+    {
+      "method": "das",
+      "neural": true,
+      "audio_seconds": 5,
+      "warmup_seconds": 1,
+      "calibration_seconds": 1,
+      "timings": {
+        "scene renderer": {
+          "calls": 1875,
+          "p50_ms": 0.008936000000176136,
+          "p95_ms": 0.009517999999843596,
+          "p99_ms": 0.03190000000040527,
+          "max_ms": 0.21621800000002622
+        },
+        "analysis FFT ×4": {
+          "calls": 1875,
+          "p50_ms": 0.060574000000087835,
+          "p95_ms": 0.1433100000003833,
+          "p99_ms": 0.18434800000022733,
+          "max_ms": 1.2516190000001188
+        },
+        "spatial filtering": {
+          "calls": 1875,
+          "p50_ms": 0.01022000000011758,
+          "p95_ms": 0.010659999999916181,
+          "p99_ms": 0.04302099999995335,
+          "max_ms": 1.5175389999999425
+        },
+        "synthesis IFFT ×2": {
+          "calls": 1875,
+          "p50_ms": 0.033302000000276166,
+          "p95_ms": 0.0806919999999991,
+          "p99_ms": 0.14505300000018906,
+          "max_ms": 0.41785699999991266
+        },
+        "RNNoise ×2 (including framing)": {
+          "calls": 1875,
+          "p50_ms": 0.0015030000004117028,
+          "p95_ms": 1.3000600000000304,
+          "p99_ms": 1.4819319999996878,
+          "max_ms": 3.491679000000204
+        },
+        "level + digital ceiling": {
+          "calls": 1875,
+          "p50_ms": 0.0010219999999208085,
+          "p95_ms": 0.0014730000002600718,
+          "p99_ms": 0.0019230000002607994,
+          "max_ms": 0.04605700000001889
+        },
+        "total audio block": {
+          "calls": 1875,
+          "p50_ms": 0.1234230000000025,
+          "p95_ms": 1.4369670000000951,
+          "p99_ms": 1.6489870000000337,
+          "max_ms": 3.705732999999782
+        }
+      },
+      "memory": {
+        "scene_state_bytes": 2048,
+        "source_PCM_bytes": 1309440,
+        "beamformer_numeric_bytes": 190208,
+        "io_numeric_bytes": 3072,
+        "neural_adapter_bytes": 7680,
+        "wasm_heap_reserved_bytes": 16777216,
+        "profiling_numeric_bytes": 114688
+      },
+      "calibration_remaining_ms": 0,
+      "noise_frames": 371,
+      "fallback_bins": 0,
+      "overruns": 2,
+      "timed_blocks": 1875,
+      "rtf": 0.17653702880000074,
+      "peak": 6.469137048270568e-8,
+      "algorithmic_delay_ms": 40.666666666666664,
+      "calibration_timings": {
+        "scene renderer": {
+          "calls": 375,
+          "p50_ms": 0.008976999999958934,
+          "p95_ms": 0.009598000000096363,
+          "p99_ms": 0.08536099999992075,
+          "max_ms": 0.11927500000001601
+        },
+        "analysis FFT ×4": {
+          "calls": 375,
+          "p50_ms": 0.06034399999998641,
+          "p95_ms": 0.15272800000002462,
+          "p99_ms": 0.3304729999999836,
+          "max_ms": 0.7648509999999078
+        },
+        "noise covariance (calibration)": {
+          "calls": 375,
+          "p50_ms": 0.030618000000231405,
+          "p95_ms": 0.04460399999970832,
+          "p99_ms": 0.12472500000012587,
+          "max_ms": 0.31626600000026883
+        },
+        "weight solve (on change)": {
+          "calls": 2,
+          "p50_ms": 0.3978300000003401,
+          "p95_ms": 0.3978300000003401,
+          "p99_ms": 0.3978300000003401,
+          "max_ms": 0.3978300000003401
+        },
+        "spatial filtering": {
+          "calls": 375,
+          "p50_ms": 0.010240000000067084,
+          "p95_ms": 0.011070999999901687,
+          "p99_ms": 0.046627999999600434,
+          "max_ms": 0.24416999999994005
+        },
+        "synthesis IFFT ×2": {
+          "calls": 375,
+          "p50_ms": 0.03325300000005882,
+          "p95_ms": 0.0854709999998704,
+          "p99_ms": 0.1420479999997042,
+          "max_ms": 0.26936799999975847
+        },
+        "RNNoise ×2 (including framing)": {
+          "calls": 375,
+          "p50_ms": 0.0015520000001743028,
+          "p95_ms": 1.3773049999999785,
+          "p99_ms": 1.553577000000132,
+          "max_ms": 2.783994999999777
+        },
+        "level + digital ceiling": {
+          "calls": 375,
+          "p50_ms": 0.001142000000072585,
+          "p95_ms": 0.0017239999997400446,
+          "p99_ms": 0.0021239999996396364,
+          "max_ms": 0.0024250000001302396
+        },
+        "total audio block": {
+          "calls": 375,
+          "p50_ms": 0.16802699999971082,
+          "p95_ms": 1.5896850000003724,
+          "p99_ms": 1.7612990000002355,
+          "max_ms": 2.974635000000035
+        }
+      },
+      "rss_before_bytes": 70569984,
+      "rss_after_bytes": 70701056
+    },
+    {
+      "method": "mvdr",
+      "neural": false,
+      "audio_seconds": 5,
+      "warmup_seconds": 1,
+      "calibration_seconds": 1,
+      "timings": {
+        "scene renderer": {
+          "calls": 1875,
+          "p50_ms": 0.008605999999872438,
+          "p95_ms": 0.008816999999908148,
+          "p99_ms": 0.03372300000000905,
+          "max_ms": 0.07708499999989726
+        },
+        "analysis FFT ×4": {
+          "calls": 1875,
+          "p50_ms": 0.06000300000005154,
+          "p95_ms": 0.12773999999990338,
+          "p99_ms": 0.15899899999976697,
+          "max_ms": 1.6105439999996634
+        },
+        "spatial filtering": {
+          "calls": 1875,
+          "p50_ms": 0.010209999999915453,
+          "p95_ms": 0.01052899999967849,
+          "p99_ms": 0.03431399999999485,
+          "max_ms": 0.08050199999979668
+        },
+        "synthesis IFFT ×2": {
+          "calls": 1875,
+          "p50_ms": 0.03264100000023973,
+          "p95_ms": 0.06412000000000262,
+          "p99_ms": 0.1162690000001021,
+          "max_ms": 0.668159000000287
+        },
+        "level + digital ceiling": {
+          "calls": 1875,
+          "p50_ms": 0.0009920000002239249,
+          "p95_ms": 0.0012719999999717402,
+          "p99_ms": 0.0016730000002098677,
+          "max_ms": 0.23818900000014764
+        },
+        "total audio block": {
+          "calls": 1875,
+          "p50_ms": 0.1163099999998849,
+          "p95_ms": 0.19343499999968117,
+          "p99_ms": 0.2524159999998119,
+          "max_ms": 1.7379040000000714
+        }
+      },
+      "memory": {
+        "scene_state_bytes": 2048,
+        "source_PCM_bytes": 1309440,
+        "beamformer_numeric_bytes": 190208,
+        "io_numeric_bytes": 3072,
+        "neural_adapter_bytes": 7680,
+        "wasm_heap_reserved_bytes": 16777216,
+        "profiling_numeric_bytes": 98304
+      },
+      "calibration_remaining_ms": 0,
+      "noise_frames": 371,
+      "fallback_bins": 0,
+      "overruns": 0,
+      "timed_blocks": 1875,
+      "rtf": 0.04901918919999998,
+      "peak": 0.001110047334805131,
+      "algorithmic_delay_ms": 10.666666666666666,
+      "calibration_timings": {
+        "scene renderer": {
+          "calls": 375,
+          "p50_ms": 0.008667000000059488,
+          "p95_ms": 0.009027999999943859,
+          "p99_ms": 0.035045999999965716,
+          "max_ms": 0.06617400000004636
+        },
+        "analysis FFT ×4": {
+          "calls": 375,
+          "p50_ms": 0.060394000000087544,
+          "p95_ms": 0.12952399999994668,
+          "p99_ms": 0.20195000000012442,
+          "max_ms": 0.5041299999998046
+        },
+        "noise covariance (calibration)": {
+          "calls": 375,
+          "p50_ms": 0.03050699999994322,
+          "p95_ms": 0.047440000000278815,
+          "p99_ms": 0.09600099999988743,
+          "max_ms": 0.12208999999984371
+        },
+        "weight solve (on change)": {
+          "calls": 2,
+          "p50_ms": 3.15802100000019,
+          "p95_ms": 3.15802100000019,
+          "p99_ms": 3.15802100000019,
+          "max_ms": 3.15802100000019
+        },
+        "spatial filtering": {
+          "calls": 375,
+          "p50_ms": 0.010209000000031665,
+          "p95_ms": 0.010459999999966385,
+          "p99_ms": 0.015298999999686203,
+          "max_ms": 0.09039100000018152
+        },
+        "synthesis IFFT ×2": {
+          "calls": 375,
+          "p50_ms": 0.03302299999995739,
+          "p95_ms": 0.06153600000016013,
+          "p99_ms": 0.14464300000008734,
+          "max_ms": 0.19301399999994828
+        },
+        "level + digital ceiling": {
+          "calls": 375,
+          "p50_ms": 0.0010219999999208085,
+          "p95_ms": 0.0012930000002597808,
+          "p99_ms": 0.002054000000043743,
+          "max_ms": 0.06966099999999642
+        },
+        "total audio block": {
+          "calls": 375,
+          "p50_ms": 0.14800900000000183,
+          "p95_ms": 0.2388700000001336,
+          "p99_ms": 0.33928000000014435,
+          "max_ms": 3.3869720000002417
+        }
+      },
+      "rss_before_bytes": 71356416,
+      "rss_after_bytes": 71487488
+    },
+    {
+      "method": "mvdr",
+      "neural": true,
+      "audio_seconds": 5,
+      "warmup_seconds": 1,
+      "calibration_seconds": 1,
+      "timings": {
+        "scene renderer": {
+          "calls": 1875,
+          "p50_ms": 0.009207999999489402,
+          "p95_ms": 0.009809000000132073,
+          "p99_ms": 0.033633000000008906,
+          "max_ms": 0.23593400000027032
+        },
+        "analysis FFT ×4": {
+          "calls": 1875,
+          "p50_ms": 0.06033399999978428,
+          "p95_ms": 0.10123999999996158,
+          "p99_ms": 0.17866700000013225,
+          "max_ms": 0.35087100000055216
+        },
+        "spatial filtering": {
+          "calls": 1875,
+          "p50_ms": 0.010420000000522123,
+          "p95_ms": 0.010851000000002387,
+          "p99_ms": 0.035015999999814085,
+          "max_ms": 0.133111000000099
+        },
+        "synthesis IFFT ×2": {
+          "calls": 1875,
+          "p50_ms": 0.03365300000041316,
+          "p95_ms": 0.05555400000048394,
+          "p99_ms": 0.1488100000005943,
+          "max_ms": 0.30985400000008667
+        },
+        "RNNoise ×2 (including framing)": {
+          "calls": 1875,
+          "p50_ms": 0.001502000000073167,
+          "p95_ms": 1.267507999999907,
+          "p99_ms": 1.3984749999999622,
+          "max_ms": 2.450746999999865
+        },
+        "level + digital ceiling": {
+          "calls": 1875,
+          "p50_ms": 0.0010219999994660611,
+          "p95_ms": 0.0014929999997548293,
+          "p99_ms": 0.0021139999998922576,
+          "max_ms": 0.040055999999822234
+        },
+        "total audio block": {
+          "calls": 1875,
+          "p50_ms": 0.12289200000031997,
+          "p95_ms": 1.4043460000002597,
+          "p99_ms": 1.5562330000002476,
+          "max_ms": 2.618884999999864
+        }
+      },
+      "memory": {
+        "scene_state_bytes": 2048,
+        "source_PCM_bytes": 1309440,
+        "beamformer_numeric_bytes": 190208,
+        "io_numeric_bytes": 3072,
+        "neural_adapter_bytes": 7680,
+        "wasm_heap_reserved_bytes": 16777216,
+        "profiling_numeric_bytes": 114688
+      },
+      "calibration_remaining_ms": 0,
+      "noise_frames": 371,
+      "fallback_bins": 0,
+      "overruns": 0,
+      "timed_blocks": 1875,
+      "rtf": 0.17194490900000564,
+      "peak": 0.00022505695233121514,
+      "algorithmic_delay_ms": 40.666666666666664,
+      "calibration_timings": {
+        "scene renderer": {
+          "calls": 375,
+          "p50_ms": 0.009246999999959371,
+          "p95_ms": 0.010008999999627122,
+          "p99_ms": 0.035095999999612104,
+          "max_ms": 0.08850700000039069
+        },
+        "analysis FFT ×4": {
+          "calls": 375,
+          "p50_ms": 0.060494000000289816,
+          "p95_ms": 0.14952100000027713,
+          "p99_ms": 0.31472300000041287,
+          "max_ms": 0.49846900000011374
+        },
+        "noise covariance (calibration)": {
+          "calls": 375,
+          "p50_ms": 0.030657000000246626,
+          "p95_ms": 0.045485000000553555,
+          "p99_ms": 0.07020299999931012,
+          "max_ms": 0.1328300000004674
+        },
+        "weight solve (on change)": {
+          "calls": 2,
+          "p50_ms": 0.5793009999997594,
+          "p95_ms": 0.5793009999997594,
+          "p99_ms": 0.5793009999997594,
+          "max_ms": 0.5793009999997594
+        },
+        "spatial filtering": {
+          "calls": 375,
+          "p50_ms": 0.010398999999779335,
+          "p95_ms": 0.010860999999749765,
+          "p99_ms": 0.02854399999978341,
+          "max_ms": 1.7001430000000255
+        },
+        "synthesis IFFT ×2": {
+          "calls": 375,
+          "p50_ms": 0.03382400000009511,
+          "p95_ms": 0.06992100000024948,
+          "p99_ms": 0.17008999999961816,
+          "max_ms": 0.25732500000049185
+        },
+        "RNNoise ×2 (including framing)": {
+          "calls": 375,
+          "p50_ms": 0.0015130000001590815,
+          "p95_ms": 1.2697520000001532,
+          "p99_ms": 1.4144750000004933,
+          "max_ms": 2.758477000000312
+        },
+        "level + digital ceiling": {
+          "calls": 375,
+          "p50_ms": 0.0011020000001735752,
+          "p95_ms": 0.0017740000002959277,
+          "p99_ms": 0.002464000000145461,
+          "max_ms": 0.0031360000002678134
+        },
+        "total audio block": {
+          "calls": 375,
+          "p50_ms": 0.17165300000033312,
+          "p95_ms": 1.4528669999999693,
+          "p99_ms": 1.8478519999998753,
+          "max_ms": 3.0205510000005233
+        }
+      },
+      "rss_before_bytes": 76206080,
+      "rss_after_bytes": 76206080
+    }
+  ]
+}

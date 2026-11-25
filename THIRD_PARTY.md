@@ -19,3 +19,13 @@ https://github.com/claritychallenge/clarity ; installed evaluator version pyclar
 ## Literature
 
 Bibliographic references and original URLs are embedded in dist/white-paper.tex and dist/survey-data.json. Published model performance is not presented as a local measurement. Neural weights and paper PDFs are not redistributed.
+
+## RNNoise WASM (edition 0.3)
+
+`dist/vendor/rnnoise-sync.js` is copied unmodified from the official npm package
+`@jitsi/rnnoise-wasm@0.2.1`; it includes the compiled default pretrained weights.
+Wrapper: Apache-2.0 (`dist/vendor/JITSI-LICENSE`). RNNoise: BSD-3-Clause
+(`dist/vendor/RNNOISE-COPYING`), retrieved from the exact pinned submodule.
+`dist/vendor/provenance.json` records npm integrity, wrapper/submodule commits,
+artifact size and SHA-256. The 2018 paper is background, not a claim that these
+are its original weights. No vendor source was modified.

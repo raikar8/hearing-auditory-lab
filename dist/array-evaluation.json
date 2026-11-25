@@ -1,0 +1,1211 @@
+{
+  "version": "0.3",
+  "utc": "2026-11-25T16:52:29.324Z",
+  "scope": "Engineering validation on one LibriSpeech utterance loop, seeded stationary noise, ideal free-field array. Train noise covariance on a separate noise-only 1s segment; freeze weights and replay target/noise separately through the identical linear filter. No neural processing, fitting, ceiling, room, head shadow or perceptual/clinical inference.",
+  "seconds_per_scene": 3,
+  "discard_initial_seconds": 0.1,
+  "calibration_noise_seed": 20261125,
+  "evaluation_noise_seed": 20261126,
+  "rows": [
+    {
+      "masker_deg": 0,
+      "scene_snr_db": 0,
+      "method": "reference",
+      "steering_error_deg": 0,
+      "ears": [
+        {
+          "output_snr_db": 0.30070165534490517,
+          "reference_snr_db": 0.30070165534490517,
+          "snr_improvement_db": 0,
+          "target_level_change_db": 0
+        },
+        {
+          "output_snr_db": 0.30070165534490517,
+          "reference_snr_db": 0.30070165534490517,
+          "snr_improvement_db": 0,
+          "target_level_change_db": 0
+        }
+      ]
+    },
+    {
+      "masker_deg": 0,
+      "scene_snr_db": 0,
+      "method": "das",
+      "steering_error_deg": 0,
+      "ears": [
+        {
+          "output_snr_db": 0.30069631976591815,
+          "reference_snr_db": 0.30070165534490517,
+          "snr_improvement_db": -0.000005335578987020195,
+          "target_level_change_db": -0.00040591486330354893
+        },
+        {
+          "output_snr_db": 0.30069631976591815,
+          "reference_snr_db": 0.30070165534490517,
+          "snr_improvement_db": -0.000005335578987020195,
+          "target_level_change_db": -0.00040591486330354893
+        }
+      ]
+    },
+    {
+      "masker_deg": 0,
+      "scene_snr_db": 0,
+      "method": "das",
+      "steering_error_deg": 20,
+      "ears": [
+        {
+          "output_snr_db": 0.09534455541741513,
+          "reference_snr_db": 0.30070165534490517,
+          "snr_improvement_db": -0.20535709992749004,
+          "target_level_change_db": -2.1777810956991503
+        },
+        {
+          "output_snr_db": 0.1581216074432476,
+          "reference_snr_db": 0.30070165534490517,
+          "snr_improvement_db": -0.14258004790165757,
+          "target_level_change_db": -2.1927139538328704
+        }
+      ]
+    },
+    {
+      "masker_deg": 0,
+      "scene_snr_db": 0,
+      "method": "mvdr",
+      "steering_error_deg": 0,
+      "ears": [
+        {
+          "output_snr_db": 0.30153171126153566,
+          "reference_snr_db": 0.30070165534490517,
+          "snr_improvement_db": 0.0008300559166304899,
+          "target_level_change_db": 0.0003230610256826633
+        },
+        {
+          "output_snr_db": 0.30153171126153566,
+          "reference_snr_db": 0.30070165534490517,
+          "snr_improvement_db": 0.0008300559166304899,
+          "target_level_change_db": 0.0003230610256826633
+        }
+      ]
+    },
+    {
+      "masker_deg": 0,
+      "scene_snr_db": 0,
+      "method": "mvdr",
+      "steering_error_deg": 20,
+      "ears": [
+        {
+          "output_snr_db": 1.71244774903224,
+          "reference_snr_db": 0.30070165534490517,
+          "snr_improvement_db": 1.411746093687335,
+          "target_level_change_db": -12.978351025332556
+        },
+        {
+          "output_snr_db": 1.720133284550559,
+          "reference_snr_db": 0.30070165534490517,
+          "snr_improvement_db": 1.419431629205654,
+          "target_level_change_db": -12.981478630885096
+        }
+      ]
+    },
+    {
+      "masker_deg": 0,
+      "scene_snr_db": 5,
+      "method": "reference",
+      "steering_error_deg": 0,
+      "ears": [
+        {
+          "output_snr_db": 5.300701656482469,
+          "reference_snr_db": 5.300701656482469,
+          "snr_improvement_db": 0,
+          "target_level_change_db": 0
+        },
+        {
+          "output_snr_db": 5.300701656482469,
+          "reference_snr_db": 5.300701656482469,
+          "snr_improvement_db": 0,
+          "target_level_change_db": 0
+        }
+      ]
+    },
+    {
+      "masker_deg": 0,
+      "scene_snr_db": 5,
+      "method": "das",
+      "steering_error_deg": 0,
+      "ears": [
+        {
+          "output_snr_db": 5.3006963166989385,
+          "reference_snr_db": 5.300701656482469,
+          "snr_improvement_db": -0.000005339783530899922,
+          "target_level_change_db": -0.00040591486330354893
+        },
+        {
+          "output_snr_db": 5.3006963166989385,
+          "reference_snr_db": 5.300701656482469,
+          "snr_improvement_db": -0.000005339783530899922,
+          "target_level_change_db": -0.00040591486330354893
+        }
+      ]
+    },
+    {
+      "masker_deg": 0,
+      "scene_snr_db": 5,
+      "method": "das",
+      "steering_error_deg": 20,
+      "ears": [
+        {
+          "output_snr_db": 5.095344556765047,
+          "reference_snr_db": 5.300701656482469,
+          "snr_improvement_db": -0.2053570997174221,
+          "target_level_change_db": -2.1777810956991503
+        },
+        {
+          "output_snr_db": 5.158121613605481,
+          "reference_snr_db": 5.300701656482469,
+          "snr_improvement_db": -0.14258004287698878,
+          "target_level_change_db": -2.1927139538328704
+        }
+      ]
+    },
+    {
+      "masker_deg": 0,
+      "scene_snr_db": 5,
+      "method": "mvdr",
+      "steering_error_deg": 0,
+      "ears": [
+        {
+          "output_snr_db": 5.301531715157069,
+          "reference_snr_db": 5.300701656482469,
+          "snr_improvement_db": 0.0008300586745999539,
+          "target_level_change_db": 0.0003230610256826633
+        },
+        {
+          "output_snr_db": 5.301531715157069,
+          "reference_snr_db": 5.300701656482469,
+          "snr_improvement_db": 0.0008300586745999539,
+          "target_level_change_db": 0.0003230610256826633
+        }
+      ]
+    },
+    {
+      "masker_deg": 0,
+      "scene_snr_db": 5,
+      "method": "mvdr",
+      "steering_error_deg": 20,
+      "ears": [
+        {
+          "output_snr_db": 6.712447752723736,
+          "reference_snr_db": 5.300701656482469,
+          "snr_improvement_db": 1.4117460962412665,
+          "target_level_change_db": -12.978351025332556
+        },
+        {
+          "output_snr_db": 6.720133288769271,
+          "reference_snr_db": 5.300701656482469,
+          "snr_improvement_db": 1.419431632286802,
+          "target_level_change_db": -12.981478630885096
+        }
+      ]
+    },
+    {
+      "masker_deg": 0,
+      "scene_snr_db": 10,
+      "method": "reference",
+      "steering_error_deg": 0,
+      "ears": [
+        {
+          "output_snr_db": 10.300701655902875,
+          "reference_snr_db": 10.300701655902875,
+          "snr_improvement_db": 0,
+          "target_level_change_db": 0
+        },
+        {
+          "output_snr_db": 10.300701655902875,
+          "reference_snr_db": 10.300701655902875,
+          "snr_improvement_db": 0,
+          "target_level_change_db": 0
+        }
+      ]
+    },
+    {
+      "masker_deg": 0,
+      "scene_snr_db": 10,
+      "method": "das",
+      "steering_error_deg": 0,
+      "ears": [
+        {
+          "output_snr_db": 10.30069631896264,
+          "reference_snr_db": 10.300701655902875,
+          "snr_improvement_db": -0.000005336940235523002,
+          "target_level_change_db": -0.00040591486330354893
+        },
+        {
+          "output_snr_db": 10.30069631896264,
+          "reference_snr_db": 10.300701655902875,
+          "snr_improvement_db": -0.000005336940235523002,
+          "target_level_change_db": -0.00040591486330354893
+        }
+      ]
+    },
+    {
+      "masker_deg": 0,
+      "scene_snr_db": 10,
+      "method": "das",
+      "steering_error_deg": 20,
+      "ears": [
+        {
+          "output_snr_db": 10.095344555296437,
+          "reference_snr_db": 10.300701655902875,
+          "snr_improvement_db": -0.20535710060643808,
+          "target_level_change_db": -2.1777810956991503
+        },
+        {
+          "output_snr_db": 10.15812160962061,
+          "reference_snr_db": 10.300701655902875,
+          "snr_improvement_db": -0.14258004628226573,
+          "target_level_change_db": -2.1927139538328704
+        }
+      ]
+    },
+    {
+      "masker_deg": 0,
+      "scene_snr_db": 10,
+      "method": "mvdr",
+      "steering_error_deg": 0,
+      "ears": [
+        {
+          "output_snr_db": 10.301531713216086,
+          "reference_snr_db": 10.300701655902875,
+          "snr_improvement_db": 0.0008300573132107303,
+          "target_level_change_db": 0.0003230610256826633
+        },
+        {
+          "output_snr_db": 10.301531713216086,
+          "reference_snr_db": 10.300701655902875,
+          "snr_improvement_db": 0.0008300573132107303,
+          "target_level_change_db": 0.0003230610256826633
+        }
+      ]
+    },
+    {
+      "masker_deg": 0,
+      "scene_snr_db": 10,
+      "method": "mvdr",
+      "steering_error_deg": 20,
+      "ears": [
+        {
+          "output_snr_db": 11.712447743134149,
+          "reference_snr_db": 10.300701655902875,
+          "snr_improvement_db": 1.4117460872312737,
+          "target_level_change_db": -12.978351025332556
+        },
+        {
+          "output_snr_db": 11.720133283299116,
+          "reference_snr_db": 10.300701655902875,
+          "snr_improvement_db": 1.419431627396241,
+          "target_level_change_db": -12.981478630885096
+        }
+      ]
+    },
+    {
+      "masker_deg": 0,
+      "scene_snr_db": 15,
+      "method": "reference",
+      "steering_error_deg": 0,
+      "ears": [
+        {
+          "output_snr_db": 15.300701656944513,
+          "reference_snr_db": 15.300701656944513,
+          "snr_improvement_db": 0,
+          "target_level_change_db": 0
+        },
+        {
+          "output_snr_db": 15.300701656944513,
+          "reference_snr_db": 15.300701656944513,
+          "snr_improvement_db": 0,
+          "target_level_change_db": 0
+        }
+      ]
+    },
+    {
+      "masker_deg": 0,
+      "scene_snr_db": 15,
+      "method": "das",
+      "steering_error_deg": 0,
+      "ears": [
+        {
+          "output_snr_db": 15.300696320676783,
+          "reference_snr_db": 15.300701656944513,
+          "snr_improvement_db": -0.000005336267729916244,
+          "target_level_change_db": -0.00040591486330354893
+        },
+        {
+          "output_snr_db": 15.300696320676783,
+          "reference_snr_db": 15.300701656944513,
+          "snr_improvement_db": -0.000005336267729916244,
+          "target_level_change_db": -0.00040591486330354893
+        }
+      ]
+    },
+    {
+      "masker_deg": 0,
+      "scene_snr_db": 15,
+      "method": "das",
+      "steering_error_deg": 20,
+      "ears": [
+        {
+          "output_snr_db": 15.095344557602717,
+          "reference_snr_db": 15.300701656944513,
+          "snr_improvement_db": -0.20535709934179636,
+          "target_level_change_db": -2.1777810956991503
+        },
+        {
+          "output_snr_db": 15.158121610258597,
+          "reference_snr_db": 15.300701656944513,
+          "snr_improvement_db": -0.14258004668591617,
+          "target_level_change_db": -2.1927139538328704
+        }
+      ]
+    },
+    {
+      "masker_deg": 0,
+      "scene_snr_db": 15,
+      "method": "mvdr",
+      "steering_error_deg": 0,
+      "ears": [
+        {
+          "output_snr_db": 15.301531714953875,
+          "reference_snr_db": 15.300701656944513,
+          "snr_improvement_db": 0.0008300580093614229,
+          "target_level_change_db": 0.0003230610256826633
+        },
+        {
+          "output_snr_db": 15.301531714953875,
+          "reference_snr_db": 15.300701656944513,
+          "snr_improvement_db": 0.0008300580093614229,
+          "target_level_change_db": 0.0003230610256826633
+        }
+      ]
+    },
+    {
+      "masker_deg": 0,
+      "scene_snr_db": 15,
+      "method": "mvdr",
+      "steering_error_deg": 20,
+      "ears": [
+        {
+          "output_snr_db": 16.712447758173255,
+          "reference_snr_db": 15.300701656944513,
+          "snr_improvement_db": 1.4117461012287418,
+          "target_level_change_db": -12.978351025332556
+        },
+        {
+          "output_snr_db": 16.72013329612858,
+          "reference_snr_db": 15.300701656944513,
+          "snr_improvement_db": 1.419431639184067,
+          "target_level_change_db": -12.981478630885096
+        }
+      ]
+    },
+    {
+      "masker_deg": 30,
+      "scene_snr_db": 0,
+      "method": "reference",
+      "steering_error_deg": 0,
+      "ears": [
+        {
+          "output_snr_db": 0.4548433801408403,
+          "reference_snr_db": 0.4548433801408403,
+          "snr_improvement_db": 0,
+          "target_level_change_db": 0
+        },
+        {
+          "output_snr_db": 0.42210390369225465,
+          "reference_snr_db": 0.42210390369225465,
+          "snr_improvement_db": 0,
+          "target_level_change_db": 0
+        }
+      ]
+    },
+    {
+      "masker_deg": 30,
+      "scene_snr_db": 0,
+      "method": "das",
+      "steering_error_deg": 0,
+      "ears": [
+        {
+          "output_snr_db": 2.87675365508063,
+          "reference_snr_db": 0.4548433801408403,
+          "snr_improvement_db": 2.4219102749397896,
+          "target_level_change_db": -0.0004059148740003868
+        },
+        {
+          "output_snr_db": 2.87675365508063,
+          "reference_snr_db": 0.42210390369225465,
+          "snr_improvement_db": 2.4546497513883754,
+          "target_level_change_db": -0.0004059148867726513
+        }
+      ]
+    },
+    {
+      "masker_deg": 30,
+      "scene_snr_db": 0,
+      "method": "das",
+      "steering_error_deg": 20,
+      "ears": [
+        {
+          "output_snr_db": -0.6919336462001667,
+          "reference_snr_db": 0.4548433801408403,
+          "snr_improvement_db": -1.146777026341007,
+          "target_level_change_db": -2.1777810956986903
+        },
+        {
+          "output_snr_db": -0.6711524256776064,
+          "reference_snr_db": 0.42210390369225465,
+          "snr_improvement_db": -1.093256329369861,
+          "target_level_change_db": -2.1927139538659373
+        }
+      ]
+    },
+    {
+      "masker_deg": 30,
+      "scene_snr_db": 0,
+      "method": "mvdr",
+      "steering_error_deg": 0,
+      "ears": [
+        {
+          "output_snr_db": 14.286602256431935,
+          "reference_snr_db": 0.4548433801408403,
+          "snr_improvement_db": 13.831758876291095,
+          "target_level_change_db": -0.0032005187990764667
+        },
+        {
+          "output_snr_db": 14.286602256431935,
+          "reference_snr_db": 0.42210390369225465,
+          "snr_improvement_db": 13.86449835273968,
+          "target_level_change_db": -0.003200518811848749
+        }
+      ]
+    },
+    {
+      "masker_deg": 30,
+      "scene_snr_db": 0,
+      "method": "mvdr",
+      "steering_error_deg": 20,
+      "ears": [
+        {
+          "output_snr_db": 15.763675416252036,
+          "reference_snr_db": 0.4548433801408403,
+          "snr_improvement_db": 15.308832036111196,
+          "target_level_change_db": 5.829530139464289
+        },
+        {
+          "output_snr_db": 15.760109239190019,
+          "reference_snr_db": 0.42210390369225465,
+          "snr_improvement_db": 15.338005335497764,
+          "target_level_change_db": 5.8214023152286165
+        }
+      ]
+    },
+    {
+      "masker_deg": 30,
+      "scene_snr_db": 5,
+      "method": "reference",
+      "steering_error_deg": 0,
+      "ears": [
+        {
+          "output_snr_db": 5.454843382210796,
+          "reference_snr_db": 5.454843382210796,
+          "snr_improvement_db": 0,
+          "target_level_change_db": 0
+        },
+        {
+          "output_snr_db": 5.422103903357418,
+          "reference_snr_db": 5.422103903357418,
+          "snr_improvement_db": 0,
+          "target_level_change_db": 0
+        }
+      ]
+    },
+    {
+      "masker_deg": 30,
+      "scene_snr_db": 5,
+      "method": "das",
+      "steering_error_deg": 0,
+      "ears": [
+        {
+          "output_snr_db": 7.876753655939104,
+          "reference_snr_db": 5.454843382210796,
+          "snr_improvement_db": 2.421910273728308,
+          "target_level_change_db": -0.0004059148740003868
+        },
+        {
+          "output_snr_db": 7.876753655939104,
+          "reference_snr_db": 5.422103903357418,
+          "snr_improvement_db": 2.4546497525816857,
+          "target_level_change_db": -0.0004059148867726513
+        }
+      ]
+    },
+    {
+      "masker_deg": 30,
+      "scene_snr_db": 5,
+      "method": "das",
+      "steering_error_deg": 20,
+      "ears": [
+        {
+          "output_snr_db": 4.308066354552914,
+          "reference_snr_db": 5.454843382210796,
+          "snr_improvement_db": -1.1467770276578815,
+          "target_level_change_db": -2.1777810956986903
+        },
+        {
+          "output_snr_db": 4.3288475732923715,
+          "reference_snr_db": 5.422103903357418,
+          "snr_improvement_db": -1.0932563300650466,
+          "target_level_change_db": -2.1927139538659373
+        }
+      ]
+    },
+    {
+      "masker_deg": 30,
+      "scene_snr_db": 5,
+      "method": "mvdr",
+      "steering_error_deg": 0,
+      "ears": [
+        {
+          "output_snr_db": 19.28660225656751,
+          "reference_snr_db": 5.454843382210796,
+          "snr_improvement_db": 13.831758874356712,
+          "target_level_change_db": -0.0032005187990764667
+        },
+        {
+          "output_snr_db": 19.28660225656751,
+          "reference_snr_db": 5.422103903357418,
+          "snr_improvement_db": 13.864498353210092,
+          "target_level_change_db": -0.003200518811848749
+        }
+      ]
+    },
+    {
+      "masker_deg": 30,
+      "scene_snr_db": 5,
+      "method": "mvdr",
+      "steering_error_deg": 20,
+      "ears": [
+        {
+          "output_snr_db": 20.763675411223772,
+          "reference_snr_db": 5.454843382210796,
+          "snr_improvement_db": 15.308832029012976,
+          "target_level_change_db": 5.829530139464289
+        },
+        {
+          "output_snr_db": 20.760109233943428,
+          "reference_snr_db": 5.422103903357418,
+          "snr_improvement_db": 15.338005330586011,
+          "target_level_change_db": 5.8214023152286165
+        }
+      ]
+    },
+    {
+      "masker_deg": 30,
+      "scene_snr_db": 10,
+      "method": "reference",
+      "steering_error_deg": 0,
+      "ears": [
+        {
+          "output_snr_db": 10.454843381845995,
+          "reference_snr_db": 10.454843381845995,
+          "snr_improvement_db": 0,
+          "target_level_change_db": 0
+        },
+        {
+          "output_snr_db": 10.422103903905311,
+          "reference_snr_db": 10.422103903905311,
+          "snr_improvement_db": 0,
+          "target_level_change_db": 0
+        }
+      ]
+    },
+    {
+      "masker_deg": 30,
+      "scene_snr_db": 10,
+      "method": "das",
+      "steering_error_deg": 0,
+      "ears": [
+        {
+          "output_snr_db": 12.876753655387107,
+          "reference_snr_db": 10.454843381845995,
+          "snr_improvement_db": 2.421910273541112,
+          "target_level_change_db": -0.0004059148740003868
+        },
+        {
+          "output_snr_db": 12.876753655387107,
+          "reference_snr_db": 10.422103903905311,
+          "snr_improvement_db": 2.4546497514817958,
+          "target_level_change_db": -0.0004059148867726513
+        }
+      ]
+    },
+    {
+      "masker_deg": 30,
+      "scene_snr_db": 10,
+      "method": "das",
+      "steering_error_deg": 20,
+      "ears": [
+        {
+          "output_snr_db": 9.30806635495811,
+          "reference_snr_db": 10.454843381845995,
+          "snr_improvement_db": -1.1467770268878859,
+          "target_level_change_db": -2.1777810956986903
+        },
+        {
+          "output_snr_db": 9.328847575401419,
+          "reference_snr_db": 10.422103903905311,
+          "snr_improvement_db": -1.0932563285038928,
+          "target_level_change_db": -2.1927139538659373
+        }
+      ]
+    },
+    {
+      "masker_deg": 30,
+      "scene_snr_db": 10,
+      "method": "mvdr",
+      "steering_error_deg": 0,
+      "ears": [
+        {
+          "output_snr_db": 24.28660226516928,
+          "reference_snr_db": 10.454843381845995,
+          "snr_improvement_db": 13.831758883323284,
+          "target_level_change_db": -0.0032005187990764667
+        },
+        {
+          "output_snr_db": 24.28660226516928,
+          "reference_snr_db": 10.422103903905311,
+          "snr_improvement_db": 13.864498361263967,
+          "target_level_change_db": -0.003200518811848749
+        }
+      ]
+    },
+    {
+      "masker_deg": 30,
+      "scene_snr_db": 10,
+      "method": "mvdr",
+      "steering_error_deg": 20,
+      "ears": [
+        {
+          "output_snr_db": 25.763675414814195,
+          "reference_snr_db": 10.454843381845995,
+          "snr_improvement_db": 15.3088320329682,
+          "target_level_change_db": 5.829530139464289
+        },
+        {
+          "output_snr_db": 25.760109237896664,
+          "reference_snr_db": 10.422103903905311,
+          "snr_improvement_db": 15.338005333991353,
+          "target_level_change_db": 5.8214023152286165
+        }
+      ]
+    },
+    {
+      "masker_deg": 30,
+      "scene_snr_db": 15,
+      "method": "reference",
+      "steering_error_deg": 0,
+      "ears": [
+        {
+          "output_snr_db": 15.454843381666459,
+          "reference_snr_db": 15.454843381666459,
+          "snr_improvement_db": 0,
+          "target_level_change_db": 0
+        },
+        {
+          "output_snr_db": 15.422103905257455,
+          "reference_snr_db": 15.422103905257455,
+          "snr_improvement_db": 0,
+          "target_level_change_db": 0
+        }
+      ]
+    },
+    {
+      "masker_deg": 30,
+      "scene_snr_db": 15,
+      "method": "das",
+      "steering_error_deg": 0,
+      "ears": [
+        {
+          "output_snr_db": 17.876753656780323,
+          "reference_snr_db": 15.454843381666459,
+          "snr_improvement_db": 2.4219102751138646,
+          "target_level_change_db": -0.0004059148740003868
+        },
+        {
+          "output_snr_db": 17.876753656780323,
+          "reference_snr_db": 15.422103905257455,
+          "snr_improvement_db": 2.4546497515228687,
+          "target_level_change_db": -0.0004059148867726513
+        }
+      ]
+    },
+    {
+      "masker_deg": 30,
+      "scene_snr_db": 15,
+      "method": "das",
+      "steering_error_deg": 20,
+      "ears": [
+        {
+          "output_snr_db": 14.30806635531879,
+          "reference_snr_db": 15.454843381666459,
+          "snr_improvement_db": -1.146777026347669,
+          "target_level_change_db": -2.1777810956986903
+        },
+        {
+          "output_snr_db": 14.328847577439978,
+          "reference_snr_db": 15.422103905257455,
+          "snr_improvement_db": -1.0932563278174765,
+          "target_level_change_db": -2.1927139538659373
+        }
+      ]
+    },
+    {
+      "masker_deg": 30,
+      "scene_snr_db": 15,
+      "method": "mvdr",
+      "steering_error_deg": 0,
+      "ears": [
+        {
+          "output_snr_db": 29.286602253160044,
+          "reference_snr_db": 15.454843381666459,
+          "snr_improvement_db": 13.831758871493586,
+          "target_level_change_db": -0.0032005187990764667
+        },
+        {
+          "output_snr_db": 29.286602253160044,
+          "reference_snr_db": 15.422103905257455,
+          "snr_improvement_db": 13.86449834790259,
+          "target_level_change_db": -0.003200518811848749
+        }
+      ]
+    },
+    {
+      "masker_deg": 30,
+      "scene_snr_db": 15,
+      "method": "mvdr",
+      "steering_error_deg": 20,
+      "ears": [
+        {
+          "output_snr_db": 30.76367541161428,
+          "reference_snr_db": 15.454843381666459,
+          "snr_improvement_db": 15.30883202994782,
+          "target_level_change_db": 5.829530139464289
+        },
+        {
+          "output_snr_db": 30.760109230294553,
+          "reference_snr_db": 15.422103905257455,
+          "snr_improvement_db": 15.338005325037098,
+          "target_level_change_db": 5.8214023152286165
+        }
+      ]
+    },
+    {
+      "masker_deg": 90,
+      "scene_snr_db": 0,
+      "method": "reference",
+      "steering_error_deg": 0,
+      "ears": [
+        {
+          "output_snr_db": 0.48315552634206604,
+          "reference_snr_db": 0.48315552634206604,
+          "snr_improvement_db": 0,
+          "target_level_change_db": 0
+        },
+        {
+          "output_snr_db": 0.484001022143907,
+          "reference_snr_db": 0.484001022143907,
+          "snr_improvement_db": 0,
+          "target_level_change_db": 0
+        }
+      ]
+    },
+    {
+      "masker_deg": 90,
+      "scene_snr_db": 0,
+      "method": "das",
+      "steering_error_deg": 0,
+      "ears": [
+        {
+          "output_snr_db": 3.9465209855773677,
+          "reference_snr_db": 0.48315552634206604,
+          "snr_improvement_db": 3.463365459235302,
+          "target_level_change_db": -0.0004059148824679733
+        },
+        {
+          "output_snr_db": 3.9465209855773677,
+          "reference_snr_db": 0.484001022143907,
+          "snr_improvement_db": 3.462519963433461,
+          "target_level_change_db": -0.0004059148766371045
+        }
+      ]
+    },
+    {
+      "masker_deg": 90,
+      "scene_snr_db": 0,
+      "method": "das",
+      "steering_error_deg": 20,
+      "ears": [
+        {
+          "output_snr_db": 1.4546464377102775,
+          "reference_snr_db": 0.48315552634206604,
+          "snr_improvement_db": 0.9714909113682114,
+          "target_level_change_db": -2.177781095695864
+        },
+        {
+          "output_snr_db": 1.4607596933447105,
+          "reference_snr_db": 0.484001022143907,
+          "snr_improvement_db": 0.9767586712008034,
+          "target_level_change_db": -2.1927139538558373
+        }
+      ]
+    },
+    {
+      "masker_deg": 90,
+      "scene_snr_db": 0,
+      "method": "mvdr",
+      "steering_error_deg": 0,
+      "ears": [
+        {
+          "output_snr_db": 15.110822365836034,
+          "reference_snr_db": 0.48315552634206604,
+          "snr_improvement_db": 14.627666839493967,
+          "target_level_change_db": -0.0021245462666555884
+        },
+        {
+          "output_snr_db": 15.110822365836034,
+          "reference_snr_db": 0.484001022143907,
+          "snr_improvement_db": 14.626821343692127,
+          "target_level_change_db": -0.002124546260825306
+        }
+      ]
+    },
+    {
+      "masker_deg": 90,
+      "scene_snr_db": 0,
+      "method": "mvdr",
+      "steering_error_deg": 20,
+      "ears": [
+        {
+          "output_snr_db": 13.898358032156736,
+          "reference_snr_db": 0.48315552634206604,
+          "snr_improvement_db": 13.415202505814669,
+          "target_level_change_db": 0.09223813599234251
+        },
+        {
+          "output_snr_db": 13.89209761977199,
+          "reference_snr_db": 0.484001022143907,
+          "snr_improvement_db": 13.408096597628083,
+          "target_level_change_db": 0.08186526279132539
+        }
+      ]
+    },
+    {
+      "masker_deg": 90,
+      "scene_snr_db": 5,
+      "method": "reference",
+      "steering_error_deg": 0,
+      "ears": [
+        {
+          "output_snr_db": 5.483155527624248,
+          "reference_snr_db": 5.483155527624248,
+          "snr_improvement_db": 0,
+          "target_level_change_db": 0
+        },
+        {
+          "output_snr_db": 5.48400102308179,
+          "reference_snr_db": 5.48400102308179,
+          "snr_improvement_db": 0,
+          "target_level_change_db": 0
+        }
+      ]
+    },
+    {
+      "masker_deg": 90,
+      "scene_snr_db": 5,
+      "method": "das",
+      "steering_error_deg": 0,
+      "ears": [
+        {
+          "output_snr_db": 8.9465209844568,
+          "reference_snr_db": 5.483155527624248,
+          "snr_improvement_db": 3.463365456832552,
+          "target_level_change_db": -0.0004059148824679733
+        },
+        {
+          "output_snr_db": 8.9465209844568,
+          "reference_snr_db": 5.48400102308179,
+          "snr_improvement_db": 3.46251996137501,
+          "target_level_change_db": -0.0004059148766371045
+        }
+      ]
+    },
+    {
+      "masker_deg": 90,
+      "scene_snr_db": 5,
+      "method": "das",
+      "steering_error_deg": 20,
+      "ears": [
+        {
+          "output_snr_db": 6.454646437184777,
+          "reference_snr_db": 5.483155527624248,
+          "snr_improvement_db": 0.9714909095605284,
+          "target_level_change_db": -2.177781095695864
+        },
+        {
+          "output_snr_db": 6.460759693564587,
+          "reference_snr_db": 5.48400102308179,
+          "snr_improvement_db": 0.9767586704827966,
+          "target_level_change_db": -2.1927139538558373
+        }
+      ]
+    },
+    {
+      "masker_deg": 90,
+      "scene_snr_db": 5,
+      "method": "mvdr",
+      "steering_error_deg": 0,
+      "ears": [
+        {
+          "output_snr_db": 20.110822372778717,
+          "reference_snr_db": 5.483155527624248,
+          "snr_improvement_db": 14.627666845154469,
+          "target_level_change_db": -0.0021245462666555884
+        },
+        {
+          "output_snr_db": 20.110822372778717,
+          "reference_snr_db": 5.48400102308179,
+          "snr_improvement_db": 14.626821349696927,
+          "target_level_change_db": -0.002124546260825306
+        }
+      ]
+    },
+    {
+      "masker_deg": 90,
+      "scene_snr_db": 5,
+      "method": "mvdr",
+      "steering_error_deg": 20,
+      "ears": [
+        {
+          "output_snr_db": 18.898358041373534,
+          "reference_snr_db": 5.483155527624248,
+          "snr_improvement_db": 13.415202513749286,
+          "target_level_change_db": 0.09223813599234251
+        },
+        {
+          "output_snr_db": 18.89209762785367,
+          "reference_snr_db": 5.48400102308179,
+          "snr_improvement_db": 13.40809660477188,
+          "target_level_change_db": 0.08186526279132539
+        }
+      ]
+    },
+    {
+      "masker_deg": 90,
+      "scene_snr_db": 10,
+      "method": "reference",
+      "steering_error_deg": 0,
+      "ears": [
+        {
+          "output_snr_db": 10.483155526858427,
+          "reference_snr_db": 10.483155526858427,
+          "snr_improvement_db": 0,
+          "target_level_change_db": 0
+        },
+        {
+          "output_snr_db": 10.484001019978956,
+          "reference_snr_db": 10.484001019978956,
+          "snr_improvement_db": 0,
+          "target_level_change_db": 0
+        }
+      ]
+    },
+    {
+      "masker_deg": 90,
+      "scene_snr_db": 10,
+      "method": "das",
+      "steering_error_deg": 0,
+      "ears": [
+        {
+          "output_snr_db": 13.946520983674045,
+          "reference_snr_db": 10.483155526858427,
+          "snr_improvement_db": 3.463365456815618,
+          "target_level_change_db": -0.0004059148824679733
+        },
+        {
+          "output_snr_db": 13.946520983674045,
+          "reference_snr_db": 10.484001019978956,
+          "snr_improvement_db": 3.4625199636950885,
+          "target_level_change_db": -0.0004059148766371045
+        }
+      ]
+    },
+    {
+      "masker_deg": 90,
+      "scene_snr_db": 10,
+      "method": "das",
+      "steering_error_deg": 20,
+      "ears": [
+        {
+          "output_snr_db": 11.454646436159962,
+          "reference_snr_db": 10.483155526858427,
+          "snr_improvement_db": 0.9714909093015347,
+          "target_level_change_db": -2.177781095695864
+        },
+        {
+          "output_snr_db": 11.460759692499556,
+          "reference_snr_db": 10.484001019978956,
+          "snr_improvement_db": 0.9767586725205994,
+          "target_level_change_db": -2.1927139538558373
+        }
+      ]
+    },
+    {
+      "masker_deg": 90,
+      "scene_snr_db": 10,
+      "method": "mvdr",
+      "steering_error_deg": 0,
+      "ears": [
+        {
+          "output_snr_db": 25.110822371899282,
+          "reference_snr_db": 10.483155526858427,
+          "snr_improvement_db": 14.627666845040855,
+          "target_level_change_db": -0.0021245462666555884
+        },
+        {
+          "output_snr_db": 25.110822371899282,
+          "reference_snr_db": 10.484001019978956,
+          "snr_improvement_db": 14.626821351920325,
+          "target_level_change_db": -0.002124546260825306
+        }
+      ]
+    },
+    {
+      "masker_deg": 90,
+      "scene_snr_db": 10,
+      "method": "mvdr",
+      "steering_error_deg": 20,
+      "ears": [
+        {
+          "output_snr_db": 23.89835804145654,
+          "reference_snr_db": 10.483155526858427,
+          "snr_improvement_db": 13.415202514598112,
+          "target_level_change_db": 0.09223813599234251
+        },
+        {
+          "output_snr_db": 23.892097628992172,
+          "reference_snr_db": 10.484001019978956,
+          "snr_improvement_db": 13.408096609013215,
+          "target_level_change_db": 0.08186526279132539
+        }
+      ]
+    },
+    {
+      "masker_deg": 90,
+      "scene_snr_db": 15,
+      "method": "reference",
+      "steering_error_deg": 0,
+      "ears": [
+        {
+          "output_snr_db": 15.483155526709258,
+          "reference_snr_db": 15.483155526709258,
+          "snr_improvement_db": 0,
+          "target_level_change_db": 0
+        },
+        {
+          "output_snr_db": 15.484001022634128,
+          "reference_snr_db": 15.484001022634128,
+          "snr_improvement_db": 0,
+          "target_level_change_db": 0
+        }
+      ]
+    },
+    {
+      "masker_deg": 90,
+      "scene_snr_db": 15,
+      "method": "das",
+      "steering_error_deg": 0,
+      "ears": [
+        {
+          "output_snr_db": 18.94652098784661,
+          "reference_snr_db": 15.483155526709258,
+          "snr_improvement_db": 3.4633654611373537,
+          "target_level_change_db": -0.0004059148824679733
+        },
+        {
+          "output_snr_db": 18.94652098784661,
+          "reference_snr_db": 15.484001022634128,
+          "snr_improvement_db": 3.4625199652124827,
+          "target_level_change_db": -0.0004059148766371045
+        }
+      ]
+    },
+    {
+      "masker_deg": 90,
+      "scene_snr_db": 15,
+      "method": "das",
+      "steering_error_deg": 20,
+      "ears": [
+        {
+          "output_snr_db": 16.454646438816813,
+          "reference_snr_db": 15.483155526709258,
+          "snr_improvement_db": 0.971490912107555,
+          "target_level_change_db": -2.177781095695864
+        },
+        {
+          "output_snr_db": 16.460759692258698,
+          "reference_snr_db": 15.484001022634128,
+          "snr_improvement_db": 0.9767586696245694,
+          "target_level_change_db": -2.1927139538558373
+        }
+      ]
+    },
+    {
+      "masker_deg": 90,
+      "scene_snr_db": 15,
+      "method": "mvdr",
+      "steering_error_deg": 0,
+      "ears": [
+        {
+          "output_snr_db": 30.110822369379406,
+          "reference_snr_db": 15.483155526709258,
+          "snr_improvement_db": 14.627666842670148,
+          "target_level_change_db": -0.0021245462666555884
+        },
+        {
+          "output_snr_db": 30.110822369379406,
+          "reference_snr_db": 15.484001022634128,
+          "snr_improvement_db": 14.626821346745277,
+          "target_level_change_db": -0.002124546260825306
+        }
+      ]
+    },
+    {
+      "masker_deg": 90,
+      "scene_snr_db": 15,
+      "method": "mvdr",
+      "steering_error_deg": 20,
+      "ears": [
+        {
+          "output_snr_db": 28.89835803742203,
+          "reference_snr_db": 15.483155526709258,
+          "snr_improvement_db": 13.415202510712774,
+          "target_level_change_db": 0.09223813599234251
+        },
+        {
+          "output_snr_db": 28.89209762120723,
+          "reference_snr_db": 15.484001022634128,
+          "snr_improvement_db": 13.408096598573103,
+          "target_level_change_db": 0.08186526279132539
+        }
+      ]
+    }
+  ]
+}

@@ -119,3 +119,33 @@ For each new paper record search date, primary URL, evidence access (full paper/
 ## Version control and publication
 
 Keep results, paper, guide and code synchronized in Git. Preserve the existing repository and its visibility. Never commit access tokens, microphone recordings, user uploads, private profiles or installation-specific credentials. The provided GitHub repository is the canonical source; publication is subject to its existing permissions. If pushing is unavailable, provide the source archive and exact setup commands, and state that the push did not complete.
+
+## Edition 0.3 reproduction: array, neural and timing
+
+1. Read `dist/array-method.md` for the acoustic model and equations.
+2. Serve `dist`, then open `array.html`. Use headphones, start low, wait for the
+   one-second target-muted calibration and compare reference/DAS/MVDR. Steering
+   is manual; changing scene/noise geometry starts a fresh calibration.
+3. Enable RNNoise. It loads once; two recurrent states persist, with reset on
+   toggles. Do not replace this with a framewise model reload.
+4. Run `npm test`, `npm run evaluate:array`, then `npm run benchmark:array`
+   sequentially. Preserve resulting JSON with host/configuration and timestamps.
+5. Keep target/noise decomposition scoring confined to frozen linear processors.
+   RNNoise needs a separate nonlinear evaluation with aligned clean references.
+6. Verify the current bundle's latency: 1440 samples/30 ms in the adapter, plus
+   512 samples/10.67 ms for the array STFT. Do not infer total delay from frame size.
+7. Read timing-source labels: AudioWorklet may lack `performance.now`; Node
+   benchmark numbers are not the user's browser timings. Report tail overruns,
+   reserved WASM heap and whole-process RSS with their distinct meanings.
+8. Use `dist/vendor/provenance.json` and the two vendor license files for exact
+   reproducibility. Run npm pack only when restoring the pinned package; do not
+   silently replace weights with latest upstream.
+9. Compile `dist/array-supplement.tex` using pdfLaTeX twice. Preserve original
+   white paper plus supplement. Update evaluation/benchmark tables from JSON.
+10. For localization, compare known/manual steering, fixed-front and estimated
+    DOA with target association; include angular errors, track swaps, control
+    lag and audio delay separately. No automatic DOA is implemented in 0.3.
+
+The extension isolates enhancement before fitting. Do not describe its free-field
+renderer as measured BTE acoustics or its neural runtime as a binaural neural
+model. Neither an acoustic feedback canceller nor AEC is implemented.

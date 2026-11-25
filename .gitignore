@@ -5,3 +5,6 @@ __pycache__/
 *.log
 *.out
 kemar.zip
+research/models/
+research/data/*.flac
+research/work/

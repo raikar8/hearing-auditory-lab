@@ -29,3 +29,10 @@ Wrapper: Apache-2.0 (`dist/vendor/JITSI-LICENSE`). RNNoise: BSD-3-Clause
 `dist/vendor/provenance.json` records npm integrity, wrapper/submodule commits,
 artifact size and SHA-256. The 2018 paper is background, not a claim that these
 are its original weights. No vendor source was modified.
+
+## Version 0.4 additions
+
+- Four additional LibriSpeech test-clean utterances: 1320-122617-0003, 5639-40744-0032, 260-123440-0018, 7729-102255-0045. Source https://www.openslr.org/12 ; Panayotov et al. (2015); CC BY 4.0 https://creativecommons.org/licenses/by/4.0/ . Original checksums in `research/data/manifest.json`. The six `dist/assets/evaluation/*.wav` files derive from the first three seconds of 1320-122617-0003 with simulated room/noise, enhancement, NAL-R fitting and common playback gain. This attribution applies to the derived clips; no endorsement implied.
+- SpeechBrain MetricGAN+ model, https://huggingface.co/speechbrain/metricgan-plus-voicebank , revision `a196ce26b3bdace6fa1d819017584bdbcce462a8`, model-card license Apache-2.0. Weights downloaded by the user, not included in this repository. Exact checkpoint SHA and parameter counts in `dist/neural-beamformer-runtime.json`; Fu et al. (2021), https://arxiv.org/abs/2104.03538 . Our mask-proxy/Souden-MVDR hybrid is an engineering experiment, not the original model's published multichannel system.
+- RIR generator 0.3.0, https://github.com/audiolabs/rir-generator , installed as a dependency; image-method simulator. Our room responses are synthetic, not measured LOCATA/DREGON data. Those datasets are cited as future validation sources only.
+- `CONCEPTS.md` cites the relevant papers and official IEC, ISO and ITU-T catalog pages. No proprietary normative standard text, licensed test signals, or clinical speech-test materials are redistributed.

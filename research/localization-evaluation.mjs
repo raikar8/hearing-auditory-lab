@@ -1,0 +1,11 @@
+// Full waveform → simulated microphones → actual FFT → SRP. Truth used only by scorer.
+import fs from 'node:fs';import {Scene,Beamformer,H,FS} from '../dist/array-dsp.js';import {Localizer,wrap} from '../dist/localization.js';import {speech} from './array-benchmark.mjs';
+const source=speech(),rows=[];
+for(const channels of [2,4])for(const sector of [180,90])for(const scenario of ['front','rear','moving','loud_interferer']){
+ const scene=new Scene();scene.sources=[source,null];scene.configure({target:scenario==='rear'?150:30,masker:-70,snr:scenario==='loud_interferer'?-5:60});const beam=new Beamformer(),loc=new Localizer();loc.configure({channels,sector,anchor:0});const x=Array.from({length:4},()=>new Float32Array(H)),y=[new Float32Array(H),new Float32Array(H)],trace=[];
+ beam.onSpectrum=(r,i)=>{if(loc.process(r,i))trace.push({time_s:time,truth:angle,estimate:loc.direction,peak_contrast:loc.confidence,error_deg:Math.abs(wrap(loc.direction-angle))});};let time=0,angle=scene.target;
+ for(let b=0;b<FS*4/H;b++){time=b*H/FS;angle=scenario==='moving'?(time<2?-30:30):scene.target;scene.configure({target:angle});scene.process(x,false);beam.process(x,y);}
+ const active=trace.filter(t=>t.time_s>.5),accepted=active.filter(t=>t.peak_contrast>=.02);const settled=scenario==='moving'?trace.find(t=>t.time_s>=2&&t.error_deg<=10&&t.peak_contrast>=.02):null;
+ rows.push({channels,sector_half_width_deg:sector,scenario,mean_absolute_error_deg:active.reduce((s,t)=>s+t.error_deg,0)/active.length,within_10deg_fraction:active.filter(t=>t.error_deg<=10).length/active.length,accepted_update_fraction:accepted.length/active.length,accepted_mae_deg:accepted.length?accepted.reduce((s,t)=>s+t.error_deg,0)/accepted.length:null,first_accepted_10deg_after_step_ms:settled?(settled.time_s-2)*1000:null,trace});
+}
+fs.writeFileSync('dist/localization-evaluation.json',JSON.stringify({version:'0.4',scope:'Deterministic waveform tests, one existing demo speech clip. Free-field stationary sources or a direction step at 2 s; 60 dB target-to-noise except loud_interferer at -5 dB. Sector is a user prior and excludes the rear target. No identity tracker. Step response is first accepted estimate within 10 degrees, not sustained settling time.',rows},null,2));console.log(rows.map(({trace,...r})=>r));

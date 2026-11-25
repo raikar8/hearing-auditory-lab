@@ -1,0 +1,40 @@
+{
+  "dataset": "LibriSpeech test-clean",
+  "license": "CC BY 4.0",
+  "source": "https://www.openslr.org/12",
+  "selection": "First four distinct speakers in archive order with >=3 s, excluding original demo speaker 6930; first 3 s used; no tuning",
+  "clips": [
+    {
+      "utterance": "1320-122617-0003",
+      "speaker": "1320",
+      "path": "research/data/1320-122617-0003.flac",
+      "sample_rate": 16000,
+      "original_seconds": 6.285,
+      "sha256": "bbe9ef85bbe228c73a414f064c9bd992c94135d73f9900b33104ad93c07d0594"
+    },
+    {
+      "utterance": "5639-40744-0032",
+      "speaker": "5639",
+      "path": "research/data/5639-40744-0032.flac",
+      "sample_rate": 16000,
+      "original_seconds": 17.43,
+      "sha256": "ecba1c65406f3d2fdfe383a22385dfe19cc117b71b126817f5e20df791f22a50"
+    },
+    {
+      "utterance": "260-123440-0018",
+      "speaker": "260",
+      "path": "research/data/260-123440-0018.flac",
+      "sample_rate": 16000,
+      "original_seconds": 3.64,
+      "sha256": "a80d66d866b8f9114094301a965a7b6d0a62d9467c96885ff1098a27f5b02cb4"
+    },
+    {
+      "utterance": "7729-102255-0045",
+      "speaker": "7729",
+      "path": "research/data/7729-102255-0045.flac",
+      "sample_rate": 16000,
+      "original_seconds": 6.805,
+      "sha256": "52b2863422cf066b046facaf8c9608e81179a61be437b8e321c2832b2119805c"
+    }
+  ]
+}

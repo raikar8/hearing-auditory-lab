@@ -1,0 +1,6 @@
+# Install torch/torchaudio CPU wheels separately; see README.
+-r requirements.txt
+speechbrain==1.0.3
+huggingface_hub==0.29.3
+rir-generator==0.3.0
+# pyclarity==0.9.0 installed with --no-deps for the tested evaluator subset.

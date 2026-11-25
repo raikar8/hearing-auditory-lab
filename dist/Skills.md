@@ -1,6 +1,6 @@
 # Skills.md — Reproduce and extend the Hearing Auditory Lab
 
-This is a project reproduction guide for people and Codex. It is not an installed agent skill or a claim of clinical validation. Read README.md first. Research snapshot: 25 November 2026; implementation 0.2.0.
+This is a project reproduction guide for people and Codex. It is not an installed agent skill or a claim of clinical validation. Read README.md first. Research snapshot: 25 November 2026; implementation 0.4.0.
 
 ## Goal and scientific contract
 
@@ -149,3 +149,20 @@ Keep results, paper, guide and code synchronized in Git. Preserve the existing r
 The extension isolates enhancement before fitting. Do not describe its free-field
 renderer as measured BTE acoustics or its neural runtime as a binaural neural
 model. Neither an acoustic feedback canceller nor AEC is implemented.
+
+## Version 0.4 reproduction and interpretation
+
+Read CONCEPTS.md for the teaching sequence and current IEC/ISO/ITU-T reference map. Follow the v0.4 command sequence in README.md in order. `requirements-research.txt` adds SpeechBrain and the image-source RIR generator to the evaluator environment; install the pinned CPU Torch pair separately. `restore_neural_model.py` verifies the pinned model SHA before use. `prepare_eval_data.py` restores missing locked FLACs by exact utterance ID and checksum.
+
+Never tune on these four evaluation speakers and continue calling them held out. Record any future tuning as a new development split. Do not claim their identities are absent from every third-party model's training sources. The study has one geometry per speaker, 3-second clips and synthetic stationary noise. A larger crossed design is needed for generalization.
+
+- `research/prepare_spatial_scenes.py`: deterministic image-source mixtures, independent noise-calibration signal, reference stems reserved for scoring.
+- `research/render_spatial_eval.mjs`: actual causal JavaScript DSP, oracle/estimated steering, RNNoise; no model reload per condition.
+- `research/neural_mvdr.py`: one persistent offline pretrained mask estimator; whole-utterance PSD and two reference-channel outputs.
+- `research/evaluate_perception.py`: matched fitting, HASPI/HASQI, waveform/cue metrics and common-gain listening clips. Completeness is recorded in JSON; never publish partial rows as a complete study.
+- `research/localization-evaluation.mjs`: actual waveform/FFT localization tests, including ambiguity, sector exclusion, a direction step and louder interference.
+- `research/array-benchmark.mjs`: current 0.4 execution/memory benchmark; writes `array-benchmark-v04.json`, preserving the old archived report.
+
+A true streaming neural extension must explicitly declare look-ahead and persistent state. Evaluate target association separately from angular estimation. Avoid using clean stems or true target angle in a method labeled estimated. A learned mask is not necessarily an identity-conditioned speaker mask. For fixed linear methods, target/noise decomposition uses the same frozen weights; nonlinear methods require a different justified attribution method.
+
+After measurements: run all Node tests, Python metric tests, JSON completeness/finite-value checks, refresh generated paper tables, compile the paper twice, and update VALIDATION.md. Keep data provenance, model hash, dependency pins, information access, reference definition and hardware timing scope attached to results. Package with `research/package.py`, which excludes transient scenes, model weights, raw downloaded FLACs and hosting credentials. Push checkpoints to the authorized GitHub repository; preserve the private Site audience.

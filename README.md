@@ -56,6 +56,8 @@ pdflatex -interaction=nonstopmode -halt-on-error -output-directory dist dist/whi
 pdflatex -interaction=nonstopmode -halt-on-error -output-directory dist dist/white-paper.tex
 ```
 
+Run `python research/paper_tables.py` after changing measurements to refresh the LaTeX tables.
+
 The paper uses an embedded bibliography and generated plots in `dist/figures/`; no BibTeX step is needed. Regenerate research results and figures before updating result claims.
 
 ## Implemented versus planned

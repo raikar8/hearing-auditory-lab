@@ -1,0 +1,145 @@
+[
+  {
+    "name": "NAL-R amplification",
+    "family": "Classical",
+    "year": "1986",
+    "authors": "Byrne & Dillon",
+    "url": "https://doi.org/10.1097/00003446-198608000-00007",
+    "idea": "Audiogram-conditioned frequency gain. Exact Clarity FIR is used offline; the live filter bank approximates its targets.",
+    "issue": "Restores some audibility; cannot repair cochlear resolution or separate overlapping speech.",
+    "status": "Live approximation + offline reference",
+    "run": "nalr"
+  },
+  {
+    "name": "Wide dynamic-range compression",
+    "family": "Classical",
+    "year": "2005",
+    "authors": "Kates, Principles of Digital Dynamic-Range Compression",
+    "url": "https://doi.org/10.1177/108471380500900202",
+    "idea": "Bandwise level-dependent gain maps input dynamics into a smaller output range.",
+    "issue": "Fast independent-ear gain changes can affect envelopes and interaural level cues. Our parameters are illustrative, not a fitting prescription.",
+    "status": "Live educational implementation",
+    "run": "wdrc"
+  },
+  {
+    "name": "Ideal directional selection",
+    "family": "Classical",
+    "year": "Lab control",
+    "authors": "Oracle condition",
+    "url": "methodology.html",
+    "idea": "Known source direction controls a cardioid-like gain before spatial mixing.",
+    "issue": "Not a beamformer. It has access to clean source stems unavailable to a real hearing aid.",
+    "status": "Live oracle control",
+    "run": "direction"
+  },
+  {
+    "name": "MSBG hearing-loss model",
+    "family": "Hearing models",
+    "year": "1990s / current toolkit",
+    "authors": "Clarity implementation of Moore–Stone–Baer–Glasberg model",
+    "url": "https://github.com/claritychallenge/clarity/tree/main/clarity/evaluator/msbg",
+    "idea": "Models aspects of impaired auditory filtering and loudness recruitment for auralization.",
+    "issue": "Audiogram alone does not determine pathology, cognition, or an individual listening experience.",
+    "status": "Offline model audio included",
+    "run": null
+  },
+  {
+    "name": "HASPI / HASQI",
+    "family": "Hearing models",
+    "year": "2022 overview",
+    "authors": "Kates & Arehart",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/36137862/",
+    "idea": "Auditory-model metrics for predicted intelligibility and quality.",
+    "issue": "Objective predictions are not listening-test scores. Do not pass MSBG output through a second impairment model by accident.",
+    "status": "HASPI v2 pilot measured; HASQI planned",
+    "run": null
+  },
+  {
+    "name": "Binaural MWF / MWF-N",
+    "family": "Spatial",
+    "year": "2009",
+    "authors": "Van den Bogaert, Doclo, Wouters & Moonen",
+    "url": "https://doi.org/10.1121/1.3023069",
+    "idea": "Multichannel Wiener filtering trades noise reduction and spatial-cue preservation.",
+    "issue": "Requires microphone geometry, covariance estimation and a fair distortion constraint. Residual noise cues matter too.",
+    "status": "Literature candidate; not implemented",
+    "run": null
+  },
+  {
+    "name": "openMHA",
+    "family": "Platforms",
+    "year": "2022",
+    "authors": "Open-source master hearing aid",
+    "url": "https://doi.org/10.1016/j.softx.2021.100953",
+    "idea": "A research platform for assembling and evaluating hearing-aid algorithms.",
+    "issue": "A framework, not one algorithm or a quality ranking. Hardware/audio-driver behavior still needs measurement.",
+    "status": "Reference platform; not bundled",
+    "run": null
+  },
+  {
+    "name": "DeepFilterNet",
+    "family": "Neural",
+    "year": "2023",
+    "authors": "Schröter, Rosenkranz, Escalante-B. & Maier",
+    "url": "https://arxiv.org/abs/2305.08227",
+    "idea": "Perceptual bands plus complex deep filtering; published open code and weights.",
+    "issue": "Notebook real-time factor does not establish open-fit hearing-aid latency; independent mono use can alter binaural cues.",
+    "status": "Literature candidate; not run",
+    "run": null
+  },
+  {
+    "name": "Deep FIR / Viking",
+    "family": "Neural",
+    "year": "2024 / 2025 revision",
+    "authors": "Dementyev et al.",
+    "url": "https://arxiv.org/abs/2409.18239",
+    "idea": "A compact recurrent network estimates time-domain FIR filters; minimum-phase conversion reduces delay.",
+    "issue": "Paper reports 0.32–1.25 ms mean algorithmic latency and 3.35 ms mean end-to-end on its hardware, not in this lab.",
+    "status": "Full paper reviewed; not reproduced",
+    "run": null
+  },
+  {
+    "name": "Ultra-low-latency study",
+    "family": "Neural",
+    "year": "2025",
+    "authors": "Wu & Braun",
+    "url": "https://arxiv.org/abs/2409.10358",
+    "idea": "Compares architectures and design choices under strict speech-enhancement delay constraints.",
+    "issue": "A controlled latency/quality study is a better baseline-selection guide than ranking unrelated published scores.",
+    "status": "Literature candidate; not run",
+    "run": null
+  },
+  {
+    "name": "RT-Tango",
+    "family": "Neural",
+    "year": "2026 preprint",
+    "authors": "Benslimane et al.",
+    "url": "https://arxiv.org/abs/2607.01834",
+    "idea": "Distributed binaural processing, compressed ERB features, grouped recurrent inference and asymmetric STFT.",
+    "issue": "Abstract reports operation as low as 8 ms. Code, weights, adaptation behavior and end-to-end timing need verification.",
+    "status": "Abstract screened; not reproduced",
+    "run": null
+  },
+  {
+    "name": "Directivity-conditioned neural filtering",
+    "family": "Neural",
+    "year": "2026",
+    "authors": "Uphaus, Merboldt, Hofbauer & Gerkmann",
+    "url": "https://arxiv.org/abs/2609.15760",
+    "idea": "FiLM conditioning steers directivity; cross-channel spectral constraints aim to preserve spatial relationships.",
+    "issue": "Abstract reports 10 ms latency. Reproduction must test unseen head geometry, moving sources and steering errors.",
+    "status": "Abstract screened; not reproduced",
+    "run": null
+  },
+  {
+    "name": "Clarity CEC3",
+    "family": "Benchmarks",
+    "year": "2024 onward",
+    "authors": "Clarity Challenge organizers",
+    "url": "https://claritychallenge.org/clarity_CEC3",
+    "idea": "Hearing-aid enhancement evaluation with real room responses, hearing-aid signals and dynamic backgrounds.",
+    "issue": "Follow task-specific data licenses, split definitions and latency rules. Prediction challenges evaluate metrics, not enhancement systems.",
+    "status": "Proposed main benchmark; not downloaded",
+    "run": null
+  }
+]

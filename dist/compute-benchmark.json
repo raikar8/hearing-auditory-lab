@@ -1,0 +1,15 @@
+{
+  "scope": "Node DSP only, warm 1s then approximately 10s; not browser I/O or wearable latency",
+  "cpu": "AMD EPYC 7763 64-Core Processor",
+  "node": "v24.22.3",
+  "sample_rate": 44100,
+  "block_samples": 128,
+  "blocks": 3446,
+  "median_ms": 0.17945700000007037,
+  "p95_ms": 0.31804699999997865,
+  "p99_ms": 0.4820060000000126,
+  "max_ms": 1.6671010000000024,
+  "deadline_ms": 2.9024943310657596,
+  "overruns": 0,
+  "rtf": 0.07449493119830979
+}

@@ -1,0 +1,7 @@
+.sites-checkout/
+__pycache__/
+.venv/
+*.aux
+*.log
+*.out
+kemar.zip

@@ -1,0 +1,5 @@
+import {Engine} from './dsp.js';
+class HearingProcessor extends AudioWorkletProcessor{
+ constructor(){super();this.engine=new Engine(sampleRate);this.tick=0;this.record=null;this.port.onmessage=({data:d})=>{try{if(d.type==='config')this.engine.configure(d.value);if(d.type==='source')this.engine.setSource(d.index,d.value);if(d.type==='hrir')this.engine.setHRIR(d.value);if(d.type==='record'){this.record=[new Float32Array(sampleRate*10),new Float32Array(sampleRate*10)];this.recordPos=0;}}catch(e){this.port.postMessage({type:'error',message:e.message});}};}
+ process(inputs,outputs){const [l,r]=outputs[0];const m=this.engine.process(l,r,inputs[0]?.[0]);if(++this.tick%64===0)this.port.postMessage({type:'meter',...m});if(this.record){const n=Math.min(l.length,this.record[0].length-this.recordPos);this.record[0].set(l.subarray(0,n),this.recordPos);this.record[1].set(r.subarray(0,n),this.recordPos);this.recordPos+=n;if(this.recordPos===this.record[0].length){this.port.postMessage({type:'record',channels:this.record},this.record.map(x=>x.buffer));this.record=null;}}return true;}
+}registerProcessor('hearing-processor',HearingProcessor);

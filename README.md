@@ -1,6 +1,6 @@
 # Hearing Auditory Lab
 
-A research and teaching lab for **binaural acoustics, hearing loss and hearing-aid DSP**. Includes a real-time browser prototype, a cited literature survey, a LaTeX implementation white paper, tests, a reproducible offline HASPI/MSBG pilot, and a compute benchmark.
+A research and teaching lab for **binaural acoustics, hearing loss and hearing-aid DSP**. Includes a real-time browser prototype, a cited literature survey, a LaTeX implementation white paper, tests, a reproducible offline HASPI/MSBG pilot, and compute benchmarks. Edition **0.5** adds a simulated acoustic feedback loop with adaptive feedback cancellation, individualized HRTFs, and multi-source target tracking for the beamformer.
 
 Read [CONCEPTS.md](CONCEPTS.md) for the guided course: hearing physiology, hardware, DSP, localization, neural beamforming, evaluation and the IEC/ISO counterparts to automotive ITU-T testing.
 
@@ -21,8 +21,39 @@ Open **http://localhost:8000**, click **Start listening**, and start at low devi
 3. Change per-ear thresholds, compression ratio and time constants.
 4. Test added delay/direct blend in D, then export settings or a 10-second stereo WAV.
 5. Open Literature for paper status and the separately measured offline pilot.
+6. **Panel 05, acoustic feedback:** in D, enable the feedback path, raise its gain until it howls, then enable the canceller (PEM-AFC by default). Try *Bring phone to ear*. Lower device volume first.
+7. **Panel 06, HRTFs:** switch between KEMAR, KEMAR scaled to your head width and spectral scale, or a custom set converted from SOFA.
 
 Microphone capture is optional and requests browser permission. Use headphones to avoid acoustic feedback; disable the mic to return to file input. Files and mic audio are processed locally. Google Fonts is the only nonlocal UI resource; system fonts work offline.
+
+## Feedback cancellation, HRTFs and tracking (0.5)
+
+| Feature | Where | Method note | Evaluation |
+|---|---|---|---|
+| Closed feedback loop + NLMS / frequency-shift / PEM-AFC cancellers | Lab panel 05, condition D | [feedback-method.md](dist/feedback-method.md) | `npm run evaluate:feedback` → `dist/feedback-evaluation.json` |
+| KEMAR scaled to head width / spectral scale; custom full-circle sets; SOFA converter | Lab panel 06 | [hrtf-method.md](dist/hrtf-method.md) | `tests/hrtf.test.mjs`, `tests/test_sofa_convert.py` |
+| Time-frequency voting + multi-target tracker; lock-on and speech-like target selection | array.html → *Tracked target* | [tracking-method.md](dist/tracking-method.md) | `npm run evaluate:tracking` → `dist/tracking-evaluation.json` |
+
+Headline results, all from idealized simulation (see each method note for limits):
+
+- **Tracking.** With a stationary masker 5 dB louder than the target, the v0.4 dominant-direction controller
+  steers to the masker (−2.8 dB SNR change). Lock-on matches known-direction MVDR (+15.3 dB), and the speech-like policy
+  reaches +10.6 dB with no direction prior. With two talkers, lock-on keeps the target (+17.4 dB, 0 source switches vs 27).
+  The speech-like policy cannot separate two voices.
+- **Feedback.** Plain NLMS is unstable on speech in quiet at every tested path gain, because closed-loop bias makes it learn
+  the speech. PEM-AFC is stable up to the +10 dB sweep edge on both speech inputs, but it fails at two path gains on a tone
+  complex and attenuates steady tones by 5.4 dB. Every canceller needs forward-path delay: at 0 ms, 6/6 PEM cases howl.
+- **HRTFs.** Head-width scaling changes ITD in proportion (KEMAR 723 µs at 90 degrees → 808 µs at 17 cm). A SOFA file converts
+  through `research/sofa_to_lab.py` (needs `h5py`); the converter core is tested on synthetic data, and the h5py reader has not
+  yet been run on a real SOFA file.
+
+```bash
+npm run evaluate:feedback     # tens of minutes on a laptop CPU; full sweep + delay ablation
+npm run evaluate:tracking     # about 1 minute
+npm run benchmark:v05         # lab engine cost per feedback configuration
+npm run benchmark:array       # writes dist/array-benchmark-v05.json (includes tracked steering)
+python -m unittest tests/test_sofa_convert.py
+```
 
 ## Array, localization and neural experiments (0.4)
 
@@ -48,11 +79,11 @@ npm run evaluate:array
 Run these sequentially. No GPU or npm install is needed. Vendored model/runtime provenance and licenses
 are in `dist/vendor/` and `THIRD_PARTY.md`. Read [the array method](dist/array-method.md) and
 [the LaTeX supplement](dist/array-supplement.tex) / [PDF](dist/array-supplement.pdf).
-The original white paper describes edition 0.2; the supplement specifies the 0.3 extension.
+The original white paper describes edition 0.2; the supplement specifies the 0.3 extension. Edition 0.5 is documented in the three method notes listed above rather than a new LaTeX paper.
 
 ## Research environment
 
-Tested with Python 3.12, Node 24.22.3 on Linux. Python 3.12 is recommended for reproducing these exact pins. In a new virtual environment:
+Tested with Python 3.12, Node 24.22.3 on Linux. Edition 0.5 code was additionally tested on Windows 11 with Node 26.13.1 and Python 3.15 (numpy only). Python 3.12 is recommended for reproducing the pinned research stack. In a new virtual environment:
 
 ```bash
 python -m venv .venv
@@ -100,9 +131,12 @@ The paper uses an embedded bibliography and generated plots in `dist/figures/`; 
 | HASPI v2 / HASQI v2 | Expanded 16-scene, four-speaker offline study; exploratory |
 | Front-facing directionality | Oracle source access, not a microphone beamformer |
 | Microphone beamforming/localization | DS, calibrated MVDR, SRP-PHAT; live 48 kHz array page |
+| Multi-source tracking / target selection | TF voting, alpha-beta tracks, crossing guard; lock-on (by direction) and speech-like selection (0.5) |
 | Neural processing | RNNoise live postfilter; offline pretrained mask proxy + Souden MVDR |
-| Target identity tracking / competing-speaker separation | Not implemented |
-| Feedback cancellation/AEC, individualized HRTFs, hardware validation | Planned |
+| Voice identity (speaker recognition) / competing-speaker separation | Not implemented; tracking keeps identity by direction only |
+| Acoustic feedback loop + adaptive cancellation | Simulated synthetic path; NLMS, frequency shift, PEM-AFC (0.5) |
+| Individualized HRTFs | Anthropometric KEMAR scaling, custom sets, SOFA converter (0.5); horizontal plane only |
+| Vehicle-style AEC, measured feedback paths, hardware validation | Planned |
 
 The lab is not a clinical device or fitting prescription. Audiogram values do not uniquely predict a person's perception. A digital limiter is not SPL calibration. NAL-R is a transparent historical baseline, not NAL-NL2. Published neural results are labeled separately from local measurements.
 
@@ -110,6 +144,7 @@ The lab is not a clinical device or fitting prescription. Audiogram values do no
 
 - `dist/`: static web app, paper, literature cards, public data and measured JSON results.
 - `dist/dsp.js`, `processor.js`: streaming engine and AudioWorklet adapter.
+- `dist/feedback.js`, `dist/hrtf.js`, `dist/tracking.js`: 0.5 feedback loop/cancellers, HRTF sets and personalization, multi-source tracker.
 - `research/`: data restoration, offline study, figures and host benchmark.
 - `tests/`: independent checks of formulas, streaming state, spatial rendering and output bounds.
 - `Skills.md`: reproducibility instructions and research workflow for a human or Codex.

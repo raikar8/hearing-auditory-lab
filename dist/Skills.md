@@ -1,6 +1,6 @@
 # Skills.md — Reproduce and extend the Hearing Auditory Lab
 
-This is a project reproduction guide for people and Codex. It is not an installed agent skill or a claim of clinical validation. Read README.md first. Research snapshot: 25 November 2026; implementation 0.4.0.
+This is a project reproduction guide for people and Codex. It is not an installed agent skill or a claim of clinical validation. Read README.md first. Research snapshot: 26 November 2026; implementation 0.5.0.
 
 ## Goal and scientific contract
 
@@ -54,6 +54,8 @@ The data script saves SHA-256 hashes for top-level assets. See THIRD_PARTY.md fo
 - `dist/app.js`: scene controls, audiograms, local audio decoding, microphone lifecycle, charts and export.
 - `research/reference_study.py`: independently calls Clarity's NAL-R, HASPI v2 and MSBG. It does not score the browser engine.
 - `research/benchmark.mjs`: warm Node timing of the actual browser DSP engine, excluding UI/audio-device work.
+- `dist/feedback.js`: synthetic feedback path, receiver history, NLMS, PEM prewhitening with howl fallback, Hilbert frequency shifter, magnitude-bound MSG (0.5).
+- `dist/hrtf.js`: full-circle HRIR schema, mirroring of the half-circle KEMAR, validation, ITD/spectral personalization, ITD measurement (0.5).
 
 Live configuration: 44,100 Hz; nominal 128-sample quantum; HRIR coefficient transition 20 ms; two sources, two ears; 128-tap convolution. Six target bands at 250, 500, 1000, 2000, 4000, 6000 Hz. Lowpass corner frequencies: 354, 707, 1414, 2828, 4899 Hz. Bands are lowpass differences plus a residual. Unity gains reconstruct the input, unequal gains approximate the desired curve.
 
@@ -161,7 +163,7 @@ Never tune on these four evaluation speakers and continue calling them held out.
 - `research/neural_mvdr.py`: one persistent offline pretrained mask estimator; whole-utterance PSD and two reference-channel outputs.
 - `research/evaluate_perception.py`: matched fitting, HASPI/HASQI, waveform/cue metrics and common-gain listening clips. Completeness is recorded in JSON; never publish partial rows as a complete study.
 - `research/localization-evaluation.mjs`: actual waveform/FFT localization tests, including ambiguity, sector exclusion, a direction step and louder interference.
-- `research/array-benchmark.mjs`: current 0.4 execution/memory benchmark; writes `array-benchmark-v04.json`, preserving the old archived report.
+- `research/array-benchmark.mjs`: execution/memory benchmark; from 0.5 it adds the `tracked` steering mode and writes `array-benchmark-v05.json`, preserving the v0.3 and v0.4 reports.
 
 A true streaming neural extension must explicitly declare look-ahead and persistent state. Evaluate target association separately from angular estimation. Avoid using clean stems or true target angle in a method labeled estimated. A learned mask is not necessarily an identity-conditioned speaker mask. For fixed linear methods, target/noise decomposition uses the same frozen weights; nonlinear methods require a different justified attribution method.
 
@@ -172,3 +174,22 @@ After measurements: run all Node tests, Python metric tests, JSON completeness/f
 `research/evaluate_parallel.py --workers 4` runs independent scene scoring workers and merges their outputs in manifest order. Each worker resets the same per-ear metric random seed and uses one BLAS/OpenMP/Numba thread. The final JSON is written only after all 16 scenes return six rows. Its peak RSS field is the largest individual scoring-worker RSS, not aggregate memory across simultaneous workers. Neural inference and runtime profiling remain separate stages, with the checkpoint loaded once. The serial `evaluate_perception.py` route remains available.
 
 After a workspace reset, recover source from the GitHub checkpoint and use the locked data/model restore scripts. Recompute missing outputs; never reconstruct full result rows from a log containing only selected summary values. Keep any regenerated runtime numbers tied to their actual host/run metadata.
+
+## Version 0.5 reproduction: feedback, HRTFs and tracking
+
+```bash
+npm test                                   # 58 Node tests
+python -m unittest tests/test_eval_metrics.py tests/test_sofa_convert.py
+npm run evaluate:tracking                  # dist/tracking-evaluation.json
+npm run evaluate:feedback                  # dist/feedback-evaluation.json (long: full sweep + delay ablation)
+node research/feedback-evaluation.mjs rescore    # recompute score fields from stored per-second data only
+node research/feedback-evaluation.mjs ablation   # rerun only the forward-delay ablation
+npm run benchmark:v05                      # dist/compute-benchmark-v05.json
+npm run benchmark:array                    # dist/array-benchmark-v05.json
+```
+
+Contracts that keep these results honest:
+
+- **Feedback.** The canceller reads only the microphone and receiver signals. Misalignment and the stable-gain bound use the simulator's true path and are labelled simulation truth. The feedback path is synthetic and fits inside the canceller, so stable-gain values are upper bounds for the model. Always report the wanted-sound level change (`tail_level_change_db`) next to stability: a canceller can buy stability by cancelling the signal. Keep the forward delay of 1 ms or more that the method needs, and report it.
+- **Tracking.** The localizer and tracker read only microphone spectra. Lock-on receives one designated direction at t = 0 and must be labelled with that privilege. Speech-like selection receives none. Do not describe either policy as speaker identification. Score with target-only/noise-only shadow scenes through the identical time-varying filter.
+- **HRTFs.** Scaled KEMAR is a two-parameter model, not a measurement. Record the source, the personalization factors and the converter's `conversion` block with any result. Check dataset licenses before committing converted sets.

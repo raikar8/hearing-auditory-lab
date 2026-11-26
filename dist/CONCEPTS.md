@@ -1,8 +1,8 @@
 # CONCEPTS — From two ears to a hearing-aid research system
 
-**Learning guide for Hearing Auditory Lab, v0.4 · 25 November 2026.**
+**Learning guide for Hearing Auditory Lab, v0.5 · 26 November 2026.**
 
-Start here to understand the system; use [README.md](README.md) for installation and [Skills.md](Skills.md) for reproduction. Equations below explain the implemented ideas, not a clinical fitting prescription. References distinguish original papers, official standards, and implementation documentation. Standards summaries describe their published scope; they are not substitutes for the normative documents or compliance test limits.
+Start here to understand the system; use [README.md](https://github.com/raikar8/hearing-auditory-lab#readme) for installation and [Skills.md](Skills.md) for reproduction. Equations below explain the implemented ideas, not a clinical fitting prescription. References distinguish original papers, official standards, and implementation documentation. Standards summaries describe their published scope; they are not substitutes for the normative documents or compliance test limits.
 
 ## Learning route
 
@@ -301,4 +301,26 @@ For a stronger next study, cross speakers with multiple geometries, use longer u
 - **[S5]** [ITU-T P.1100](https://www.itu.int/itu-t/recommendations/rec.aspx?rec=P.1100) and [P.1110](https://www.itu.int/itu-t/recommendations/rec.aspx?rec=P.1110), vehicle hands-free testing; current catalog editions checked November 2026.
 - **[S6]** [ITU-T P.863](https://www.itu.int/rec/T-REC-P.863/en) and [P.863.1](https://www.itu.int/rec/T-REC-P.863.1/en), objective listening-quality prediction and application guidance. They do not replace an audiogram-aware evaluation or real-ear fitting verification.
 
-**Code reading order:** `dist/dsp.js` → `dist/array-dsp.js` → `dist/localization.js` → `dist/array-engine.js` → `dist/neural.js` → `research/neural_mvdr.py` → `research/evaluate_perception.py`. Run `npm test` before modifying the DSP. Preserve original results when changing an algorithm, then regenerate both measurements and documentation.
+**Code reading order:** `dist/dsp.js` → `dist/feedback.js` → `dist/hrtf.js` → `dist/array-dsp.js` → `dist/localization.js` → `dist/tracking.js` → `dist/array-engine.js` → `dist/neural.js` → `research/neural_mvdr.py` → `research/evaluate_perception.py`. Run `npm test` before modifying the DSP. Preserve original results when changing an algorithm, then regenerate both measurements and documentation.
+
+## 19. Version 0.5: close the loop, choose the talker, fit the ears
+
+**Feedback is a closed-loop identification problem.** With microphone signal m = x + F∗y and receiver signal y = G(m), the loop is stable while |G(f)F(f)| < 1 wherever the loop phase is a multiple of 2π. An adaptive canceller estimates F from y and subtracts F̂∗y. The difficulty is that y is a delayed, amplified copy of x, so a least-squares estimate also explains part of x and becomes biased [R7, R21]. Run panel 05 in condition D:
+
+1. Raise the path gain without a canceller until it howls; note the bound shown in the stable-gain meter.
+2. Enable **plain NLMS** with speech and no masker (set Scene SNR to quiet). Watch the misalignment climb above 0 dB: the filter is learning to predict speech, and the loop can howl at gains that were stable without it.
+3. Switch to **PEM-AFC**. Prewhitening with a model of the incoming sound removes most of that correlation [R22]. Then press *Bring phone to ear* and watch it re-converge.
+4. Enabling the canceller raises a 0 ms added delay to 4 ms. Drag added delay back to 0 ms and watch the misalignment rise. Explain why a loop without forward delay cannot tell feedback from incoming sound.
+5. Read `dist/feedback-evaluation.json`: compare `tail_level_change_db` for the tone complex. A canceller can buy stability by cancelling wanted periodic sound.
+
+**Direction is not identity, but continuity can stand in for it.** The 0.4 controller steered to the strongest direction. Version 0.5 lets each time-frequency bin vote, because speech energy is sparse and two talkers rarely dominate the same bin at the same time [R23]. A tracker turns the votes into persistent tracks. Lock-on keeps the track you pointed at, and a crossing guard stops a passing talker from stealing it. The speech-like policy prefers modulated sources over steady noise but cannot tell two voices apart. In array.html choose *Tracked target*, put a −5 dB stationary masker at −70° and a target at 30°, and compare with *Estimated SRP-PHAT direction*. Then switch the masker to speech and try the speech-like policy: explain why it fails.
+
+**Individual ears.** ITD grows with head size; in a rigid-sphere model it is proportional to radius [R24]. Pinna cues shift in frequency with ear size, and scaling a generic set in frequency reduces inter-subject spectral differences [R25]. Panel 06 lets you change both parameters and load a measured set converted from SOFA. Exercise: set head width to 17 cm and predict the new ITD at 90° before reading it (KEMAR: 723 µs). Then explain why neither control can create an individual's pinna notches.
+
+- **[R21]** van Waterschoot & Moonen (2011), *Fifty years of acoustic feedback control: state of the art and future challenges*, Proc. IEEE 99(2):288–327, [doi:10.1109/JPROC.2010.2090998](https://doi.org/10.1109/JPROC.2010.2090998).
+- **[R22]** Spriet, Proudler, Moonen & Wouters (2005), *Adaptive feedback cancellation in hearing aids with linear prediction of the desired signal*, IEEE Trans. Signal Process. 53(10):3749–3763.
+- **[R23]** Yilmaz & Rickard (2004), *Blind separation of speech mixtures via time-frequency masking*, IEEE Trans. Signal Process. 52(7):1830–1847.
+- **[R24]** Kuhn (1977), *Model for the interaural time differences in the azimuthal plane*, J. Acoust. Soc. Am. 62(1):157–167; Algazi, Avendano & Duda (2001), *Estimation of a spherical-head model from anthropometry*, J. Audio Eng. Soc. 49(6):472–479.
+- **[R25]** Middlebrooks (1999), *Individual differences in external-ear transfer functions reduced by scaling in frequency*, J. Acoust. Soc. Am. 106(3):1480–1492.
+
+Code: `dist/feedback.js`, `dist/hrtf.js`, `dist/tracking.js`, `research/feedback-evaluation.mjs`, `research/tracking-evaluation.mjs`, `research/sofa_to_lab.py`. Method notes: `dist/feedback-method.md`, `dist/tracking-method.md`, `dist/hrtf-method.md`.

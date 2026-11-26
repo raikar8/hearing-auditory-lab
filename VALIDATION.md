@@ -72,3 +72,61 @@ Cloud-browser preview verified startup, calibration, estimated-steering telemetr
 CONCEPTS.md contains 18 learning sections, equations, code exercises and paper/official standards references. Catalog scopes were checked for IEC 60118-0:2022, IEC 60118-15:2012, IEC 61669:2015+AMD1:2025 and ISO 21388-1:2026, with their roles compared to automotive ITU-T. No licensed normative test text is redistributed.
 
 Limits: four short English speaker/geometry pairings, one sloping audiogram, synthetic image-source rooms and directional Gaussian noise. Calibration/true-angle versus future-context privileges differ. No real drone/head-mounted recordings, identity tracking, adaptive feedback cancellation, real-ear fitting verification, participant study or standards certification. Metrics describe different properties; no single result establishes clinical benefit.
+
+## Version 0.5 — 26 November 2026
+
+Host for all 0.5 measurements: Windows 11, AMD Ryzen 5 5500U, Node 26.13.1, Python 3.15.2 with numpy only. These numbers come from a different host than the 0.4 EPYC results and are not directly comparable to them.
+
+### Tests
+
+- **58 Node tests pass** (`npm test`): the 29 earlier tests unchanged, plus 11 feedback, 9 HRTF and 9 tracking tests. They cover:
+  - feedback-path calibration, open-loop NLMS identification, the SSB frequency shifter;
+  - closed-loop howl and recovery, NLMS failure versus PEM stability on real speech, PEM howl fallback;
+  - mode-D-only gating, chunk invariance with the canceller on;
+  - KEMAR mirroring, half- versus full-circle equivalence, ITD and spectral scaling, custom asymmetric sets, validation errors, cross-fade on set change;
+  - time-frequency voting, track lifecycle, lock-on, the crossing guard, the speech-like policy, and end-to-end tracked MVDR steering.
+- **5 Python SOFA-converter tests pass** (`tests/test_sofa_convert.py`, numpy only).
+- **Not run on this host:** `tests/test_eval_metrics.py` needs scipy from the research stack, which is not installed here. The 0.4 record above remains the latest run of it.
+
+### Browser QA (Claude desktop built-in Chromium, localhost)
+
+- **Lab.** Started audio; in D with the path at −10 dB enabled PEM-AFC.
+  - The page raised added delay from 0 to 4 ms and showed the reason. The loop converged (misalignment −19.3 dB, 0 clips). After *phone at ear* it saturated for 9 samples, then recovered (−21.6 dB).
+  - Before the delay safeguard existed, the same test at 0 ms diverged (+15.5 dB misalignment, clipping). This led to the safeguard and the delay ablation.
+- **HRTFs.**
+  - Head width 17 cm gave ITD 808 µs (KEMAR 723 µs).
+  - A custom full-circle JSON loaded through the file input.
+  - A 48 kHz file was rejected with the expected message.
+- **Array page.**
+  - With target 30°, stationary masker −70°, −5 dB SNR and MVDR, the existing estimated mode steered to −70°.
+  - Tracked lock-on steered to 31°. The speech-like policy selected 30° with modulation 3.83 vs 0.11 for the noise.
+  - Track markers rendered.
+- **Evaluations page.** The new v0.5 section renders 16 tracking rows, 12 feedback rows and the ablation summary.
+- **Links.** A local link and module-import check passes for every page and served Markdown file. A pre-existing broken README link in the served CONCEPTS.md was fixed.
+- **Not checked:** listening quality, real microphones or acoustic loopback, and other browsers. The AudioWorklet clock was unavailable, so the timing tables show the Node host benchmark, as designed.
+
+### Measurements
+
+- **Tracking** (`dist/tracking-evaluation.json`): 4 scenarios × 5 controllers, 8 s each. Full table in `dist/tracking-method.md`.
+  - Loud stationary masker: dominant −2.79 dB, lock-on +15.30 dB (= known), speech-like +10.60 dB.
+  - Two talkers: lock-on +17.37 dB vs known +17.41 dB; dominant had 27 source switches.
+  - Crossing talker (delay-and-sum): lock-on 0.6° mean error after adding the crossing guard (22.7° before it).
+- **Feedback** (`dist/feedback-evaluation.json`): 3 inputs × 4 conditions × 21 path gains, path-change runs and a 24-run delay ablation. Summary in `dist/feedback-method.md`.
+  - Plain NLMS and NLMS + shift are unstable on speech in quiet at every gain.
+  - PEM is stable up to the +10 dB sweep edge on both speech inputs, fails at −5 and 0 dB on the tone complex, and attenuates the tone complex by 5.4 dB.
+  - With 0 ms forward delay, 6/6 PEM cases howl; with 1–4 ms, 18/18 are stable.
+- **Lab engine cost** (`dist/compute-benchmark-v05.json`, 44.1 kHz, 2.90 ms budget): baseline D RTF 0.112; PEM 0.363 (p95 1.59 ms); PEM + 6 Hz shift 0.394 (max 2.90 ms, at the budget, 0 overruns).
+- **Array cost** (`dist/array-benchmark-v05.json`): MVDR without RNNoise RTF 0.088 manual vs 0.175 tracked (tracking p95 0.24 ms, 0/1875 overruns). With RNNoise: 0.272 vs 0.365, with 7/1875 overruns in tracked mode. Tracking state is 5,472 bytes; templates are shared with the SRP localizer.
+
+### Bugs found and fixed during this release
+
+- The PEM pitch predictor was silently disabled by a misplaced comment. Found by a unit test; all PEM results were regenerated after the fix.
+- A strided pitch search missed odd-aligned pulses.
+- The speech-like policy selected the noise when no speech track was confirmed.
+- The feedback status line stayed on "saturating" after recovery.
+- The first feedback evaluation counted speech-peak clipping as howling. It now compares against a feedback-free reference.
+
+### Not verified
+
+- The SOFA reader (h5py) on a real measured SOFA file: none was downloaded.
+- Perceptual benefit of any 0.5 feature; measured feedback paths; vehicle-style AEC; elevation HRTFs; voice-identity tracking; a new LaTeX paper (0.5 is documented in Markdown method notes).

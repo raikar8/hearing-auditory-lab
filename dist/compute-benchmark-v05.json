@@ -1,0 +1,86 @@
+{
+  "version": "0.5",
+  "utc": "2026-11-26T13:09:12.765Z",
+  "scope": "Node DSP only, warm 1 s then approximately 10 s per configuration, mode D with oracle directionality; not browser I/O, worklet scheduling or wearable latency. PEM re-estimation is bursty (every 512 samples per ear, ears staggered), which max_ms reflects.",
+  "cpu": "AMD Ryzen 5 5500U with Radeon Graphics         ",
+  "node": "v26.13.1",
+  "sample_rate": 44100,
+  "block_samples": 128,
+  "deadline_ms": 2.9024943310657596,
+  "runs": [
+    {
+      "config": "baseline_D",
+      "parameters": {},
+      "blocks": 3446,
+      "median_ms": 0.3204000000000633,
+      "p95_ms": 0.33750000000009095,
+      "p99_ms": 0.4855000000000018,
+      "max_ms": 0.571200000000033,
+      "overruns": 0,
+      "rtf": 0.11203936293891412
+    },
+    {
+      "config": "feedback_no_afc",
+      "parameters": {
+        "feedback": true,
+        "feedbackGain": -30
+      },
+      "blocks": 3446,
+      "median_ms": 0.34560000000010405,
+      "p95_ms": 0.3500000000001364,
+      "p99_ms": 0.37969999999995707,
+      "max_ms": 0.7478000000000975,
+      "overruns": 0,
+      "rtf": 0.11940308353435265
+    },
+    {
+      "config": "nlms",
+      "parameters": {
+        "feedback": true,
+        "feedbackGain": -30,
+        "afc": true,
+        "afcMode": "nlms"
+      },
+      "blocks": 3446,
+      "median_ms": 0.4375999999997475,
+      "p95_ms": 0.4501999999997679,
+      "p99_ms": 0.8207000000002154,
+      "max_ms": 8.989000000000033,
+      "overruns": 1,
+      "rtf": 0.15406764634268086
+    },
+    {
+      "config": "pem",
+      "parameters": {
+        "feedback": true,
+        "feedbackGain": -30,
+        "afc": true,
+        "afcMode": "pem"
+      },
+      "blocks": 3446,
+      "median_ms": 0.8176000000003114,
+      "p95_ms": 1.5874999999996362,
+      "p99_ms": 1.7309999999997672,
+      "max_ms": 2.657799999999952,
+      "overruns": 0,
+      "rtf": 0.3632041538876595
+    },
+    {
+      "config": "pem_shift6hz",
+      "parameters": {
+        "feedback": true,
+        "feedbackGain": -30,
+        "afc": true,
+        "afcMode": "pem",
+        "freqShift": 6
+      },
+      "blocks": 3446,
+      "median_ms": 1.6044999999994616,
+      "p95_ms": 1.7186000000001513,
+      "p99_ms": 1.9909999999999854,
+      "max_ms": 2.90099999999984,
+      "overruns": 0,
+      "rtf": 0.3936544276425531
+    }
+  ]
+}

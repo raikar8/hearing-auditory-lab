@@ -155,12 +155,12 @@ python research/restore_neural_model.py
 python research/prepare_spatial_scenes.py
 node research/render_spatial_eval.mjs
 python research/neural_mvdr.py
-python research/evaluate_perception.py
+python research/evaluate_parallel.py --workers 4
 npm run evaluate:localization
 npm run benchmark:array
 ```
 
-Run sequentially; avoid competing CPU jobs when measuring compute. The model loads once per script invocation, not once per utterance. Model download is about 7.3 MB; streaming the LibriSpeech archive can require substantial network traffic. The locked manifest verifies original FLAC checksums. Intermediates and model weights remain under ignored `research/work/` and `research/models/`; result JSON and selected derived WAV clips are committed.
+Run the listed stages sequentially; the scorer alone distributes independent scenes across four bounded workers with one math-library thread each. Use `python research/evaluate_perception.py` for a single-process scorer. Avoid competing CPU jobs when measuring compute. The model loads once per script invocation, not once per utterance. Model download is about 7.3 MB; streaming the LibriSpeech archive can require substantial network traffic. The locked manifest verifies original FLAC checksums. Intermediates and model weights remain under ignored `research/work/` and `research/models/`; result JSON and selected derived WAV clips are committed.
 
 There are 4 speakers × 2 room conditions × 2 SNRs × 6 methods = 96 rows. Each speaker has only one geometry and one three-second clip, so speaker/geometry effects cannot be separated. Requested RT60 is not measured RT60. All quality scores use the same NAL-R fitting, audiogram and assumed level calibration. References include room coloration. Calibration privileges and future context differ across methods. These results are not a clinical outcome study, standards certification, or SOTA ranking.
 

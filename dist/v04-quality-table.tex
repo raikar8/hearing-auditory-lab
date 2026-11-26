@@ -1,0 +1,12 @@
+\begin{table}[htbp]\centering\small
+\caption{Equal-speaker means across all 16 scenes. SI-SDR and cues precede fitting.}
+\begin{tabular}{lrrrrr}\toprule
+Method & HASPI & HASQI & SI-SDR dB & ILD dB & ITD $\mu$s \\
+\midrule
+Reference pair & 0.727 & 0.240 & 3.14 & 0.31 & 148.4 \\
+Delay-and-sum & 0.831 & 0.302 & 5.35 & 0.40 & 15.6 \\
+MVDR known & 0.925 & 0.627 & 12.79 & 0.40 & 15.6 \\
+MVDR estimated & 0.695 & 0.336 & -10.04 & 0.40 & 664.1 \\
+MVDR + RNNoise & 0.896 & 0.658 & 11.18 & 0.40 & 15.6 \\
+Neural MVDR (offline) & 0.813 & 0.353 & 5.98 & 0.42 & 74.2 \\
+\bottomrule\end{tabular}\end{table}

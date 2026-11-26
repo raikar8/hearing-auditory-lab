@@ -1,0 +1,11 @@
+\begin{table}[htbp]\centering\small
+\caption{Offline neural CPU compute per three-second clip; no streaming-delay claim.}
+\begin{tabular}{lrr}\toprule
+Component & Mean ms & Maximum ms \\
+\midrule
+stft & 1.42 & 4.66 \\
+network and mask & 43.57 & 69.63 \\
+covariance and solve & 13.38 & 26.84 \\
+istft & 1.66 & 3.33 \\
+total & 60.05 & 100.10 \\
+\bottomrule\end{tabular}\end{table}

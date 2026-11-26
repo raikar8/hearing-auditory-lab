@@ -1,0 +1,36 @@
+{
+  "source_utterance": "1320-122617-0003",
+  "common_playback_gain": 0.5,
+  "clips": [
+    {
+      "path": "assets/evaluation/das.wav",
+      "sha256": "0ef324324f72b3e1dbdd5b3c71e29962dba5b8214a029982126f831c850641fb",
+      "license": "CC BY 4.0; see THIRD_PARTY.md"
+    },
+    {
+      "path": "assets/evaluation/mvdr_estimated.wav",
+      "sha256": "899403c5856965f6b0450ff66560caec2ca185aa7fecfa94e5e7374d120176f2",
+      "license": "CC BY 4.0; see THIRD_PARTY.md"
+    },
+    {
+      "path": "assets/evaluation/mvdr_known.wav",
+      "sha256": "e85e1e725de2a9d63a925397d20c12d9c4e9ec4814e13d2ec866c0d2065fd9cb",
+      "license": "CC BY 4.0; see THIRD_PARTY.md"
+    },
+    {
+      "path": "assets/evaluation/mvdr_rnnoise.wav",
+      "sha256": "9d48c522538635a8fdb6920c13a46843d7200ea7fe50ca8af2ebe0fb76b78607",
+      "license": "CC BY 4.0; see THIRD_PARTY.md"
+    },
+    {
+      "path": "assets/evaluation/neural_mvdr.wav",
+      "sha256": "f9aa697dbbc5418a76ed746390cdb0175145cf38e3c89e82cf8b43c998199e50",
+      "license": "CC BY 4.0; see THIRD_PARTY.md"
+    },
+    {
+      "path": "assets/evaluation/reference.wav",
+      "sha256": "ff1d50f3741185e438c107462884d77f14c3ae32b36e5d56c9adf08cbbf7e7dd",
+      "license": "CC BY 4.0; see THIRD_PARTY.md"
+    }
+  ]
+}

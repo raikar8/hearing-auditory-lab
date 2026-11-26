@@ -15,19 +15,13 @@ methods=['reference','das','mvdr_known','mvdr_estimated','mvdr_rnnoise','neural_
 audiogram=Audiogram(levels=np.array([10,15,25,40,55,60]),frequencies=np.array([250,500,1000,2000,4000,6000]));nal=NALR(220,FS);fir,_=nal.build(audiogram)
 def fit(y):return np.stack([fftconvolve(c,fir)[110:110+len(c)] for c in y])
 def read48(path):return resample_poly(np.fromfile(path,dtype='<f4').reshape(-1,2).T,1,3,axis=1)
-def sisdr(ref,y):
- ref=ref-ref.mean();y=y-y.mean();p=np.dot(y,ref)*ref/(np.dot(ref,ref)+1e-20);return float(10*np.log10((np.dot(p,p)+1e-20)/(np.sum((y-p)**2)+1e-20)))
-def cues(y):
- _,_,z=stft(y,FS,nperseg=512,noverlap=256,axis=-1);f=np.fft.rfftfreq(512,1/FS);b=(f>=300)&(f<=4000)
- ild=float(10*np.log10((np.sum(abs(z[0,b])**2)+1e-20)/(np.sum(abs(z[1,b])**2)+1e-20)))
- # GCC-PHAT on pooled spectra, only 300--1500 Hz; integer-sample diagnostic.
- cross=np.mean(z[0]*np.conj(z[1]),axis=-1);cross/=np.maximum(abs(cross),1e-12);cross[(f<300)|(f>1500)]=0
- corr=np.fft.irfft(cross,512);lags=np.arange(-16,17);itd=float(lags[np.argmax(corr[lags%512])]/FS*1e6)
- return ild,itd
+from eval_metrics import sisdr,cues
 out=Path('dist/assets/evaluation');out.mkdir(exist_ok=True,parents=True)
 result={'version':'0.4','scope':'Four lab-held-out LibriSpeech test speakers; 16 synthetic stationary scenes, 96 method/scenario rows. Not clinical validation or a SOTA ranking. No guarantees of speaker disjointness from every third-party model training source.','config':{**{k:v for k,v in manifest.items() if k!='scenes'},'audiogram_db_hl':audiogram.levels.tolist(),'equiv_0db_spl':100,'target_reference_left_spl':65,'fitting':'Exact Clarity NAL-R FIR order 220, 110-sample delay removed offline; equal fitting and ±0.89 digital ceiling for all methods','metric_reference':'Reverberant target-only ear image at microphones 0 and 2; not dry speech','hasqi_equalisation':1,'discard_initial_s':.2,'neural_beamformer':'Offline pretrained MetricGAN+ mask proxy + Souden MVDR, whole-utterance statistics','cue_metrics':'Mixture-output vs target-image ILD 300–4000 Hz and integer GCC-PHAT ITD 300–1500 Hz (62.5 us resolution); not human localization error'},'versions':{k:importlib.metadata.version(k) for k in ['numpy','scipy','pyclarity','torch','speechbrain','rir-generator']},'speakers':json.loads(Path('research/data/manifest.json').read_text()),'rows':rows}
-limit=int(sys.argv[1]) if len(sys.argv)>1 else len(manifest['scenes'])
-for scene in manifest['scenes'][:limit]:
+import argparse
+parser=argparse.ArgumentParser();parser.add_argument('--scene-index',type=int);parser.add_argument('--output',default='dist/perceptual-evaluation.json');args=parser.parse_args()
+selected=manifest['scenes'] if args.scene_index is None else [manifest['scenes'][args.scene_index]]
+for scene in selected:
  ref=np.load(root/(scene['id']+'.npz'))['target'][[0,2]];rc=ref[:,crop];refcues=cues(rc);fitted_ref=fit(ref)
  for method in methods:
   y=np.load(root/(scene['id']+'_neural_mvdr.npy')) if method=='neural_mvdr' else read48(root/(scene['id']+'_'+method+'.f32'))
@@ -49,4 +43,4 @@ for scene in manifest['scenes'][:limit]:
    file=out/(method+'.wav');sf.write(file,(fy*.5).T,FS,subtype='PCM_16');row['audio']=str(file.relative_to('dist'))
   rows.append(row);print(scene['id'],method,round(ears[0]['haspi_v2'],3),round(ears[0]['hasqi_v2'],3),round(row['metric_compute_s'],2),'s',flush=True)
   result['completed_rows']=len(rows);result['complete']=len(rows)==len(manifest['scenes'])*len(methods);result['peak_process_rss_bytes']=resource.getrusage(resource.RUSAGE_SELF).ru_maxrss*1024
-  Path('dist/perceptual-evaluation.json').write_text(json.dumps(result,indent=2,allow_nan=False))
+  Path(args.output).write_text(json.dumps(result,indent=2,allow_nan=False))

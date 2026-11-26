@@ -1,0 +1,3931 @@
+{
+  "version": "0.4",
+  "scope": "Four lab-held-out LibriSpeech test speakers; 16 synthetic stationary scenes, 96 method/scenario rows. Not clinical validation or a SOTA ranking. No guarantees of speaker disjointness from every third-party model training source.",
+  "config": {
+    "fs": 16000,
+    "render_fs": 48000,
+    "room_m": [
+      6,
+      5,
+      3
+    ],
+    "centre_m": [
+      3.0,
+      2.5,
+      1.5
+    ],
+    "offsets_m": [
+      [
+        -0.09,
+        0.008,
+        0.0
+      ],
+      [
+        -0.09,
+        -0.008,
+        0.0
+      ],
+      [
+        0.09,
+        0.008,
+        0.0
+      ],
+      [
+        0.09,
+        -0.008,
+        0.0
+      ]
+    ],
+    "source_distance_m": 1.4,
+    "rir_length_s": 0.4,
+    "rir_generator": "0.3.0 image method; RT60 is requested, not measured",
+    "audiogram_db_hl": [
+      10,
+      15,
+      25,
+      40,
+      55,
+      60
+    ],
+    "equiv_0db_spl": 100,
+    "target_reference_left_spl": 65,
+    "fitting": "Exact Clarity NAL-R FIR order 220, 110-sample delay removed offline; equal fitting and \u00b10.89 digital ceiling for all methods",
+    "metric_reference": "Reverberant target-only ear image at microphones 0 and 2; not dry speech",
+    "hasqi_equalisation": 1,
+    "discard_initial_s": 0.2,
+    "neural_beamformer": "Offline pretrained MetricGAN+ mask proxy + Souden MVDR, whole-utterance statistics",
+    "cue_metrics": "Mixture-output vs target-image ILD 300\u20134000 Hz and integer GCC-PHAT ITD 300\u20131500 Hz (62.5 us resolution); not human localization error"
+  },
+  "versions": {
+    "numpy": "2.3.5",
+    "scipy": "1.17.0",
+    "pyclarity": "0.9.0",
+    "torch": "2.5.1+cpu",
+    "speechbrain": "1.0.3",
+    "rir-generator": "0.3.0"
+  },
+  "speakers": {
+    "dataset": "LibriSpeech test-clean",
+    "license": "CC BY 4.0",
+    "source": "https://www.openslr.org/12",
+    "selection": "First four distinct speakers in archive order with >=3 s, excluding original demo speaker 6930; first 3 s used; no tuning",
+    "clips": [
+      {
+        "utterance": "1320-122617-0003",
+        "speaker": "1320",
+        "path": "research/data/1320-122617-0003.flac",
+        "sample_rate": 16000,
+        "original_seconds": 6.285,
+        "sha256": "bbe9ef85bbe228c73a414f064c9bd992c94135d73f9900b33104ad93c07d0594"
+      },
+      {
+        "utterance": "5639-40744-0032",
+        "speaker": "5639",
+        "path": "research/data/5639-40744-0032.flac",
+        "sample_rate": 16000,
+        "original_seconds": 17.43,
+        "sha256": "ecba1c65406f3d2fdfe383a22385dfe19cc117b71b126817f5e20df791f22a50"
+      },
+      {
+        "utterance": "260-123440-0018",
+        "speaker": "260",
+        "path": "research/data/260-123440-0018.flac",
+        "sample_rate": 16000,
+        "original_seconds": 3.64,
+        "sha256": "a80d66d866b8f9114094301a965a7b6d0a62d9467c96885ff1098a27f5b02cb4"
+      },
+      {
+        "utterance": "7729-102255-0045",
+        "speaker": "7729",
+        "path": "research/data/7729-102255-0045.flac",
+        "sample_rate": 16000,
+        "original_seconds": 6.805,
+        "sha256": "52b2863422cf066b046facaf8c9608e81179a61be437b8e321c2832b2119805c"
+      }
+    ]
+  },
+  "rows": [
+    {
+      "id": "1320_rt0.0_snr0",
+      "speaker": "1320",
+      "utterance": "1320-122617-0003",
+      "target_deg": -30,
+      "masker_deg": 70,
+      "nominal_rt60_s": 0.0,
+      "snr_left_db": 0,
+      "frames_48k": 144000,
+      "frames_calibration_48k": 48000,
+      "method": "reference",
+      "ears": [
+        {
+          "haspi_v2": 0.36782835990686236,
+          "hasqi_v2": 0.11202237326658769,
+          "si_sdr_db": 0.5784144163665891,
+          "output_level_change_db": 2.758722510711002
+        },
+        {
+          "haspi_v2": 0.3201804533408053,
+          "hasqi_v2": 0.09333698518323842,
+          "si_sdr_db": -1.0491006846072497,
+          "output_level_change_db": 3.5795939416559874
+        }
+      ],
+      "ild_error_db": 0.9616987157530974,
+      "itd_error_us": 750.0,
+      "clip_fraction_after_fitting": 0.0,
+      "metric_compute_s": 12.809843613999988,
+      "algorithmic_delay_ms": 10.666666666666666,
+      "doa_mean_absolute_error_deg": 100,
+      "doa_within_10deg_fraction": 0,
+      "target_only": {
+        "si_sdr_db": [
+          48.017033137385624,
+          48.2161715952142
+        ],
+        "level_change_db": [
+          0.0051636510933009755,
+          0.005172856101443708
+        ],
+        "output_snr_db": [
+          0.5556042194366455,
+          -1.057194709777832
+        ]
+      }
+    },
+    {
+      "id": "1320_rt0.0_snr0",
+      "speaker": "1320",
+      "utterance": "1320-122617-0003",
+      "target_deg": -30,
+      "masker_deg": 70,
+      "nominal_rt60_s": 0.0,
+      "snr_left_db": 0,
+      "frames_48k": 144000,
+      "frames_calibration_48k": 48000,
+      "method": "das",
+      "ears": [
+        {
+          "haspi_v2": 0.5324644810123323,
+          "hasqi_v2": 0.17465710296549333,
+          "si_sdr_db": 3.1890644502672534,
+          "output_level_change_db": 1.3878691542449428
+        },
+        {
+          "haspi_v2": 0.542686013747011,
+          "hasqi_v2": 0.1771732912426963,
+          "si_sdr_db": 3.2131786960650515,
+          "output_level_change_db": 1.9437085234946956
+        }
+      ],
+      "ild_error_db": 0.5632752171402688,
+      "itd_error_us": 0.0,
+      "clip_fraction_after_fitting": 0.0,
+      "metric_compute_s": 13.568974165999975,
+      "algorithmic_delay_ms": 10.666666666666666,
+      "doa_mean_absolute_error_deg": 100,
+      "doa_within_10deg_fraction": 0,
+      "target_only": {
+        "si_sdr_db": [
+          45.02690111122422,
+          44.762323990906765
+        ],
+        "level_change_db": [
+          -0.3282520377480086,
+          0.2355180744209207
+        ],
+        "output_snr_db": [
+          3.175013303756714,
+          3.1995842456817627
+        ]
+      }
+    },
+    {
+      "id": "1320_rt0.0_snr0",
+      "speaker": "1320",
+      "utterance": "1320-122617-0003",
+      "target_deg": -30,
+      "masker_deg": 70,
+      "nominal_rt60_s": 0.0,
+      "snr_left_db": 0,
+      "frames_48k": 144000,
+      "frames_calibration_48k": 48000,
+      "method": "mvdr_known",
+      "ears": [
+        {
+          "haspi_v2": 0.9997519372566855,
+          "hasqi_v2": 0.8464337859297877,
+          "si_sdr_db": 20.38737528407166,
+          "output_level_change_db": -0.041554151746301955
+        },
+        {
+          "haspi_v2": 0.9997063516286439,
+          "hasqi_v2": 0.84127447636057,
+          "si_sdr_db": 20.627824539095954,
+          "output_level_change_db": 0.5154621193256704
+        }
+      ],
+      "ild_error_db": 0.5637273934587728,
+      "itd_error_us": 0.0,
+      "clip_fraction_after_fitting": 0.0,
+      "metric_compute_s": 13.378873763000001,
+      "algorithmic_delay_ms": 10.666666666666666,
+      "doa_mean_absolute_error_deg": 100,
+      "doa_within_10deg_fraction": 0,
+      "target_only": {
+        "si_sdr_db": [
+          23.881959211446553,
+          24.73481525657403
+        ],
+        "level_change_db": [
+          -0.06591020793471936,
+          0.4895297130780545
+        ],
+        "output_snr_db": [
+          22.973342895507812,
+          22.768877029418945
+        ]
+      }
+    },
+    {
+      "id": "1320_rt0.0_snr0",
+      "speaker": "1320",
+      "utterance": "1320-122617-0003",
+      "target_deg": -30,
+      "masker_deg": 70,
+      "nominal_rt60_s": 0.0,
+      "snr_left_db": 0,
+      "frames_48k": 144000,
+      "frames_calibration_48k": 48000,
+      "method": "mvdr_estimated",
+      "ears": [
+        {
+          "haspi_v2": 0.9903600649316192,
+          "hasqi_v2": 0.3974349407789961,
+          "si_sdr_db": 1.9225093828317412,
+          "output_level_change_db": 10.176750268389213
+        },
+        {
+          "haspi_v2": 0.9939720455505919,
+          "hasqi_v2": 0.4147654016305689,
+          "si_sdr_db": -9.853367843124634,
+          "output_level_change_db": 10.67886933798923
+        }
+      ],
+      "ild_error_db": 0.5187089081771563,
+      "itd_error_us": 750.0,
+      "clip_fraction_after_fitting": 0.006302083333333333,
+      "metric_compute_s": 15.882470743999988,
+      "algorithmic_delay_ms": 10.666666666666666,
+      "doa_mean_absolute_error_deg": 100,
+      "doa_within_10deg_fraction": 0
+    },
+    {
+      "id": "1320_rt0.0_snr0",
+      "speaker": "1320",
+      "utterance": "1320-122617-0003",
+      "target_deg": -30,
+      "masker_deg": 70,
+      "nominal_rt60_s": 0.0,
+      "snr_left_db": 0,
+      "frames_48k": 144000,
+      "frames_calibration_48k": 48000,
+      "method": "mvdr_rnnoise",
+      "ears": [
+        {
+          "haspi_v2": 0.9995594648608177,
+          "hasqi_v2": 0.8372666318476711,
+          "si_sdr_db": 15.922606730525057,
+          "output_level_change_db": -0.15459440654053602
+        },
+        {
+          "haspi_v2": 0.9994915578859638,
+          "hasqi_v2": 0.8325645382164484,
+          "si_sdr_db": 15.636071263967242,
+          "output_level_change_db": 0.40060544927212
+        }
+      ],
+      "ild_error_db": 0.55943956872559,
+      "itd_error_us": 0.0,
+      "clip_fraction_after_fitting": 0.0,
+      "metric_compute_s": 13.607658675000039,
+      "algorithmic_delay_ms": 40.666666666666664,
+      "doa_mean_absolute_error_deg": 100,
+      "doa_within_10deg_fraction": 0
+    },
+    {
+      "id": "1320_rt0.0_snr0",
+      "speaker": "1320",
+      "utterance": "1320-122617-0003",
+      "target_deg": -30,
+      "masker_deg": 70,
+      "nominal_rt60_s": 0.0,
+      "snr_left_db": 0,
+      "frames_48k": 144000,
+      "frames_calibration_48k": 48000,
+      "method": "neural_mvdr",
+      "ears": [
+        {
+          "haspi_v2": 0.877117867153355,
+          "hasqi_v2": 0.29194012153590343,
+          "si_sdr_db": 8.080990728285064,
+          "output_level_change_db": -1.4398050978808903
+        },
+        {
+          "haspi_v2": 0.7356687236166791,
+          "hasqi_v2": 0.2640920417339898,
+          "si_sdr_db": 6.649362239376258,
+          "output_level_change_db": -1.1876484239474678
+        }
+      ],
+      "ild_error_db": 0.39124716412465665,
+      "itd_error_us": 62.5,
+      "clip_fraction_after_fitting": 0.0,
+      "metric_compute_s": 12.273211976000084,
+      "algorithmic_delay_ms": null
+    },
+    {
+      "id": "1320_rt0.0_snr5",
+      "speaker": "1320",
+      "utterance": "1320-122617-0003",
+      "target_deg": -30,
+      "masker_deg": 70,
+      "nominal_rt60_s": 0.0,
+      "snr_left_db": 5,
+      "frames_48k": 144000,
+      "frames_calibration_48k": 48000,
+      "method": "reference",
+      "ears": [
+        {
+          "haspi_v2": 0.7775327095566544,
+          "hasqi_v2": 0.21047035618386534,
+          "si_sdr_db": 5.568125106725763,
+          "output_level_change_db": 1.0814081427759883
+        },
+        {
+          "haspi_v2": 0.6257437274261084,
+          "hasqi_v2": 0.17941014323995375,
+          "si_sdr_db": 3.947288629902415,
+          "output_level_change_db": 1.4800718872659395
+        }
+      ],
+      "ild_error_db": 0.5146629709668349,
+      "itd_error_us": 62.5,
+      "clip_fraction_after_fitting": 0.0,
+      "metric_compute_s": 12.524458155000048,
+      "algorithmic_delay_ms": 10.666666666666666,
+      "doa_mean_absolute_error_deg": 100,
+      "doa_within_10deg_fraction": 0,
+      "target_only": {
+        "si_sdr_db": [
+          48.017033137385624,
+          48.2161715952142
+        ],
+        "level_change_db": [
+          0.0051636510933009755,
+          0.005172856101443708
+        ],
+        "output_snr_db": [
+          5.555603504180908,
+          3.942805290222168
+        ]
+      }
+    },
+    {
+      "id": "1320_rt0.0_snr5",
+      "speaker": "1320",
+      "utterance": "1320-122617-0003",
+      "target_deg": -30,
+      "masker_deg": 70,
+      "nominal_rt60_s": 0.0,
+      "snr_left_db": 5,
+      "frames_48k": 144000,
+      "frames_calibration_48k": 48000,
+      "method": "das",
+      "ears": [
+        {
+          "haspi_v2": 0.8790919611209767,
+          "hasqi_v2": 0.3042408204036428,
+          "si_sdr_db": 8.182357435355392,
+          "output_level_change_db": 0.2939521965570892
+        },
+        {
+          "haspi_v2": 0.8668810037473728,
+          "hasqi_v2": 0.3064738936183567,
+          "si_sdr_db": 8.206238419837979,
+          "output_level_change_db": 0.8545038139757466
+        }
+      ],
+      "ild_error_db": 0.5642733829479556,
+      "itd_error_us": 0.0,
+      "clip_fraction_after_fitting": 0.0,
+      "metric_compute_s": 13.521841871000106,
+      "algorithmic_delay_ms": 10.666666666666666,
+      "doa_mean_absolute_error_deg": 100,
+      "doa_within_10deg_fraction": 0,
+      "target_only": {
+        "si_sdr_db": [
+          45.02690111122422,
+          44.762323990906765
+        ],
+        "level_change_db": [
+          -0.3282520377480086,
+          0.2355180744209207
+        ],
+        "output_snr_db": [
+          8.175012588500977,
+          8.1995849609375
+        ]
+      }
+    },
+    {
+      "id": "1320_rt0.0_snr5",
+      "speaker": "1320",
+      "utterance": "1320-122617-0003",
+      "target_deg": -30,
+      "masker_deg": 70,
+      "nominal_rt60_s": 0.0,
+      "snr_left_db": 5,
+      "frames_48k": 144000,
+      "frames_calibration_48k": 48000,
+      "method": "mvdr_known",
+      "ears": [
+        {
+          "haspi_v2": 0.9997653394663065,
+          "hasqi_v2": 0.9101145309055079,
+          "si_sdr_db": 22.448464790414842,
+          "output_level_change_db": -0.05757331994773289
+        },
+        {
+          "haspi_v2": 0.9997393114816459,
+          "hasqi_v2": 0.9059982972128805,
+          "si_sdr_db": 22.979574358928005,
+          "output_level_change_db": 0.4984974895056044
+        }
+      ],
+      "ild_error_db": 0.5627055316615741,
+      "itd_error_us": 0.0,
+      "clip_fraction_after_fitting": 0.0,
+      "metric_compute_s": 13.41284103999999,
+      "algorithmic_delay_ms": 10.666666666666666,
+      "doa_mean_absolute_error_deg": 100,
+      "doa_within_10deg_fraction": 0,
+      "target_only": {
+        "si_sdr_db": [
+          23.88195932848683,
+          24.73481538198535
+        ],
+        "level_change_db": [
+          -0.06590982869027953,
+          0.4895297130780545
+        ],
+        "output_snr_db": [
+          27.973342895507812,
+          27.768877029418945
+        ]
+      }
+    },
+    {
+      "id": "1320_rt0.0_snr5",
+      "speaker": "1320",
+      "utterance": "1320-122617-0003",
+      "target_deg": -30,
+      "masker_deg": 70,
+      "nominal_rt60_s": 0.0,
+      "snr_left_db": 5,
+      "frames_48k": 144000,
+      "frames_calibration_48k": 48000,
+      "method": "mvdr_estimated",
+      "ears": [
+        {
+          "haspi_v2": 0.9986460159782553,
+          "hasqi_v2": 0.5078427994974433,
+          "si_sdr_db": 2.2385443487432295,
+          "output_level_change_db": 10.052646960680509
+        },
+        {
+          "haspi_v2": 0.9993035879113027,
+          "hasqi_v2": 0.5184492913086401,
+          "si_sdr_db": -9.730032789820811,
+          "output_level_change_db": 10.569260569541349
+        }
+      ],
+      "ild_error_db": 0.5335182186134051,
+      "itd_error_us": 750.0,
+      "clip_fraction_after_fitting": 0.006197916666666667,
+      "metric_compute_s": 15.777165741999966,
+      "algorithmic_delay_ms": 10.666666666666666,
+      "doa_mean_absolute_error_deg": 100,
+      "doa_within_10deg_fraction": 0
+    },
+    {
+      "id": "1320_rt0.0_snr5",
+      "speaker": "1320",
+      "utterance": "1320-122617-0003",
+      "target_deg": -30,
+      "masker_deg": 70,
+      "nominal_rt60_s": 0.0,
+      "snr_left_db": 5,
+      "frames_48k": 144000,
+      "frames_calibration_48k": 48000,
+      "method": "mvdr_rnnoise",
+      "ears": [
+        {
+          "haspi_v2": 0.9996772401227672,
+          "hasqi_v2": 0.8945589896319214,
+          "si_sdr_db": 16.22931576368037,
+          "output_level_change_db": -0.15185714783006807
+        },
+        {
+          "haspi_v2": 0.9996218726007498,
+          "hasqi_v2": 0.8951688035154167,
+          "si_sdr_db": 15.960335129938386,
+          "output_level_change_db": 0.40509707039242937
+        }
+      ],
+      "ild_error_db": 0.5610668077458985,
+      "itd_error_us": 0.0,
+      "clip_fraction_after_fitting": 0.0,
+      "metric_compute_s": 13.573956578999969,
+      "algorithmic_delay_ms": 40.666666666666664,
+      "doa_mean_absolute_error_deg": 100,
+      "doa_within_10deg_fraction": 0
+    },
+    {
+      "id": "1320_rt0.0_snr5",
+      "speaker": "1320",
+      "utterance": "1320-122617-0003",
+      "target_deg": -30,
+      "masker_deg": 70,
+      "nominal_rt60_s": 0.0,
+      "snr_left_db": 5,
+      "frames_48k": 144000,
+      "frames_calibration_48k": 48000,
+      "method": "neural_mvdr",
+      "ears": [
+        {
+          "haspi_v2": 0.9963430375937425,
+          "hasqi_v2": 0.5144981348993409,
+          "si_sdr_db": 14.106343638621324,
+          "output_level_change_db": -1.270127857675544
+        },
+        {
+          "haspi_v2": 0.991604482992719,
+          "hasqi_v2": 0.4706473852538661,
+          "si_sdr_db": 13.062052546733089,
+          "output_level_change_db": -1.2304260437452204
+        }
+      ],
+      "ild_error_db": 0.058661202445059124,
+      "itd_error_us": 62.5,
+      "clip_fraction_after_fitting": 0.0,
+      "metric_compute_s": 13.086542803999919,
+      "algorithmic_delay_ms": null
+    },
+    {
+      "id": "1320_rt0.3_snr0",
+      "speaker": "1320",
+      "utterance": "1320-122617-0003",
+      "target_deg": -30,
+      "masker_deg": 70,
+      "nominal_rt60_s": 0.3,
+      "snr_left_db": 0,
+      "frames_48k": 144000,
+      "frames_calibration_48k": 48000,
+      "method": "reference",
+      "ears": [
+        {
+          "haspi_v2": 0.7548182769358417,
+          "hasqi_v2": 0.17253370034816526,
+          "si_sdr_db": 0.5367186543342649,
+          "output_level_change_db": 2.77941550201765
+        },
+        {
+          "haspi_v2": 0.768614212873361,
+          "hasqi_v2": 0.1716801815196625,
+          "si_sdr_db": 0.254191882102312,
+          "output_level_change_db": 2.921211128148663
+        }
+      ],
+      "ild_error_db": 0.08555876146721707,
+      "itd_error_us": 625.0,
+      "clip_fraction_after_fitting": 0.0,
+      "metric_compute_s": 12.466974427999958,
+      "algorithmic_delay_ms": 10.666666666666666,
+      "doa_mean_absolute_error_deg": 99.14529914529915,
+      "doa_within_10deg_fraction": 0,
+      "target_only": {
+        "si_sdr_db": [
+          47.881234789160644,
+          47.54677265236687
+        ],
+        "level_change_db": [
+          0.005602979370767429,
+          0.005546537152544703
+        ],
+        "output_snr_db": [
+          0.5056989192962646,
+          0.21663597226142883
+        ]
+      },
+      "audio": "assets/evaluation/reference.wav"
+    },
+    {
+      "id": "1320_rt0.3_snr0",
+      "speaker": "1320",
+      "utterance": "1320-122617-0003",
+      "target_deg": -30,
+      "masker_deg": 70,
+      "nominal_rt60_s": 0.3,
+      "snr_left_db": 0,
+      "frames_48k": 144000,
+      "frames_calibration_48k": 48000,
+      "method": "das",
+      "ears": [
+        {
+          "haspi_v2": 0.7638915926457288,
+          "hasqi_v2": 0.18840067216506398,
+          "si_sdr_db": 2.4442715893000075,
+          "output_level_change_db": 1.1847474536113702
+        },
+        {
+          "haspi_v2": 0.8718856780014703,
+          "hasqi_v2": 0.18869304700597958,
+          "si_sdr_db": 2.5156512593262526,
+          "output_level_change_db": 1.1105670052784724
+        }
+      ],
+      "ild_error_db": 0.09791399925296142,
+      "itd_error_us": 0.0,
+      "clip_fraction_after_fitting": 0.0,
+      "metric_compute_s": 12.943746808000014,
+      "algorithmic_delay_ms": 10.666666666666666,
+      "doa_mean_absolute_error_deg": 99.14529914529915,
+      "doa_within_10deg_fraction": 0,
+      "target_only": {
+        "si_sdr_db": [
+          10.251989116586362,
+          10.470752607033662
+        ],
+        "level_change_db": [
+          -0.41106981061582404,
+          -0.4777788307342378
+        ],
+        "output_snr_db": [
+          3.5638723373413086,
+          3.5884666442871094
+        ]
+      },
+      "audio": "assets/evaluation/das.wav"
+    },
+    {
+      "id": "1320_rt0.3_snr0",
+      "speaker": "1320",
+      "utterance": "1320-122617-0003",
+      "target_deg": -30,
+      "masker_deg": 70,
+      "nominal_rt60_s": 0.3,
+      "snr_left_db": 0,
+      "frames_48k": 144000,
+      "frames_calibration_48k": 48000,
+      "method": "mvdr_known",
+      "ears": [
+        {
+          "haspi_v2": 0.7976970734592059,
+          "hasqi_v2": 0.22172512772490505,
+          "si_sdr_db": 2.3208750431776193,
+          "output_level_change_db": -0.8694163255929439
+        },
+        {
+          "haspi_v2": 0.7099609765892052,
+          "hasqi_v2": 0.22295442019210315,
+          "si_sdr_db": 2.3210900799398244,
+          "output_level_change_db": -0.9498430111422146
+        }
+      ],
+      "ild_error_db": 0.09649604340364172,
+      "itd_error_us": 0.0,
+      "clip_fraction_after_fitting": 0.0,
+      "metric_compute_s": 13.624376470000016,
+      "algorithmic_delay_ms": 10.666666666666666,
+      "doa_mean_absolute_error_deg": 99.14529914529915,
+      "doa_within_10deg_fraction": 0,
+      "target_only": {
+        "si_sdr_db": [
+          4.855044982420552,
+          4.780848256608353
+        ],
+        "level_change_db": [
+          -1.6267705408121844,
+          -1.7024448435017372
+        ],
+        "output_snr_db": [
+          7.039039611816406,
+          7.06913423538208
+        ]
+      },
+      "audio": "assets/evaluation/mvdr_known.wav"
+    },
+    {
+      "id": "1320_rt0.3_snr0",
+      "speaker": "1320",
+      "utterance": "1320-122617-0003",
+      "target_deg": -30,
+      "masker_deg": 70,
+      "nominal_rt60_s": 0.3,
+      "snr_left_db": 0,
+      "frames_48k": 144000,
+      "frames_calibration_48k": 48000,
+      "method": "mvdr_estimated",
+      "ears": [
+        {
+          "haspi_v2": 0.036473772817897654,
+          "hasqi_v2": 0.06139693876515528,
+          "si_sdr_db": -32.49951315444119,
+          "output_level_change_db": -0.8785534907866976
+        },
+        {
+          "haspi_v2": 0.0455774925543921,
+          "hasqi_v2": 0.05431221508665092,
+          "si_sdr_db": -31.71126228219851,
+          "output_level_change_db": -0.8924441807709684
+        }
+      ],
+      "ild_error_db": 0.10748266931903495,
+      "itd_error_us": 750.0,
+      "clip_fraction_after_fitting": 0.0,
+      "metric_compute_s": 15.12248338300003,
+      "algorithmic_delay_ms": 10.666666666666666,
+      "doa_mean_absolute_error_deg": 99.14529914529915,
+      "doa_within_10deg_fraction": 0,
+      "audio": "assets/evaluation/mvdr_estimated.wav"
+    },
+    {
+      "id": "1320_rt0.3_snr0",
+      "speaker": "1320",
+      "utterance": "1320-122617-0003",
+      "target_deg": -30,
+      "masker_deg": 70,
+      "nominal_rt60_s": 0.3,
+      "snr_left_db": 0,
+      "frames_48k": 144000,
+      "frames_calibration_48k": 48000,
+      "method": "mvdr_rnnoise",
+      "ears": [
+        {
+          "haspi_v2": 0.8671850319515453,
+          "hasqi_v2": 0.32222255920200316,
+          "si_sdr_db": 3.1604987841547842,
+          "output_level_change_db": -2.3627348310977734
+        },
+        {
+          "haspi_v2": 0.8785361790171241,
+          "hasqi_v2": 0.3308087062222292,
+          "si_sdr_db": 3.3639556077090305,
+          "output_level_change_db": -2.462976633389112
+        }
+      ],
+      "ild_error_db": 0.12871227357816828,
+      "itd_error_us": 0.0,
+      "clip_fraction_after_fitting": 0.0,
+      "metric_compute_s": 13.35694067999998,
+      "algorithmic_delay_ms": 40.666666666666664,
+      "doa_mean_absolute_error_deg": 99.14529914529915,
+      "doa_within_10deg_fraction": 0,
+      "audio": "assets/evaluation/mvdr_rnnoise.wav"
+    },
+    {
+      "id": "1320_rt0.3_snr0",
+      "speaker": "1320",
+      "utterance": "1320-122617-0003",
+      "target_deg": -30,
+      "masker_deg": 70,
+      "nominal_rt60_s": 0.3,
+      "snr_left_db": 0,
+      "frames_48k": 144000,
+      "frames_calibration_48k": 48000,
+      "method": "neural_mvdr",
+      "ears": [
+        {
+          "haspi_v2": 0.7486367203809522,
+          "hasqi_v2": 0.218322898172017,
+          "si_sdr_db": 3.5261001527089366,
+          "output_level_change_db": -3.3194445321562127
+        },
+        {
+          "haspi_v2": 0.8825847211809561,
+          "hasqi_v2": 0.22803788293623486,
+          "si_sdr_db": 4.154979392964242,
+          "output_level_change_db": -2.8087806485519513
+        }
+      ],
+      "ild_error_db": 1.2290692055348795,
+      "itd_error_us": 62.5,
+      "clip_fraction_after_fitting": 0.0,
+      "metric_compute_s": 12.603641487999994,
+      "algorithmic_delay_ms": null,
+      "audio": "assets/evaluation/neural_mvdr.wav"
+    },
+    {
+      "id": "1320_rt0.3_snr5",
+      "speaker": "1320",
+      "utterance": "1320-122617-0003",
+      "target_deg": -30,
+      "masker_deg": 70,
+      "nominal_rt60_s": 0.3,
+      "snr_left_db": 5,
+      "frames_48k": 144000,
+      "frames_calibration_48k": 48000,
+      "method": "reference",
+      "ears": [
+        {
+          "haspi_v2": 0.8875861617066207,
+          "hasqi_v2": 0.2869450269382766,
+          "si_sdr_db": 5.500632572446486,
+          "output_level_change_db": 1.090153928188054
+        },
+        {
+          "haspi_v2": 0.9526666710794137,
+          "hasqi_v2": 0.27631975662734876,
+          "si_sdr_db": 5.215434016029356,
+          "output_level_change_db": 1.1581922483617466
+        }
+      ],
+      "ild_error_db": 0.041216869463204006,
+      "itd_error_us": 687.5,
+      "clip_fraction_after_fitting": 0.0,
+      "metric_compute_s": 12.87366874299994,
+      "algorithmic_delay_ms": 10.666666666666666,
+      "doa_mean_absolute_error_deg": 99.87179487179488,
+      "doa_within_10deg_fraction": 0,
+      "target_only": {
+        "si_sdr_db": [
+          47.881234789160644,
+          47.54677265236687
+        ],
+        "level_change_db": [
+          0.005602979370767429,
+          0.005546537152544703
+        ],
+        "output_snr_db": [
+          5.505699157714844,
+          5.2166361808776855
+        ]
+      }
+    },
+    {
+      "id": "1320_rt0.3_snr5",
+      "speaker": "1320",
+      "utterance": "1320-122617-0003",
+      "target_deg": -30,
+      "masker_deg": 70,
+      "nominal_rt60_s": 0.3,
+      "snr_left_db": 5,
+      "frames_48k": 144000,
+      "frames_calibration_48k": 48000,
+      "method": "das",
+      "ears": [
+        {
+          "haspi_v2": 0.9279144898416125,
+          "hasqi_v2": 0.2979443405144485,
+          "si_sdr_db": 6.092272421122267,
+          "output_level_change_db": 0.16322067801110451
+        },
+        {
+          "haspi_v2": 0.9553565164055412,
+          "hasqi_v2": 0.29455081989964804,
+          "si_sdr_db": 6.201592165359012,
+          "output_level_change_db": 0.09352695496200639
+        }
+      ],
+      "ild_error_db": 0.09597571697366371,
+      "itd_error_us": 0.0,
+      "clip_fraction_after_fitting": 0.0,
+      "metric_compute_s": 14.26936097500004,
+      "algorithmic_delay_ms": 10.666666666666666,
+      "doa_mean_absolute_error_deg": 99.87179487179488,
+      "doa_within_10deg_fraction": 0,
+      "target_only": {
+        "si_sdr_db": [
+          10.251989116586362,
+          10.470752607033662
+        ],
+        "level_change_db": [
+          -0.41106981061582404,
+          -0.4777788307342378
+        ],
+        "output_snr_db": [
+          8.563872337341309,
+          8.588465690612793
+        ]
+      }
+    },
+    {
+      "id": "1320_rt0.3_snr5",
+      "speaker": "1320",
+      "utterance": "1320-122617-0003",
+      "target_deg": -30,
+      "masker_deg": 70,
+      "nominal_rt60_s": 0.3,
+      "snr_left_db": 5,
+      "frames_48k": 144000,
+      "frames_calibration_48k": 48000,
+      "method": "mvdr_known",
+      "ears": [
+        {
+          "haspi_v2": 0.9489704560272245,
+          "hasqi_v2": 0.32669084238826374,
+          "si_sdr_db": 3.879698969208267,
+          "output_level_change_db": -1.3799904857442071
+        },
+        {
+          "haspi_v2": 0.8822294648227658,
+          "hasqi_v2": 0.33556581890679366,
+          "si_sdr_db": 3.8486856899700146,
+          "output_level_change_db": -1.4572909717496643
+        }
+      ],
+      "ild_error_db": 0.09502373836283519,
+      "itd_error_us": 0.0,
+      "clip_fraction_after_fitting": 0.0,
+      "metric_compute_s": 14.232188507999922,
+      "algorithmic_delay_ms": 10.666666666666666,
+      "doa_mean_absolute_error_deg": 99.87179487179488,
+      "doa_within_10deg_fraction": 0,
+      "target_only": {
+        "si_sdr_db": [
+          4.855044959076345,
+          4.780848196789378
+        ],
+        "level_change_db": [
+          -1.6267705408121844,
+          -1.7024448435017372
+        ],
+        "output_snr_db": [
+          12.039039611816406,
+          12.069134712219238
+        ]
+      }
+    },
+    {
+      "id": "1320_rt0.3_snr5",
+      "speaker": "1320",
+      "utterance": "1320-122617-0003",
+      "target_deg": -30,
+      "masker_deg": 70,
+      "nominal_rt60_s": 0.3,
+      "snr_left_db": 5,
+      "frames_48k": 144000,
+      "frames_calibration_48k": 48000,
+      "method": "mvdr_estimated",
+      "ears": [
+        {
+          "haspi_v2": 0.2922323504763536,
+          "hasqi_v2": 0.12170525992365597,
+          "si_sdr_db": -31.171558850579956,
+          "output_level_change_db": -2.951178369410096
+        },
+        {
+          "haspi_v2": 0.23994748534510238,
+          "hasqi_v2": 0.11644830993572636,
+          "si_sdr_db": -29.588250065610318,
+          "output_level_change_db": -3.012198787738793
+        }
+      ],
+      "ild_error_db": 0.13688860032987726,
+      "itd_error_us": 750.0,
+      "clip_fraction_after_fitting": 0.0,
+      "metric_compute_s": 14.803245075000063,
+      "algorithmic_delay_ms": 10.666666666666666,
+      "doa_mean_absolute_error_deg": 99.87179487179488,
+      "doa_within_10deg_fraction": 0
+    },
+    {
+      "id": "1320_rt0.3_snr5",
+      "speaker": "1320",
+      "utterance": "1320-122617-0003",
+      "target_deg": -30,
+      "masker_deg": 70,
+      "nominal_rt60_s": 0.3,
+      "snr_left_db": 5,
+      "frames_48k": 144000,
+      "frames_calibration_48k": 48000,
+      "method": "mvdr_rnnoise",
+      "ears": [
+        {
+          "haspi_v2": 0.8798692066039171,
+          "hasqi_v2": 0.3628541173778008,
+          "si_sdr_db": 3.4055725512007,
+          "output_level_change_db": -2.2354358506394663
+        },
+        {
+          "haspi_v2": 0.905630460309898,
+          "hasqi_v2": 0.3740503744376061,
+          "si_sdr_db": 3.5620588971187397,
+          "output_level_change_db": -2.3234843623207864
+        }
+      ],
+      "ild_error_db": 0.10869354140293731,
+      "itd_error_us": 0.0,
+      "clip_fraction_after_fitting": 0.0,
+      "metric_compute_s": 13.426108283000076,
+      "algorithmic_delay_ms": 40.666666666666664,
+      "doa_mean_absolute_error_deg": 99.87179487179488,
+      "doa_within_10deg_fraction": 0
+    },
+    {
+      "id": "1320_rt0.3_snr5",
+      "speaker": "1320",
+      "utterance": "1320-122617-0003",
+      "target_deg": -30,
+      "masker_deg": 70,
+      "nominal_rt60_s": 0.3,
+      "snr_left_db": 5,
+      "frames_48k": 144000,
+      "frames_calibration_48k": 48000,
+      "method": "neural_mvdr",
+      "ears": [
+        {
+          "haspi_v2": 0.9697839909750041,
+          "hasqi_v2": 0.3637563334197586,
+          "si_sdr_db": 6.598108509345715,
+          "output_level_change_db": -4.550083064515312
+        },
+        {
+          "haspi_v2": 0.9804393790480734,
+          "hasqi_v2": 0.37197231220123605,
+          "si_sdr_db": 7.443959874018672,
+          "output_level_change_db": -3.973486813455074
+        }
+      ],
+      "ild_error_db": 1.491457706339533,
+      "itd_error_us": 62.5,
+      "clip_fraction_after_fitting": 0.0,
+      "metric_compute_s": 12.290395773,
+      "algorithmic_delay_ms": null
+    },
+    {
+      "id": "5639_rt0.0_snr0",
+      "speaker": "5639",
+      "utterance": "5639-40744-0032",
+      "target_deg": 0,
+      "masker_deg": 90,
+      "nominal_rt60_s": 0.0,
+      "snr_left_db": 0,
+      "frames_48k": 144000,
+      "frames_calibration_48k": 48000,
+      "method": "reference",
+      "ears": [
+        {
+          "haspi_v2": 0.6111580676238906,
+          "hasqi_v2": 0.23260452847985644,
+          "si_sdr_db": 0.517251145422428,
+          "output_level_change_db": 2.764003721761635
+        },
+        {
+          "haspi_v2": 0.6455206078895445,
+          "hasqi_v2": 0.20092054442016571,
+          "si_sdr_db": -0.6424347834685528,
+          "output_level_change_db": 3.3170270591830824
+        }
+      ],
+      "ild_error_db": 0.5308835506439209,
+      "itd_error_us": 62.5,
+      "clip_fraction_after_fitting": 1.0416666666666666e-05,
+      "metric_compute_s": 12.97799718400006,
+      "algorithmic_delay_ms": 10.666666666666666,
+      "doa_mean_absolute_error_deg": 89.31623931623932,
+      "doa_within_10deg_fraction": 0,
+      "target_only": {
+        "si_sdr_db": [
+          24.99177450370745,
+          24.99177450370745
+        ],
+        "level_change_db": [
+          -0.05431405210204669,
+          -0.05431405210204669
+        ],
+        "output_snr_db": [
+          0.4728378653526306,
+          -0.6581755876541138
+        ]
+      }
+    },
+    {
+      "id": "5639_rt0.0_snr0",
+      "speaker": "5639",
+      "utterance": "5639-40744-0032",
+      "target_deg": 0,
+      "masker_deg": 90,
+      "nominal_rt60_s": 0.0,
+      "snr_left_db": 0,
+      "frames_48k": 144000,
+      "frames_calibration_48k": 48000,
+      "method": "das",
+      "ears": [
+        {
+          "haspi_v2": 0.9095422412448426,
+          "hasqi_v2": 0.3438497865318342,
+          "si_sdr_db": 4.493014340666559,
+          "output_level_change_db": 1.2481602738457722
+        },
+        {
+          "haspi_v2": 0.9095422412448426,
+          "hasqi_v2": 0.3438497865318342,
+          "si_sdr_db": 4.493014340666559,
+          "output_level_change_db": 1.2481602738457722
+        }
+      ],
+      "ild_error_db": 0.0,
+      "itd_error_us": 0.0,
+      "clip_fraction_after_fitting": 0.0,
+      "metric_compute_s": 12.559337060000075,
+      "algorithmic_delay_ms": 10.666666666666666,
+      "doa_mean_absolute_error_deg": 89.31623931623932,
+      "doa_within_10deg_fraction": 0,
+      "target_only": {
+        "si_sdr_db": [
+          23.88039201195162,
+          23.88039201195162
+        ],
+        "level_change_db": [
+          -0.10842300309632867,
+          -0.10842300309632867
+        ],
+        "output_snr_db": [
+          4.507193565368652,
+          4.507193565368652
+        ]
+      }
+    },
+    {
+      "id": "5639_rt0.0_snr0",
+      "speaker": "5639",
+      "utterance": "5639-40744-0032",
+      "target_deg": 0,
+      "masker_deg": 90,
+      "nominal_rt60_s": 0.0,
+      "snr_left_db": 0,
+      "frames_48k": 144000,
+      "frames_calibration_48k": 48000,
+      "method": "mvdr_known",
+      "ears": [
+        {
+          "haspi_v2": 0.9994001254095553,
+          "hasqi_v2": 0.9554398884768711,
+          "si_sdr_db": 20.53602675189137,
+          "output_level_change_db": -0.08048940576508014
+        },
+        {
+          "haspi_v2": 0.9994001254095553,
+          "hasqi_v2": 0.9554398884768711,
+          "si_sdr_db": 20.53602675189137,
+          "output_level_change_db": -0.08048940576508014
+        }
+      ],
+      "ild_error_db": 0.0,
+      "itd_error_us": 0.0,
+      "clip_fraction_after_fitting": 0.0,
+      "metric_compute_s": 10.61122586199997,
+      "algorithmic_delay_ms": 10.666666666666666,
+      "doa_mean_absolute_error_deg": 89.31623931623932,
+      "doa_within_10deg_fraction": 0,
+      "target_only": {
+        "si_sdr_db": [
+          24.352382857958816,
+          24.352382857958816
+        ],
+        "level_change_db": [
+          -0.10230041674444738,
+          -0.10230041674444738
+        ],
+        "output_snr_db": [
+          22.88245391845703,
+          22.88245391845703
+        ]
+      }
+    },
+    {
+      "id": "5639_rt0.0_snr0",
+      "speaker": "5639",
+      "utterance": "5639-40744-0032",
+      "target_deg": 0,
+      "masker_deg": 90,
+      "nominal_rt60_s": 0.0,
+      "snr_left_db": 0,
+      "frames_48k": 144000,
+      "frames_calibration_48k": 48000,
+      "method": "mvdr_estimated",
+      "ears": [
+        {
+          "haspi_v2": 0.9799776255993825,
+          "hasqi_v2": 0.50793717830491,
+          "si_sdr_db": 1.9443489223800094,
+          "output_level_change_db": 10.4586117151244
+        },
+        {
+          "haspi_v2": 0.9889138365493934,
+          "hasqi_v2": 0.5275897469904129,
+          "si_sdr_db": -7.500320757827801,
+          "output_level_change_db": 10.3839330832662
+        }
+      ],
+      "ild_error_db": 0.0504966638982296,
+      "itd_error_us": 500.0,
+      "clip_fraction_after_fitting": 0.006541666666666667,
+      "metric_compute_s": 11.086078887000099,
+      "algorithmic_delay_ms": 10.666666666666666,
+      "doa_mean_absolute_error_deg": 89.31623931623932,
+      "doa_within_10deg_fraction": 0
+    },
+    {
+      "id": "5639_rt0.0_snr0",
+      "speaker": "5639",
+      "utterance": "5639-40744-0032",
+      "target_deg": 0,
+      "masker_deg": 90,
+      "nominal_rt60_s": 0.0,
+      "snr_left_db": 0,
+      "frames_48k": 144000,
+      "frames_calibration_48k": 48000,
+      "method": "mvdr_rnnoise",
+      "ears": [
+        {
+          "haspi_v2": 0.9987534414485101,
+          "hasqi_v2": 0.92767721401806,
+          "si_sdr_db": 16.584565757679993,
+          "output_level_change_db": -0.15046058892957842
+        },
+        {
+          "haspi_v2": 0.9987534414485101,
+          "hasqi_v2": 0.92767721401806,
+          "si_sdr_db": 16.584565757679993,
+          "output_level_change_db": -0.15046058892957842
+        }
+      ],
+      "ild_error_db": 0.0,
+      "itd_error_us": 0.0,
+      "clip_fraction_after_fitting": 0.0,
+      "metric_compute_s": 10.416427917999954,
+      "algorithmic_delay_ms": 40.666666666666664,
+      "doa_mean_absolute_error_deg": 89.31623931623932,
+      "doa_within_10deg_fraction": 0
+    },
+    {
+      "id": "5639_rt0.0_snr0",
+      "speaker": "5639",
+      "utterance": "5639-40744-0032",
+      "target_deg": 0,
+      "masker_deg": 90,
+      "nominal_rt60_s": 0.0,
+      "snr_left_db": 0,
+      "frames_48k": 144000,
+      "frames_calibration_48k": 48000,
+      "method": "neural_mvdr",
+      "ears": [
+        {
+          "haspi_v2": 0.9238784811354516,
+          "hasqi_v2": 0.42654297403676145,
+          "si_sdr_db": 7.736186272728807,
+          "output_level_change_db": -1.64307242009198
+        },
+        {
+          "haspi_v2": 0.8763177716731612,
+          "hasqi_v2": 0.38770155556489716,
+          "si_sdr_db": 6.758628312260733,
+          "output_level_change_db": -1.5915202008269793
+        }
+      ],
+      "ild_error_db": 0.10884050984298305,
+      "itd_error_us": 0.0,
+      "clip_fraction_after_fitting": 0.0,
+      "metric_compute_s": 11.560080846999995,
+      "algorithmic_delay_ms": null
+    },
+    {
+      "id": "5639_rt0.0_snr5",
+      "speaker": "5639",
+      "utterance": "5639-40744-0032",
+      "target_deg": 0,
+      "masker_deg": 90,
+      "nominal_rt60_s": 0.0,
+      "snr_left_db": 5,
+      "frames_48k": 144000,
+      "frames_calibration_48k": 48000,
+      "method": "reference",
+      "ears": [
+        {
+          "haspi_v2": 0.8157393790901805,
+          "hasqi_v2": 0.35552601928281796,
+          "si_sdr_db": 5.4529837702110004,
+          "output_level_change_db": 1.0616098793437607
+        },
+        {
+          "haspi_v2": 0.8510820825106287,
+          "hasqi_v2": 0.3196355541008497,
+          "si_sdr_db": 4.3135910298504925,
+          "output_level_change_db": 1.3238101089556642
+        }
+      ],
+      "ild_error_db": 0.25092804431915283,
+      "itd_error_us": 0.0,
+      "clip_fraction_after_fitting": 0.0,
+      "metric_compute_s": 13.275717226999973,
+      "algorithmic_delay_ms": 10.666666666666666,
+      "doa_mean_absolute_error_deg": 87.6923076923077,
+      "doa_within_10deg_fraction": 0,
+      "target_only": {
+        "si_sdr_db": [
+          24.99177450370745,
+          24.99177450370745
+        ],
+        "level_change_db": [
+          -0.05431405210204669,
+          -0.05431405210204669
+        ],
+        "output_snr_db": [
+          5.472836971282959,
+          4.341824531555176
+        ]
+      }
+    },
+    {
+      "id": "5639_rt0.0_snr5",
+      "speaker": "5639",
+      "utterance": "5639-40744-0032",
+      "target_deg": 0,
+      "masker_deg": 90,
+      "nominal_rt60_s": 0.0,
+      "snr_left_db": 5,
+      "frames_48k": 144000,
+      "frames_calibration_48k": 48000,
+      "method": "das",
+      "ears": [
+        {
+          "haspi_v2": 0.9749579600882295,
+          "hasqi_v2": 0.47671630507905965,
+          "si_sdr_db": 9.36334097675045,
+          "output_level_change_db": 0.37989479515905417
+        },
+        {
+          "haspi_v2": 0.9749579600882295,
+          "hasqi_v2": 0.47671630507905965,
+          "si_sdr_db": 9.36334097675045,
+          "output_level_change_db": 0.37989479515905417
+        }
+      ],
+      "ild_error_db": 0.0,
+      "itd_error_us": 0.0,
+      "clip_fraction_after_fitting": 0.0,
+      "metric_compute_s": 11.832388523999953,
+      "algorithmic_delay_ms": 10.666666666666666,
+      "doa_mean_absolute_error_deg": 87.6923076923077,
+      "doa_within_10deg_fraction": 0,
+      "target_only": {
+        "si_sdr_db": [
+          23.88039201195162,
+          23.88039201195162
+        ],
+        "level_change_db": [
+          -0.10842300309632867,
+          -0.10842300309632867
+        ],
+        "output_snr_db": [
+          9.507193565368652,
+          9.507193565368652
+        ]
+      }
+    },
+    {
+      "id": "5639_rt0.0_snr5",
+      "speaker": "5639",
+      "utterance": "5639-40744-0032",
+      "target_deg": 0,
+      "masker_deg": 90,
+      "nominal_rt60_s": 0.0,
+      "snr_left_db": 5,
+      "frames_48k": 144000,
+      "frames_calibration_48k": 48000,
+      "method": "mvdr_known",
+      "ears": [
+        {
+          "haspi_v2": 0.9993413166583014,
+          "hasqi_v2": 0.9702392734932207,
+          "si_sdr_db": 22.753213437666986,
+          "output_level_change_db": -0.0955135841584275
+        },
+        {
+          "haspi_v2": 0.9993413166583014,
+          "hasqi_v2": 0.9702392734932207,
+          "si_sdr_db": 22.753213437666986,
+          "output_level_change_db": -0.0955135841584275
+        }
+      ],
+      "ild_error_db": 0.0,
+      "itd_error_us": 0.0,
+      "clip_fraction_after_fitting": 0.0,
+      "metric_compute_s": 11.24573417900001,
+      "algorithmic_delay_ms": 10.666666666666666,
+      "doa_mean_absolute_error_deg": 87.6923076923077,
+      "doa_within_10deg_fraction": 0,
+      "target_only": {
+        "si_sdr_db": [
+          24.35238374330669,
+          24.35238374330669
+        ],
+        "level_change_db": [
+          -0.10230041674444738,
+          -0.10230041674444738
+        ],
+        "output_snr_db": [
+          27.88245391845703,
+          27.88245391845703
+        ]
+      }
+    },
+    {
+      "id": "5639_rt0.0_snr5",
+      "speaker": "5639",
+      "utterance": "5639-40744-0032",
+      "target_deg": 0,
+      "masker_deg": 90,
+      "nominal_rt60_s": 0.0,
+      "snr_left_db": 5,
+      "frames_48k": 144000,
+      "frames_calibration_48k": 48000,
+      "method": "mvdr_estimated",
+      "ears": [
+        {
+          "haspi_v2": 0.996974333028922,
+          "hasqi_v2": 0.6116505892592974,
+          "si_sdr_db": 2.4128763736831944,
+          "output_level_change_db": 10.265711700642225
+        },
+        {
+          "haspi_v2": 0.9979066297612342,
+          "hasqi_v2": 0.626508058108829,
+          "si_sdr_db": -7.920180417438334,
+          "output_level_change_db": 10.21009799935941
+        }
+      ],
+      "ild_error_db": 0.0392008014023304,
+      "itd_error_us": 500.0,
+      "clip_fraction_after_fitting": 0.0059479166666666665,
+      "metric_compute_s": 11.163517796000065,
+      "algorithmic_delay_ms": 10.666666666666666,
+      "doa_mean_absolute_error_deg": 87.6923076923077,
+      "doa_within_10deg_fraction": 0
+    },
+    {
+      "id": "5639_rt0.0_snr5",
+      "speaker": "5639",
+      "utterance": "5639-40744-0032",
+      "target_deg": 0,
+      "masker_deg": 90,
+      "nominal_rt60_s": 0.0,
+      "snr_left_db": 5,
+      "frames_48k": 144000,
+      "frames_calibration_48k": 48000,
+      "method": "mvdr_rnnoise",
+      "ears": [
+        {
+          "haspi_v2": 0.9990255220850348,
+          "hasqi_v2": 0.9498177191803353,
+          "si_sdr_db": 16.857308608261395,
+          "output_level_change_db": -0.12165638538084325
+        },
+        {
+          "haspi_v2": 0.9990255220850348,
+          "hasqi_v2": 0.9498177191803353,
+          "si_sdr_db": 16.857308608261395,
+          "output_level_change_db": -0.12165638538084325
+        }
+      ],
+      "ild_error_db": 0.0,
+      "itd_error_us": 0.0,
+      "clip_fraction_after_fitting": 0.0,
+      "metric_compute_s": 10.565503628999977,
+      "algorithmic_delay_ms": 40.666666666666664,
+      "doa_mean_absolute_error_deg": 87.6923076923077,
+      "doa_within_10deg_fraction": 0
+    },
+    {
+      "id": "5639_rt0.0_snr5",
+      "speaker": "5639",
+      "utterance": "5639-40744-0032",
+      "target_deg": 0,
+      "masker_deg": 90,
+      "nominal_rt60_s": 0.0,
+      "snr_left_db": 5,
+      "frames_48k": 144000,
+      "frames_calibration_48k": 48000,
+      "method": "neural_mvdr",
+      "ears": [
+        {
+          "haspi_v2": 0.9920043744677264,
+          "hasqi_v2": 0.625418921618307,
+          "si_sdr_db": 13.936829564640272,
+          "output_level_change_db": -1.537974789851413
+        },
+        {
+          "haspi_v2": 0.9799434157008726,
+          "hasqi_v2": 0.5957480561827756,
+          "si_sdr_db": 13.25486283923917,
+          "output_level_change_db": -1.5530813312103176
+        }
+      ],
+      "ild_error_db": 0.024564411188007264,
+      "itd_error_us": 0.0,
+      "clip_fraction_after_fitting": 0.0,
+      "metric_compute_s": 11.761459909999985,
+      "algorithmic_delay_ms": null
+    },
+    {
+      "id": "5639_rt0.3_snr0",
+      "speaker": "5639",
+      "utterance": "5639-40744-0032",
+      "target_deg": 0,
+      "masker_deg": 90,
+      "nominal_rt60_s": 0.3,
+      "snr_left_db": 0,
+      "frames_48k": 144000,
+      "frames_calibration_48k": 48000,
+      "method": "reference",
+      "ears": [
+        {
+          "haspi_v2": 0.5262520176790505,
+          "hasqi_v2": 0.2285743193350864,
+          "si_sdr_db": 0.4459829248342021,
+          "output_level_change_db": 2.7522527463887365
+        },
+        {
+          "haspi_v2": 0.7226971500734686,
+          "hasqi_v2": 0.22410904071323487,
+          "si_sdr_db": 0.08550955461521863,
+          "output_level_change_db": 2.85812530521304
+        }
+      ],
+      "ild_error_db": 0.09439457207919806,
+      "itd_error_us": 0.0,
+      "clip_fraction_after_fitting": 0.0,
+      "metric_compute_s": 13.647266410000043,
+      "algorithmic_delay_ms": 10.666666666666666,
+      "doa_mean_absolute_error_deg": 73.33333333333333,
+      "doa_within_10deg_fraction": 0.06837606837606838,
+      "target_only": {
+        "si_sdr_db": [
+          25.678339772918306,
+          25.678339772918175
+        ],
+        "level_change_db": [
+          -0.04900738996215939,
+          -0.04900738996214965
+        ],
+        "output_snr_db": [
+          0.4519307017326355,
+          0.15857206284999847
+        ]
+      }
+    },
+    {
+      "id": "5639_rt0.3_snr0",
+      "speaker": "5639",
+      "utterance": "5639-40744-0032",
+      "target_deg": 0,
+      "masker_deg": 90,
+      "nominal_rt60_s": 0.3,
+      "snr_left_db": 0,
+      "frames_48k": 144000,
+      "frames_calibration_48k": 48000,
+      "method": "das",
+      "ears": [
+        {
+          "haspi_v2": 0.7850764242604886,
+          "hasqi_v2": 0.3016197160314469,
+          "si_sdr_db": 3.7459926237840264,
+          "output_level_change_db": 1.2475202774491527
+        },
+        {
+          "haspi_v2": 0.7850764245327746,
+          "hasqi_v2": 0.3016197160407961,
+          "si_sdr_db": 3.745992623784027,
+          "output_level_change_db": 1.247520277449163
+        }
+      ],
+      "ild_error_db": 1.6393566931405848e-14,
+      "itd_error_us": 0.0,
+      "clip_fraction_after_fitting": 0.0,
+      "metric_compute_s": 11.69649704599999,
+      "algorithmic_delay_ms": 10.666666666666666,
+      "doa_mean_absolute_error_deg": 73.33333333333333,
+      "doa_within_10deg_fraction": 0.06837606837606838,
+      "target_only": {
+        "si_sdr_db": [
+          15.809630850699213,
+          15.809630850699241
+        ],
+        "level_change_db": [
+          -0.15085343023211745,
+          -0.15085343023210745
+        ],
+        "output_snr_db": [
+          4.159024238586426,
+          4.159024238586426
+        ]
+      }
+    },
+    {
+      "id": "5639_rt0.3_snr0",
+      "speaker": "5639",
+      "utterance": "5639-40744-0032",
+      "target_deg": 0,
+      "masker_deg": 90,
+      "nominal_rt60_s": 0.3,
+      "snr_left_db": 0,
+      "frames_48k": 144000,
+      "frames_calibration_48k": 48000,
+      "method": "mvdr_known",
+      "ears": [
+        {
+          "haspi_v2": 0.9901445139386168,
+          "hasqi_v2": 0.5824553070292593,
+          "si_sdr_db": 5.33360209869821,
+          "output_level_change_db": -1.279728006811306
+        },
+        {
+          "haspi_v2": 0.9901445139588997,
+          "hasqi_v2": 0.5824553072655859,
+          "si_sdr_db": 5.333602098698225,
+          "output_level_change_db": -1.2797280068112962
+        }
+      ],
+      "ild_error_db": 1.6393566931405848e-14,
+      "itd_error_us": 0.0,
+      "clip_fraction_after_fitting": 0.0,
+      "metric_compute_s": 11.550247481000042,
+      "algorithmic_delay_ms": 10.666666666666666,
+      "doa_mean_absolute_error_deg": 73.33333333333333,
+      "doa_within_10deg_fraction": 0.06837606837606838,
+      "target_only": {
+        "si_sdr_db": [
+          8.782210118010454,
+          8.782210118010488
+        ],
+        "level_change_db": [
+          -1.8346510815642745,
+          -1.8346510815642647
+        ],
+        "output_snr_db": [
+          8.475271224975586,
+          8.475271224975586
+        ]
+      }
+    },
+    {
+      "id": "5639_rt0.3_snr0",
+      "speaker": "5639",
+      "utterance": "5639-40744-0032",
+      "target_deg": 0,
+      "masker_deg": 90,
+      "nominal_rt60_s": 0.3,
+      "snr_left_db": 0,
+      "frames_48k": 144000,
+      "frames_calibration_48k": 48000,
+      "method": "mvdr_estimated",
+      "ears": [
+        {
+          "haspi_v2": 0.3126886332572158,
+          "hasqi_v2": 0.0992831491772542,
+          "si_sdr_db": -7.593254966842745,
+          "output_level_change_db": -2.452082435140074
+        },
+        {
+          "haspi_v2": 0.3078496564548464,
+          "hasqi_v2": 0.09963939984247726,
+          "si_sdr_db": -10.88481393387243,
+          "output_level_change_db": -2.472497385450883
+        }
+      ],
+      "ild_error_db": 0.05846371501682549,
+      "itd_error_us": 500.0,
+      "clip_fraction_after_fitting": 0.0,
+      "metric_compute_s": 11.278410008000037,
+      "algorithmic_delay_ms": 10.666666666666666,
+      "doa_mean_absolute_error_deg": 73.33333333333333,
+      "doa_within_10deg_fraction": 0.06837606837606838
+    },
+    {
+      "id": "5639_rt0.3_snr0",
+      "speaker": "5639",
+      "utterance": "5639-40744-0032",
+      "target_deg": 0,
+      "masker_deg": 90,
+      "nominal_rt60_s": 0.3,
+      "snr_left_db": 0,
+      "frames_48k": 144000,
+      "frames_calibration_48k": 48000,
+      "method": "mvdr_rnnoise",
+      "ears": [
+        {
+          "haspi_v2": 0.9728545658406953,
+          "hasqi_v2": 0.5195503243680444,
+          "si_sdr_db": 7.098066476585362,
+          "output_level_change_db": -2.1776600134564355
+        },
+        {
+          "haspi_v2": 0.9728545658750385,
+          "hasqi_v2": 0.5195503246026091,
+          "si_sdr_db": 7.098066476585386,
+          "output_level_change_db": -2.1776600134564257
+        }
+      ],
+      "ild_error_db": 1.6393566931405848e-14,
+      "itd_error_us": 0.0,
+      "clip_fraction_after_fitting": 0.0,
+      "metric_compute_s": 10.98607192899999,
+      "algorithmic_delay_ms": 40.666666666666664,
+      "doa_mean_absolute_error_deg": 73.33333333333333,
+      "doa_within_10deg_fraction": 0.06837606837606838
+    },
+    {
+      "id": "5639_rt0.3_snr0",
+      "speaker": "5639",
+      "utterance": "5639-40744-0032",
+      "target_deg": 0,
+      "masker_deg": 90,
+      "nominal_rt60_s": 0.3,
+      "snr_left_db": 0,
+      "frames_48k": 144000,
+      "frames_calibration_48k": 48000,
+      "method": "neural_mvdr",
+      "ears": [
+        {
+          "haspi_v2": 0.5744865964668583,
+          "hasqi_v2": 0.22480462758973804,
+          "si_sdr_db": 1.6912529502622864,
+          "output_level_change_db": -1.9349360859705411
+        },
+        {
+          "haspi_v2": 0.6731879305826811,
+          "hasqi_v2": 0.22387760687935826,
+          "si_sdr_db": 1.468218230239816,
+          "output_level_change_db": -1.8341092022446888
+        }
+      ],
+      "ild_error_db": 0.11937490380328385,
+      "itd_error_us": 0.0,
+      "clip_fraction_after_fitting": 0.0,
+      "metric_compute_s": 12.035293454999987,
+      "algorithmic_delay_ms": null
+    },
+    {
+      "id": "5639_rt0.3_snr5",
+      "speaker": "5639",
+      "utterance": "5639-40744-0032",
+      "target_deg": 0,
+      "masker_deg": 90,
+      "nominal_rt60_s": 0.3,
+      "snr_left_db": 5,
+      "frames_48k": 144000,
+      "frames_calibration_48k": 48000,
+      "method": "reference",
+      "ears": [
+        {
+          "haspi_v2": 0.8145514155887713,
+          "hasqi_v2": 0.3453007784798672,
+          "si_sdr_db": 5.408317378199388,
+          "output_level_change_db": 1.0491345955476268
+        },
+        {
+          "haspi_v2": 0.8829154473120824,
+          "hasqi_v2": 0.34178609702834584,
+          "si_sdr_db": 5.080420407788962,
+          "output_level_change_db": 1.085913101385395
+        }
+      ],
+      "ild_error_db": 0.027788773179070653,
+      "itd_error_us": 0.0,
+      "clip_fraction_after_fitting": 0.0,
+      "metric_compute_s": 13.761528208999948,
+      "algorithmic_delay_ms": 10.666666666666666,
+      "doa_mean_absolute_error_deg": 55.68376068376068,
+      "doa_within_10deg_fraction": 0.3162393162393162,
+      "target_only": {
+        "si_sdr_db": [
+          25.678339772918306,
+          25.678339772918175
+        ],
+        "level_change_db": [
+          -0.04900738996215939,
+          -0.04900738996214965
+        ],
+        "output_snr_db": [
+          5.451931476593018,
+          5.158572196960449
+        ]
+      }
+    },
+    {
+      "id": "5639_rt0.3_snr5",
+      "speaker": "5639",
+      "utterance": "5639-40744-0032",
+      "target_deg": 0,
+      "masker_deg": 90,
+      "nominal_rt60_s": 0.3,
+      "snr_left_db": 5,
+      "frames_48k": 144000,
+      "frames_calibration_48k": 48000,
+      "method": "das",
+      "ears": [
+        {
+          "haspi_v2": 0.9082146454596168,
+          "hasqi_v2": 0.4381383177269133,
+          "si_sdr_db": 8.202426261909944,
+          "output_level_change_db": 0.3380619211861364
+        },
+        {
+          "haspi_v2": 0.9082146455962538,
+          "hasqi_v2": 0.43813831775786444,
+          "si_sdr_db": 8.202426261909949,
+          "output_level_change_db": 0.3380619211861463
+        }
+      ],
+      "ild_error_db": 1.6393566931405848e-14,
+      "itd_error_us": 0.0,
+      "clip_fraction_after_fitting": 0.0,
+      "metric_compute_s": 11.736607360999983,
+      "algorithmic_delay_ms": 10.666666666666666,
+      "doa_mean_absolute_error_deg": 55.68376068376068,
+      "doa_within_10deg_fraction": 0.3162393162393162,
+      "target_only": {
+        "si_sdr_db": [
+          15.809630850699213,
+          15.809630850699241
+        ],
+        "level_change_db": [
+          -0.15085343023211745,
+          -0.15085343023210745
+        ],
+        "output_snr_db": [
+          9.159025192260742,
+          9.159025192260742
+        ]
+      }
+    },
+    {
+      "id": "5639_rt0.3_snr5",
+      "speaker": "5639",
+      "utterance": "5639-40744-0032",
+      "target_deg": 0,
+      "masker_deg": 90,
+      "nominal_rt60_s": 0.3,
+      "snr_left_db": 5,
+      "frames_48k": 144000,
+      "frames_calibration_48k": 48000,
+      "method": "mvdr_known",
+      "ears": [
+        {
+          "haspi_v2": 0.9932927779416172,
+          "hasqi_v2": 0.6506066643127367,
+          "si_sdr_db": 7.381627749279486,
+          "output_level_change_db": -1.6572946761904301
+        },
+        {
+          "haspi_v2": 0.993292777937859,
+          "hasqi_v2": 0.6506066645936722,
+          "si_sdr_db": 7.381627749279513,
+          "output_level_change_db": -1.6572946761904208
+        }
+      ],
+      "ild_error_db": 1.6393566931405848e-14,
+      "itd_error_us": 0.0,
+      "clip_fraction_after_fitting": 0.0,
+      "metric_compute_s": 11.285755343999995,
+      "algorithmic_delay_ms": 10.666666666666666,
+      "doa_mean_absolute_error_deg": 55.68376068376068,
+      "doa_within_10deg_fraction": 0.3162393162393162,
+      "target_only": {
+        "si_sdr_db": [
+          8.78221014610115,
+          8.782210146101182
+        ],
+        "level_change_db": [
+          -1.8346510815642745,
+          -1.8346510815642647
+        ],
+        "output_snr_db": [
+          13.475271224975586,
+          13.475271224975586
+        ]
+      }
+    },
+    {
+      "id": "5639_rt0.3_snr5",
+      "speaker": "5639",
+      "utterance": "5639-40744-0032",
+      "target_deg": 0,
+      "masker_deg": 90,
+      "nominal_rt60_s": 0.3,
+      "snr_left_db": 5,
+      "frames_48k": 144000,
+      "frames_calibration_48k": 48000,
+      "method": "mvdr_estimated",
+      "ears": [
+        {
+          "haspi_v2": 0.7574994741602712,
+          "hasqi_v2": 0.23942164467416066,
+          "si_sdr_db": -0.6081944213680543,
+          "output_level_change_db": -3.4941280600677964
+        },
+        {
+          "haspi_v2": 0.7533929180802318,
+          "hasqi_v2": 0.2388302953982525,
+          "si_sdr_db": -2.0768010797136345,
+          "output_level_change_db": -3.51329128116554
+        }
+      ],
+      "ild_error_db": 0.05419237539170533,
+      "itd_error_us": 62.5,
+      "clip_fraction_after_fitting": 0.0,
+      "metric_compute_s": 10.83839444399996,
+      "algorithmic_delay_ms": 10.666666666666666,
+      "doa_mean_absolute_error_deg": 55.68376068376068,
+      "doa_within_10deg_fraction": 0.3162393162393162
+    },
+    {
+      "id": "5639_rt0.3_snr5",
+      "speaker": "5639",
+      "utterance": "5639-40744-0032",
+      "target_deg": 0,
+      "masker_deg": 90,
+      "nominal_rt60_s": 0.3,
+      "snr_left_db": 5,
+      "frames_48k": 144000,
+      "frames_calibration_48k": 48000,
+      "method": "mvdr_rnnoise",
+      "ears": [
+        {
+          "haspi_v2": 0.983742899075192,
+          "hasqi_v2": 0.5706103911931749,
+          "si_sdr_db": 7.458383559962368,
+          "output_level_change_db": -2.072889662015608
+        },
+        {
+          "haspi_v2": 0.9837428990541005,
+          "hasqi_v2": 0.5706103914564185,
+          "si_sdr_db": 7.458383559962394,
+          "output_level_change_db": -2.0728896620155983
+        }
+      ],
+      "ild_error_db": 1.6393566931405848e-14,
+      "itd_error_us": 0.0,
+      "clip_fraction_after_fitting": 0.0,
+      "metric_compute_s": 10.48126274699996,
+      "algorithmic_delay_ms": 40.666666666666664,
+      "doa_mean_absolute_error_deg": 55.68376068376068,
+      "doa_within_10deg_fraction": 0.3162393162393162
+    },
+    {
+      "id": "5639_rt0.3_snr5",
+      "speaker": "5639",
+      "utterance": "5639-40744-0032",
+      "target_deg": 0,
+      "masker_deg": 90,
+      "nominal_rt60_s": 0.3,
+      "snr_left_db": 5,
+      "frames_48k": 144000,
+      "frames_calibration_48k": 48000,
+      "method": "neural_mvdr",
+      "ears": [
+        {
+          "haspi_v2": 0.964442966726779,
+          "hasqi_v2": 0.42832633761635663,
+          "si_sdr_db": 6.726908281058222,
+          "output_level_change_db": -2.4893352803635596
+        },
+        {
+          "haspi_v2": 0.9632959301117425,
+          "hasqi_v2": 0.42582659566707487,
+          "si_sdr_db": 6.607005353520059,
+          "output_level_change_db": -2.4991283476344357
+        }
+      ],
+      "ild_error_db": 0.029852879643215122,
+      "itd_error_us": 0.0,
+      "clip_fraction_after_fitting": 0.0,
+      "metric_compute_s": 12.11930612499998,
+      "algorithmic_delay_ms": null
+    },
+    {
+      "id": "260_rt0.0_snr0",
+      "speaker": "260",
+      "utterance": "260-123440-0018",
+      "target_deg": 30,
+      "masker_deg": -80,
+      "nominal_rt60_s": 0.0,
+      "snr_left_db": 0,
+      "frames_48k": 144000,
+      "frames_calibration_48k": 48000,
+      "method": "reference",
+      "ears": [
+        {
+          "haspi_v2": 0.6117836926329905,
+          "hasqi_v2": 0.1947599795736604,
+          "si_sdr_db": 0.5366479296686092,
+          "output_level_change_db": 2.7225515262263276
+        },
+        {
+          "haspi_v2": 0.6833317562357352,
+          "hasqi_v2": 0.23753098434848754,
+          "si_sdr_db": 2.291817201578175,
+          "output_level_change_db": 2.0655294682970906
+        }
+      ],
+      "ild_error_db": 0.48603827133539923,
+      "itd_error_us": 0.0,
+      "clip_fraction_after_fitting": 0.0,
+      "metric_compute_s": 12.452963183999941,
+      "algorithmic_delay_ms": 10.666666666666666,
+      "doa_mean_absolute_error_deg": 110,
+      "doa_within_10deg_fraction": 0,
+      "target_only": {
+        "si_sdr_db": [
+          40.505733708879596,
+          40.20002794807426
+        ],
+        "level_change_db": [
+          0.008781860181429596,
+          0.008695435229009936
+        ],
+        "output_snr_db": [
+          0.5738006830215454,
+          2.249842405319214
+        ]
+      }
+    },
+    {
+      "id": "260_rt0.0_snr0",
+      "speaker": "260",
+      "utterance": "260-123440-0018",
+      "target_deg": 30,
+      "masker_deg": -80,
+      "nominal_rt60_s": 0.0,
+      "snr_left_db": 0,
+      "frames_48k": 144000,
+      "frames_calibration_48k": 48000,
+      "method": "das",
+      "ears": [
+        {
+          "haspi_v2": 0.8285275159469537,
+          "hasqi_v2": 0.315448907242639,
+          "si_sdr_db": 5.2316816696485,
+          "output_level_change_db": 1.3813960778688537
+        },
+        {
+          "haspi_v2": 0.8205290848886782,
+          "hasqi_v2": 0.30893831211638795,
+          "si_sdr_db": 5.2180823340932765,
+          "output_level_change_db": 0.8204711014189636
+        }
+      ],
+      "ild_error_db": 0.5622825740114585,
+      "itd_error_us": 0.0,
+      "clip_fraction_after_fitting": 0.0,
+      "metric_compute_s": 11.736262592999992,
+      "algorithmic_delay_ms": 10.666666666666666,
+      "doa_mean_absolute_error_deg": 110,
+      "doa_within_10deg_fraction": 0,
+      "target_only": {
+        "si_sdr_db": [
+          38.308817047263645,
+          38.58153573476813
+        ],
+        "level_change_db": [
+          0.239217880465676,
+          -0.3250841118910077
+        ],
+        "output_snr_db": [
+          5.231572151184082,
+          5.21727180480957
+        ]
+      }
+    },
+    {
+      "id": "260_rt0.0_snr0",
+      "speaker": "260",
+      "utterance": "260-123440-0018",
+      "target_deg": 30,
+      "masker_deg": -80,
+      "nominal_rt60_s": 0.0,
+      "snr_left_db": 0,
+      "frames_48k": 144000,
+      "frames_calibration_48k": 48000,
+      "method": "mvdr_known",
+      "ears": [
+        {
+          "haspi_v2": 0.9959365165271202,
+          "hasqi_v2": 0.9077581388544688,
+          "si_sdr_db": 23.636555186288717,
+          "output_level_change_db": 0.366417011860672
+        },
+        {
+          "haspi_v2": 0.9958211378018355,
+          "hasqi_v2": 0.9085562188654315,
+          "si_sdr_db": 23.52147321293021,
+          "output_level_change_db": -0.19515750451696728
+        }
+      ],
+      "ild_error_db": 0.5620594589540069,
+      "itd_error_us": 0.0,
+      "clip_fraction_after_fitting": 0.0,
+      "metric_compute_s": 10.512986991000048,
+      "algorithmic_delay_ms": 10.666666666666666,
+      "doa_mean_absolute_error_deg": 110,
+      "doa_within_10deg_fraction": 0,
+      "target_only": {
+        "si_sdr_db": [
+          28.9520347789843,
+          28.126544692522742
+        ],
+        "level_change_db": [
+          0.35238177745956445,
+          -0.20851708081689693
+        ],
+        "output_snr_db": [
+          25.17428970336914,
+          25.389362335205078
+        ]
+      }
+    },
+    {
+      "id": "260_rt0.0_snr0",
+      "speaker": "260",
+      "utterance": "260-123440-0018",
+      "target_deg": 30,
+      "masker_deg": -80,
+      "nominal_rt60_s": 0.0,
+      "snr_left_db": 0,
+      "frames_48k": 144000,
+      "frames_calibration_48k": 48000,
+      "method": "mvdr_estimated",
+      "ears": [
+        {
+          "haspi_v2": 0.9446994897109285,
+          "hasqi_v2": 0.5063528325985058,
+          "si_sdr_db": -2.200004644161635,
+          "output_level_change_db": 12.34709815132666
+        },
+        {
+          "haspi_v2": 0.9286199335392197,
+          "hasqi_v2": 0.4906423914735687,
+          "si_sdr_db": 4.309352657010436,
+          "output_level_change_db": 11.849707025725548
+        }
+      ],
+      "ild_error_db": 0.5112404040968777,
+      "itd_error_us": 750.0,
+      "clip_fraction_after_fitting": 0.00153125,
+      "metric_compute_s": 12.448192674999973,
+      "algorithmic_delay_ms": 10.666666666666666,
+      "doa_mean_absolute_error_deg": 110,
+      "doa_within_10deg_fraction": 0
+    },
+    {
+      "id": "260_rt0.0_snr0",
+      "speaker": "260",
+      "utterance": "260-123440-0018",
+      "target_deg": 30,
+      "masker_deg": -80,
+      "nominal_rt60_s": 0.0,
+      "snr_left_db": 0,
+      "frames_48k": 144000,
+      "frames_calibration_48k": 48000,
+      "method": "mvdr_rnnoise",
+      "ears": [
+        {
+          "haspi_v2": 0.9910059320589193,
+          "hasqi_v2": 0.9023756046225277,
+          "si_sdr_db": 19.6232452046101,
+          "output_level_change_db": 0.30527905273887407
+        },
+        {
+          "haspi_v2": 0.9908246195761738,
+          "hasqi_v2": 0.8999290952696215,
+          "si_sdr_db": 19.780751721467883,
+          "output_level_change_db": -0.25332083063773814
+        }
+      ],
+      "ild_error_db": 0.5591905552404732,
+      "itd_error_us": 0.0,
+      "clip_fraction_after_fitting": 0.0,
+      "metric_compute_s": 13.148932061999972,
+      "algorithmic_delay_ms": 40.666666666666664,
+      "doa_mean_absolute_error_deg": 110,
+      "doa_within_10deg_fraction": 0
+    },
+    {
+      "id": "260_rt0.0_snr0",
+      "speaker": "260",
+      "utterance": "260-123440-0018",
+      "target_deg": 30,
+      "masker_deg": -80,
+      "nominal_rt60_s": 0.0,
+      "snr_left_db": 0,
+      "frames_48k": 144000,
+      "frames_calibration_48k": 48000,
+      "method": "neural_mvdr",
+      "ears": [
+        {
+          "haspi_v2": 0.044956595176599196,
+          "hasqi_v2": 0.10030351644526127,
+          "si_sdr_db": -5.186269835748723,
+          "output_level_change_db": -4.517750560087222
+        },
+        {
+          "haspi_v2": 0.24664787711993152,
+          "hasqi_v2": 0.1266389724853728,
+          "si_sdr_db": -3.591482641162129,
+          "output_level_change_db": -5.663262620450055
+        }
+      ],
+      "ild_error_db": 1.0004179739230676,
+      "itd_error_us": 812.5,
+      "clip_fraction_after_fitting": 0.0,
+      "metric_compute_s": 11.03836051799999,
+      "algorithmic_delay_ms": null
+    },
+    {
+      "id": "260_rt0.0_snr5",
+      "speaker": "260",
+      "utterance": "260-123440-0018",
+      "target_deg": 30,
+      "masker_deg": -80,
+      "nominal_rt60_s": 0.0,
+      "snr_left_db": 5,
+      "frames_48k": 144000,
+      "frames_calibration_48k": 48000,
+      "method": "reference",
+      "ears": [
+        {
+          "haspi_v2": 0.8636621176281178,
+          "hasqi_v2": 0.322817425213379,
+          "si_sdr_db": 5.551270913380958,
+          "output_level_change_db": 1.0552218735335306
+        },
+        {
+          "haspi_v2": 0.8174817994686606,
+          "hasqi_v2": 0.3633362679403472,
+          "si_sdr_db": 7.270949783674865,
+          "output_level_change_db": 0.7788981308444174
+        }
+      ],
+      "ild_error_db": 0.16950196400049933,
+      "itd_error_us": 0.0,
+      "clip_fraction_after_fitting": 0.0,
+      "metric_compute_s": 12.179422907000003,
+      "algorithmic_delay_ms": 10.666666666666666,
+      "doa_mean_absolute_error_deg": 110,
+      "doa_within_10deg_fraction": 0,
+      "target_only": {
+        "si_sdr_db": [
+          40.505733708879596,
+          40.20002794807426
+        ],
+        "level_change_db": [
+          0.008781860181429596,
+          0.008695435229009936
+        ],
+        "output_snr_db": [
+          5.573801040649414,
+          7.249842166900635
+        ]
+      }
+    },
+    {
+      "id": "260_rt0.0_snr5",
+      "speaker": "260",
+      "utterance": "260-123440-0018",
+      "target_deg": 30,
+      "masker_deg": -80,
+      "nominal_rt60_s": 0.0,
+      "snr_left_db": 5,
+      "frames_48k": 144000,
+      "frames_calibration_48k": 48000,
+      "method": "das",
+      "ears": [
+        {
+          "haspi_v2": 0.9081174564480433,
+          "hasqi_v2": 0.44717981247156674,
+          "si_sdr_db": 10.224372269038142,
+          "output_level_change_db": 0.6348571248156525
+        },
+        {
+          "haspi_v2": 0.8916567760957558,
+          "hasqi_v2": 0.44002324434229056,
+          "si_sdr_db": 10.211236086141602,
+          "output_level_change_db": 0.07184651215590192
+        }
+      ],
+      "ild_error_db": 0.5631904461164758,
+      "itd_error_us": 0.0,
+      "clip_fraction_after_fitting": 0.0,
+      "metric_compute_s": 10.796573156000022,
+      "algorithmic_delay_ms": 10.666666666666666,
+      "doa_mean_absolute_error_deg": 110,
+      "doa_within_10deg_fraction": 0,
+      "target_only": {
+        "si_sdr_db": [
+          38.308817047263645,
+          38.58153573476813
+        ],
+        "level_change_db": [
+          0.239217880465676,
+          -0.3250841118910077
+        ],
+        "output_snr_db": [
+          10.231572151184082,
+          10.21727180480957
+        ]
+      }
+    },
+    {
+      "id": "260_rt0.0_snr5",
+      "speaker": "260",
+      "utterance": "260-123440-0018",
+      "target_deg": 30,
+      "masker_deg": -80,
+      "nominal_rt60_s": 0.0,
+      "snr_left_db": 5,
+      "frames_48k": 144000,
+      "frames_calibration_48k": 48000,
+      "method": "mvdr_known",
+      "ears": [
+        {
+          "haspi_v2": 0.9972156220887678,
+          "hasqi_v2": 0.9479225124227803,
+          "si_sdr_db": 26.49161113052115,
+          "output_level_change_db": 0.3570375123025218
+        },
+        {
+          "haspi_v2": 0.9970662243280358,
+          "hasqi_v2": 0.948067613763414,
+          "si_sdr_db": 26.08890402358601,
+          "output_level_change_db": -0.20408496927644332
+        }
+      ],
+      "ild_error_db": 0.5616147476370479,
+      "itd_error_us": 0.0,
+      "clip_fraction_after_fitting": 0.0,
+      "metric_compute_s": 10.593932980999966,
+      "algorithmic_delay_ms": 10.666666666666666,
+      "doa_mean_absolute_error_deg": 110,
+      "doa_within_10deg_fraction": 0,
+      "target_only": {
+        "si_sdr_db": [
+          28.95203462248117,
+          28.12654406382931
+        ],
+        "level_change_db": [
+          0.35238177745956445,
+          -0.20851708081689693
+        ],
+        "output_snr_db": [
+          30.17428970336914,
+          30.389362335205078
+        ]
+      }
+    },
+    {
+      "id": "260_rt0.0_snr5",
+      "speaker": "260",
+      "utterance": "260-123440-0018",
+      "target_deg": 30,
+      "masker_deg": -80,
+      "nominal_rt60_s": 0.0,
+      "snr_left_db": 5,
+      "frames_48k": 144000,
+      "frames_calibration_48k": 48000,
+      "method": "mvdr_estimated",
+      "ears": [
+        {
+          "haspi_v2": 0.9876183865351593,
+          "hasqi_v2": 0.5955788779697939,
+          "si_sdr_db": -2.1197789632167963,
+          "output_level_change_db": 12.293141165584982
+        },
+        {
+          "haspi_v2": 0.9831494702933133,
+          "hasqi_v2": 0.5847348094411751,
+          "si_sdr_db": 4.535631979031076,
+          "output_level_change_db": 11.78540012554171
+        }
+      ],
+      "ild_error_db": 0.5181586667871834,
+      "itd_error_us": 750.0,
+      "clip_fraction_after_fitting": 0.0013125,
+      "metric_compute_s": 12.993802845000005,
+      "algorithmic_delay_ms": 10.666666666666666,
+      "doa_mean_absolute_error_deg": 110,
+      "doa_within_10deg_fraction": 0
+    },
+    {
+      "id": "260_rt0.0_snr5",
+      "speaker": "260",
+      "utterance": "260-123440-0018",
+      "target_deg": 30,
+      "masker_deg": -80,
+      "nominal_rt60_s": 0.0,
+      "snr_left_db": 5,
+      "frames_48k": 144000,
+      "frames_calibration_48k": 48000,
+      "method": "mvdr_rnnoise",
+      "ears": [
+        {
+          "haspi_v2": 0.9934490040781495,
+          "hasqi_v2": 0.930474243453863,
+          "si_sdr_db": 20.0782060472836,
+          "output_level_change_db": 0.31845871016198546
+        },
+        {
+          "haspi_v2": 0.9932329696280374,
+          "hasqi_v2": 0.928057032872654,
+          "si_sdr_db": 20.299051852713006,
+          "output_level_change_db": -0.2415286662610543
+        }
+      ],
+      "ild_error_db": 0.5603225486096726,
+      "itd_error_us": 0.0,
+      "clip_fraction_after_fitting": 0.0,
+      "metric_compute_s": 12.507165809999947,
+      "algorithmic_delay_ms": 40.666666666666664,
+      "doa_mean_absolute_error_deg": 110,
+      "doa_within_10deg_fraction": 0
+    },
+    {
+      "id": "260_rt0.0_snr5",
+      "speaker": "260",
+      "utterance": "260-123440-0018",
+      "target_deg": 30,
+      "masker_deg": -80,
+      "nominal_rt60_s": 0.0,
+      "snr_left_db": 5,
+      "frames_48k": 144000,
+      "frames_calibration_48k": 48000,
+      "method": "neural_mvdr",
+      "ears": [
+        {
+          "haspi_v2": 0.8403468978785208,
+          "hasqi_v2": 0.33137747580602833,
+          "si_sdr_db": 4.716435300772076,
+          "output_level_change_db": -4.881914571185037
+        },
+        {
+          "haspi_v2": 0.7718158557562874,
+          "hasqi_v2": 0.3680507993952974,
+          "si_sdr_db": 5.887448431430783,
+          "output_level_change_db": -5.120354918974847
+        }
+      ],
+      "ild_error_db": 0.19003110963412034,
+      "itd_error_us": 0.0,
+      "clip_fraction_after_fitting": 0.0,
+      "metric_compute_s": 11.191084320999948,
+      "algorithmic_delay_ms": null
+    },
+    {
+      "id": "260_rt0.3_snr0",
+      "speaker": "260",
+      "utterance": "260-123440-0018",
+      "target_deg": 30,
+      "masker_deg": -80,
+      "nominal_rt60_s": 0.3,
+      "snr_left_db": 0,
+      "frames_48k": 144000,
+      "frames_calibration_48k": 48000,
+      "method": "reference",
+      "ears": [
+        {
+          "haspi_v2": 0.6663110362800028,
+          "hasqi_v2": 0.19756825452935056,
+          "si_sdr_db": 0.6168233314328952,
+          "output_level_change_db": 2.7729527855851224
+        },
+        {
+          "haspi_v2": 0.8431726937411377,
+          "hasqi_v2": 0.26089233236565895,
+          "si_sdr_db": 1.6581408840193252,
+          "output_level_change_db": 2.3054227241663123
+        }
+      ],
+      "ild_error_db": 0.49947870101622704,
+      "itd_error_us": 0.0,
+      "clip_fraction_after_fitting": 0.0,
+      "metric_compute_s": 12.524405118999994,
+      "algorithmic_delay_ms": 10.666666666666666,
+      "doa_mean_absolute_error_deg": 109.27350427350427,
+      "doa_within_10deg_fraction": 0,
+      "target_only": {
+        "si_sdr_db": [
+          39.390598448824534,
+          40.47306337834152
+        ],
+        "level_change_db": [
+          0.00915944598627589,
+          0.009971720481430867
+        ],
+        "output_snr_db": [
+          0.5604430437088013,
+          1.6159870624542236
+        ]
+      }
+    },
+    {
+      "id": "260_rt0.3_snr0",
+      "speaker": "260",
+      "utterance": "260-123440-0018",
+      "target_deg": 30,
+      "masker_deg": -80,
+      "nominal_rt60_s": 0.3,
+      "snr_left_db": 0,
+      "frames_48k": 144000,
+      "frames_calibration_48k": 48000,
+      "method": "das",
+      "ears": [
+        {
+          "haspi_v2": 0.8463509343953093,
+          "hasqi_v2": 0.25072440011070196,
+          "si_sdr_db": 1.5620506098410134,
+          "output_level_change_db": 1.1138206118306029
+        },
+        {
+          "haspi_v2": 0.7728466146151837,
+          "hasqi_v2": 0.27036932356559357,
+          "si_sdr_db": 1.5584820489900766,
+          "output_level_change_db": 0.5047573298675281
+        }
+      ],
+      "ild_error_db": 0.8282900196298159,
+      "itd_error_us": 0.0,
+      "clip_fraction_after_fitting": 0.0,
+      "metric_compute_s": 10.628870732999985,
+      "algorithmic_delay_ms": 10.666666666666666,
+      "doa_mean_absolute_error_deg": 109.27350427350427,
+      "doa_within_10deg_fraction": 0,
+      "target_only": {
+        "si_sdr_db": [
+          6.988579065411083,
+          7.113099807728314
+        ],
+        "level_change_db": [
+          -0.4684826631302811,
+          -1.082140859064709
+        ],
+        "output_snr_db": [
+          3.7072196006774902,
+          3.6914758682250977
+        ]
+      }
+    },
+    {
+      "id": "260_rt0.3_snr0",
+      "speaker": "260",
+      "utterance": "260-123440-0018",
+      "target_deg": 30,
+      "masker_deg": -80,
+      "nominal_rt60_s": 0.3,
+      "snr_left_db": 0,
+      "frames_48k": 144000,
+      "frames_calibration_48k": 48000,
+      "method": "mvdr_known",
+      "ears": [
+        {
+          "haspi_v2": 0.8596610163512981,
+          "hasqi_v2": 0.34102851580064725,
+          "si_sdr_db": 1.809143113681349,
+          "output_level_change_db": -0.6342321591267747
+        },
+        {
+          "haspi_v2": 0.8747022140333616,
+          "hasqi_v2": 0.3610794736459934,
+          "si_sdr_db": 2.375412515163765,
+          "output_level_change_db": -1.2418434632911026
+        }
+      ],
+      "ild_error_db": 0.8290151157214439,
+      "itd_error_us": 0.0,
+      "clip_fraction_after_fitting": 0.0,
+      "metric_compute_s": 11.210711837000076,
+      "algorithmic_delay_ms": 10.666666666666666,
+      "doa_mean_absolute_error_deg": 109.27350427350427,
+      "doa_within_10deg_fraction": 0,
+      "target_only": {
+        "si_sdr_db": [
+          4.287168922821978,
+          5.20797441094841
+        ],
+        "level_change_db": [
+          -1.531481275405909,
+          -2.1444897030105623
+        ],
+        "output_snr_db": [
+          6.676296710968018,
+          6.649938106536865
+        ]
+      }
+    },
+    {
+      "id": "260_rt0.3_snr0",
+      "speaker": "260",
+      "utterance": "260-123440-0018",
+      "target_deg": 30,
+      "masker_deg": -80,
+      "nominal_rt60_s": 0.3,
+      "snr_left_db": 0,
+      "frames_48k": 144000,
+      "frames_calibration_48k": 48000,
+      "method": "mvdr_estimated",
+      "ears": [
+        {
+          "haspi_v2": 0.40224541342586095,
+          "hasqi_v2": 0.14529964769976877,
+          "si_sdr_db": -14.75984327765598,
+          "output_level_change_db": -0.250965790501381
+        },
+        {
+          "haspi_v2": 0.5938927308994675,
+          "hasqi_v2": 0.18673878460814852,
+          "si_sdr_db": -6.554068544754034,
+          "output_level_change_db": -0.7684389425280956
+        }
+      ],
+      "ild_error_db": 0.7555650952070153,
+      "itd_error_us": 750.0,
+      "clip_fraction_after_fitting": 0.0,
+      "metric_compute_s": 12.160589215000073,
+      "algorithmic_delay_ms": 10.666666666666666,
+      "doa_mean_absolute_error_deg": 109.27350427350427,
+      "doa_within_10deg_fraction": 0
+    },
+    {
+      "id": "260_rt0.3_snr0",
+      "speaker": "260",
+      "utterance": "260-123440-0018",
+      "target_deg": 30,
+      "masker_deg": -80,
+      "nominal_rt60_s": 0.3,
+      "snr_left_db": 0,
+      "frames_48k": 144000,
+      "frames_calibration_48k": 48000,
+      "method": "mvdr_rnnoise",
+      "ears": [
+        {
+          "haspi_v2": 0.6808495491728879,
+          "hasqi_v2": 0.4301646038916121,
+          "si_sdr_db": 3.3204126207895412,
+          "output_level_change_db": -2.0405632904866757
+        },
+        {
+          "haspi_v2": 0.6835671573494005,
+          "hasqi_v2": 0.40466757750625143,
+          "si_sdr_db": 4.205883897096686,
+          "output_level_change_db": -2.6512724560107555
+        }
+      ],
+      "ild_error_db": 0.8234772360681689,
+      "itd_error_us": 0.0,
+      "clip_fraction_after_fitting": 0.0,
+      "metric_compute_s": 12.26104086099997,
+      "algorithmic_delay_ms": 40.666666666666664,
+      "doa_mean_absolute_error_deg": 109.27350427350427,
+      "doa_within_10deg_fraction": 0
+    },
+    {
+      "id": "260_rt0.3_snr0",
+      "speaker": "260",
+      "utterance": "260-123440-0018",
+      "target_deg": 30,
+      "masker_deg": -80,
+      "nominal_rt60_s": 0.3,
+      "snr_left_db": 0,
+      "frames_48k": 144000,
+      "frames_calibration_48k": 48000,
+      "method": "neural_mvdr",
+      "ears": [
+        {
+          "haspi_v2": 0.6210781298093555,
+          "hasqi_v2": 0.1771926060024015,
+          "si_sdr_db": -1.670952804276914,
+          "output_level_change_db": -5.140329906899039
+        },
+        {
+          "haspi_v2": 0.7505259625698532,
+          "hasqi_v2": 0.22150543310462723,
+          "si_sdr_db": -0.24787378681073224,
+          "output_level_change_db": -5.179577830627063
+        }
+      ],
+      "ild_error_db": 0.6346035676046681,
+      "itd_error_us": 0.0,
+      "clip_fraction_after_fitting": 0.0,
+      "metric_compute_s": 11.504075429999943,
+      "algorithmic_delay_ms": null
+    },
+    {
+      "id": "260_rt0.3_snr5",
+      "speaker": "260",
+      "utterance": "260-123440-0018",
+      "target_deg": 30,
+      "masker_deg": -80,
+      "nominal_rt60_s": 0.3,
+      "snr_left_db": 5,
+      "frames_48k": 144000,
+      "frames_calibration_48k": 48000,
+      "method": "reference",
+      "ears": [
+        {
+          "haspi_v2": 0.8346633254342221,
+          "hasqi_v2": 0.3419719370167514,
+          "si_sdr_db": 5.59371866207851,
+          "output_level_change_db": 1.0946905313967035
+        },
+        {
+          "haspi_v2": 0.8861298323588536,
+          "hasqi_v2": 0.40413335071524564,
+          "si_sdr_db": 6.642034462246386,
+          "output_level_change_db": 0.880712764192556
+        }
+      ],
+      "ild_error_db": 0.19747281398467187,
+      "itd_error_us": 0.0,
+      "clip_fraction_after_fitting": 0.0,
+      "metric_compute_s": 12.234525293000047,
+      "algorithmic_delay_ms": 10.666666666666666,
+      "doa_mean_absolute_error_deg": 108.97435897435898,
+      "doa_within_10deg_fraction": 0,
+      "target_only": {
+        "si_sdr_db": [
+          39.390598448824534,
+          40.47306337834152
+        ],
+        "level_change_db": [
+          0.00915944598627589,
+          0.009971720481430867
+        ],
+        "output_snr_db": [
+          5.560442924499512,
+          6.615987300872803
+        ]
+      }
+    },
+    {
+      "id": "260_rt0.3_snr5",
+      "speaker": "260",
+      "utterance": "260-123440-0018",
+      "target_deg": 30,
+      "masker_deg": -80,
+      "nominal_rt60_s": 0.3,
+      "snr_left_db": 5,
+      "frames_48k": 144000,
+      "frames_calibration_48k": 48000,
+      "method": "das",
+      "ears": [
+        {
+          "haspi_v2": 0.9067584249397358,
+          "hasqi_v2": 0.36697539235003895,
+          "si_sdr_db": 4.461112044900398,
+          "output_level_change_db": 0.10958981743696265
+        },
+        {
+          "haspi_v2": 0.9105390932783761,
+          "hasqi_v2": 0.3900101747729946,
+          "si_sdr_db": 4.4949605257829095,
+          "output_level_change_db": -0.5022580280244923
+        }
+      ],
+      "ild_error_db": 0.8287496928622148,
+      "itd_error_us": 0.0,
+      "clip_fraction_after_fitting": 0.0,
+      "metric_compute_s": 10.492883591000009,
+      "algorithmic_delay_ms": 10.666666666666666,
+      "doa_mean_absolute_error_deg": 108.97435897435898,
+      "doa_within_10deg_fraction": 0,
+      "target_only": {
+        "si_sdr_db": [
+          6.988579065411083,
+          7.113099807728314
+        ],
+        "level_change_db": [
+          -0.4684826631302811,
+          -1.082140859064709
+        ],
+        "output_snr_db": [
+          8.707219123840332,
+          8.691474914550781
+        ]
+      }
+    },
+    {
+      "id": "260_rt0.3_snr5",
+      "speaker": "260",
+      "utterance": "260-123440-0018",
+      "target_deg": 30,
+      "masker_deg": -80,
+      "nominal_rt60_s": 0.3,
+      "snr_left_db": 5,
+      "frames_48k": 144000,
+      "frames_calibration_48k": 48000,
+      "method": "mvdr_known",
+      "ears": [
+        {
+          "haspi_v2": 0.9137949650863919,
+          "hasqi_v2": 0.4482065839874799,
+          "si_sdr_db": 3.337786955218866,
+          "output_level_change_db": -1.2127713760781902
+        },
+        {
+          "haspi_v2": 0.9043710081768699,
+          "hasqi_v2": 0.4749983612309005,
+          "si_sdr_db": 4.087089916983492,
+          "output_level_change_db": -1.8236105280772255
+        }
+      ],
+      "ild_error_db": 0.8297882454151421,
+      "itd_error_us": 0.0,
+      "clip_fraction_after_fitting": 0.0,
+      "metric_compute_s": 10.78898479899999,
+      "algorithmic_delay_ms": 10.666666666666666,
+      "doa_mean_absolute_error_deg": 108.97435897435898,
+      "doa_within_10deg_fraction": 0,
+      "target_only": {
+        "si_sdr_db": [
+          4.28716890697738,
+          5.207974440770831
+        ],
+        "level_change_db": [
+          -1.5314807445567942,
+          -2.1444897030105623
+        ],
+        "output_snr_db": [
+          11.676297187805176,
+          11.649938583374023
+        ]
+      }
+    },
+    {
+      "id": "260_rt0.3_snr5",
+      "speaker": "260",
+      "utterance": "260-123440-0018",
+      "target_deg": 30,
+      "masker_deg": -80,
+      "nominal_rt60_s": 0.3,
+      "snr_left_db": 5,
+      "frames_48k": 144000,
+      "frames_calibration_48k": 48000,
+      "method": "mvdr_estimated",
+      "ears": [
+        {
+          "haspi_v2": 0.5911168706197217,
+          "hasqi_v2": 0.22783540815309994,
+          "si_sdr_db": -12.918632022300187,
+          "output_level_change_db": -1.993589461603503
+        },
+        {
+          "haspi_v2": 0.8602950089405348,
+          "hasqi_v2": 0.28096651924184046,
+          "si_sdr_db": -4.358841659903061,
+          "output_level_change_db": -2.500999645483801
+        }
+      ],
+      "ild_error_db": 0.7411394449680245,
+      "itd_error_us": 750.0,
+      "clip_fraction_after_fitting": 0.0,
+      "metric_compute_s": 11.832214958999998,
+      "algorithmic_delay_ms": 10.666666666666666,
+      "doa_mean_absolute_error_deg": 108.97435897435898,
+      "doa_within_10deg_fraction": 0
+    },
+    {
+      "id": "260_rt0.3_snr5",
+      "speaker": "260",
+      "utterance": "260-123440-0018",
+      "target_deg": 30,
+      "masker_deg": -80,
+      "nominal_rt60_s": 0.3,
+      "snr_left_db": 5,
+      "frames_48k": 144000,
+      "frames_calibration_48k": 48000,
+      "method": "mvdr_rnnoise",
+      "ears": [
+        {
+          "haspi_v2": 0.721320985077227,
+          "hasqi_v2": 0.5003972569092598,
+          "si_sdr_db": 3.574087978720668,
+          "output_level_change_db": -1.8762786962815716
+        },
+        {
+          "haspi_v2": 0.7289248856424055,
+          "hasqi_v2": 0.4892791756821229,
+          "si_sdr_db": 4.460715773180289,
+          "output_level_change_db": -2.486740704318245
+        }
+      ],
+      "ild_error_db": 0.8285409684556669,
+      "itd_error_us": 0.0,
+      "clip_fraction_after_fitting": 0.0,
+      "metric_compute_s": 12.05333025699997,
+      "algorithmic_delay_ms": 40.666666666666664,
+      "doa_mean_absolute_error_deg": 108.97435897435898,
+      "doa_within_10deg_fraction": 0
+    },
+    {
+      "id": "260_rt0.3_snr5",
+      "speaker": "260",
+      "utterance": "260-123440-0018",
+      "target_deg": 30,
+      "masker_deg": -80,
+      "nominal_rt60_s": 0.3,
+      "snr_left_db": 5,
+      "frames_48k": 144000,
+      "frames_calibration_48k": 48000,
+      "method": "neural_mvdr",
+      "ears": [
+        {
+          "haspi_v2": 0.811220372689869,
+          "hasqi_v2": 0.34333530260834444,
+          "si_sdr_db": 4.056878635847079,
+          "output_level_change_db": -5.34438033692484
+        },
+        {
+          "haspi_v2": 0.860292040916274,
+          "hasqi_v2": 0.3846553799910773,
+          "si_sdr_db": 4.029186015745367,
+          "output_level_change_db": -5.870788419792349
+        }
+      ],
+      "ild_error_db": 0.7153807210688711,
+      "itd_error_us": 62.5,
+      "clip_fraction_after_fitting": 0.0,
+      "metric_compute_s": 11.325295613000094,
+      "algorithmic_delay_ms": null
+    },
+    {
+      "id": "7729_rt0.0_snr0",
+      "speaker": "7729",
+      "utterance": "7729-102255-0045",
+      "target_deg": 60,
+      "masker_deg": -50,
+      "nominal_rt60_s": 0.0,
+      "snr_left_db": 0,
+      "frames_48k": 144000,
+      "frames_calibration_48k": 48000,
+      "method": "reference",
+      "ears": [
+        {
+          "haspi_v2": 0.4207848110244858,
+          "hasqi_v2": 0.11251629841297826,
+          "si_sdr_db": 0.6047441525001241,
+          "output_level_change_db": 2.7623333051674255
+        },
+        {
+          "haspi_v2": 0.7123891524868997,
+          "hasqi_v2": 0.1403951465659608,
+          "si_sdr_db": 2.3511302555112095,
+          "output_level_change_db": 1.9390764536412084
+        }
+      ],
+      "ild_error_db": 0.6916841916728389,
+      "itd_error_us": 0.0,
+      "clip_fraction_after_fitting": 0.0,
+      "metric_compute_s": 11.111990546000015,
+      "algorithmic_delay_ms": 10.666666666666666,
+      "doa_mean_absolute_error_deg": 110,
+      "doa_within_10deg_fraction": 0,
+      "target_only": {
+        "si_sdr_db": [
+          38.3967944459098,
+          38.59875543662481
+        ],
+        "level_change_db": [
+          0.006450760702883038,
+          0.006537564991562009
+        ],
+        "output_snr_db": [
+          0.567602276802063,
+          2.411912202835083
+        ]
+      }
+    },
+    {
+      "id": "7729_rt0.0_snr0",
+      "speaker": "7729",
+      "utterance": "7729-102255-0045",
+      "target_deg": 60,
+      "masker_deg": -50,
+      "nominal_rt60_s": 0.0,
+      "snr_left_db": 0,
+      "frames_48k": 144000,
+      "frames_calibration_48k": 48000,
+      "method": "das",
+      "ears": [
+        {
+          "haspi_v2": 0.713376604067794,
+          "hasqi_v2": 0.17912843118695254,
+          "si_sdr_db": 4.572283220155863,
+          "output_level_change_db": 1.729813976669631
+        },
+        {
+          "haspi_v2": 0.7370162548796034,
+          "hasqi_v2": 0.17406736338840986,
+          "si_sdr_db": 4.619897612826262,
+          "output_level_change_db": 0.7432808960557773
+        }
+      ],
+      "ild_error_db": 0.9779316187824678,
+      "itd_error_us": 0.0,
+      "clip_fraction_after_fitting": 0.0,
+      "metric_compute_s": 10.705450128999928,
+      "algorithmic_delay_ms": 10.666666666666666,
+      "doa_mean_absolute_error_deg": 110,
+      "doa_within_10deg_fraction": 0,
+      "target_only": {
+        "si_sdr_db": [
+          37.16650224304411,
+          36.79877684749462
+        ],
+        "level_change_db": [
+          0.44382128030349255,
+          -0.5298338432266969
+        ],
+        "output_snr_db": [
+          4.588714599609375,
+          4.637622833251953
+        ]
+      }
+    },
+    {
+      "id": "7729_rt0.0_snr0",
+      "speaker": "7729",
+      "utterance": "7729-102255-0045",
+      "target_deg": 60,
+      "masker_deg": -50,
+      "nominal_rt60_s": 0.0,
+      "snr_left_db": 0,
+      "frames_48k": 144000,
+      "frames_calibration_48k": 48000,
+      "method": "mvdr_known",
+      "ears": [
+        {
+          "haspi_v2": 0.9958345373033439,
+          "hasqi_v2": 0.6729269614072767,
+          "si_sdr_db": 19.04314970581534,
+          "output_level_change_db": 0.6758018498880579
+        },
+        {
+          "haspi_v2": 0.9964650531547039,
+          "hasqi_v2": 0.6759190410293264,
+          "si_sdr_db": 18.913982347738923,
+          "output_level_change_db": -0.2862647515089147
+        }
+      ],
+      "ild_error_db": 0.9721587147552144,
+      "itd_error_us": 0.0,
+      "clip_fraction_after_fitting": 0.0,
+      "metric_compute_s": 11.451416846999905,
+      "algorithmic_delay_ms": 10.666666666666666,
+      "doa_mean_absolute_error_deg": 110,
+      "doa_within_10deg_fraction": 0,
+      "target_only": {
+        "si_sdr_db": [
+          24.33806985201203,
+          23.336398907862748
+        ],
+        "level_change_db": [
+          0.6373396458094629,
+          -0.32246651109590985
+        ],
+        "output_snr_db": [
+          20.56476593017578,
+          20.878522872924805
+        ]
+      }
+    },
+    {
+      "id": "7729_rt0.0_snr0",
+      "speaker": "7729",
+      "utterance": "7729-102255-0045",
+      "target_deg": 60,
+      "masker_deg": -50,
+      "nominal_rt60_s": 0.0,
+      "snr_left_db": 0,
+      "frames_48k": 144000,
+      "frames_calibration_48k": 48000,
+      "method": "mvdr_estimated",
+      "ears": [
+        {
+          "haspi_v2": 0.9745439964074178,
+          "hasqi_v2": 0.4693962404565662,
+          "si_sdr_db": -0.09907562429163705,
+          "output_level_change_db": 13.952647546203254
+        },
+        {
+          "haspi_v2": 0.9782055317085541,
+          "hasqi_v2": 0.45339960821269426,
+          "si_sdr_db": 4.872934017076259,
+          "output_level_change_db": 13.017225062563371
+        }
+      ],
+      "ild_error_db": 0.9366983674455058,
+      "itd_error_us": 812.5,
+      "clip_fraction_after_fitting": 0.006375,
+      "metric_compute_s": 12.168367988,
+      "algorithmic_delay_ms": 10.666666666666666,
+      "doa_mean_absolute_error_deg": 110,
+      "doa_within_10deg_fraction": 0
+    },
+    {
+      "id": "7729_rt0.0_snr0",
+      "speaker": "7729",
+      "utterance": "7729-102255-0045",
+      "target_deg": 60,
+      "masker_deg": -50,
+      "nominal_rt60_s": 0.0,
+      "snr_left_db": 0,
+      "frames_48k": 144000,
+      "frames_calibration_48k": 48000,
+      "method": "mvdr_rnnoise",
+      "ears": [
+        {
+          "haspi_v2": 0.9795381341919636,
+          "hasqi_v2": 0.775677222873511,
+          "si_sdr_db": 18.083201201393397,
+          "output_level_change_db": 0.5534186417489368
+        },
+        {
+          "haspi_v2": 0.983020318018441,
+          "hasqi_v2": 0.7747715115230608,
+          "si_sdr_db": 18.510346206119607,
+          "output_level_change_db": -0.4022211582397018
+        }
+      ],
+      "ild_error_db": 0.9706621247215752,
+      "itd_error_us": 0.0,
+      "clip_fraction_after_fitting": 0.0,
+      "metric_compute_s": 11.66750238499992,
+      "algorithmic_delay_ms": 40.666666666666664,
+      "doa_mean_absolute_error_deg": 110,
+      "doa_within_10deg_fraction": 0
+    },
+    {
+      "id": "7729_rt0.0_snr0",
+      "speaker": "7729",
+      "utterance": "7729-102255-0045",
+      "target_deg": 60,
+      "masker_deg": -50,
+      "nominal_rt60_s": 0.0,
+      "snr_left_db": 0,
+      "frames_48k": 144000,
+      "frames_calibration_48k": 48000,
+      "method": "neural_mvdr",
+      "ears": [
+        {
+          "haspi_v2": 0.7686752268742274,
+          "hasqi_v2": 0.3776054181702164,
+          "si_sdr_db": 6.88058499047446,
+          "output_level_change_db": -0.4982154775565666
+        },
+        {
+          "haspi_v2": 0.8759601749458772,
+          "hasqi_v2": 0.39551018788114406,
+          "si_sdr_db": 8.399080546384107,
+          "output_level_change_db": -0.7709612772216725
+        }
+      ],
+      "ild_error_db": 0.11380859386208886,
+      "itd_error_us": 0.0,
+      "clip_fraction_after_fitting": 0.0,
+      "metric_compute_s": 10.631941030999997,
+      "algorithmic_delay_ms": null
+    },
+    {
+      "id": "7729_rt0.0_snr5",
+      "speaker": "7729",
+      "utterance": "7729-102255-0045",
+      "target_deg": 60,
+      "masker_deg": -50,
+      "nominal_rt60_s": 0.0,
+      "snr_left_db": 5,
+      "frames_48k": 144000,
+      "frames_calibration_48k": 48000,
+      "method": "reference",
+      "ears": [
+        {
+          "haspi_v2": 0.77872476318528,
+          "hasqi_v2": 0.20606904639088364,
+          "si_sdr_db": 5.586760237765052,
+          "output_level_change_db": 1.086641881440232
+        },
+        {
+          "haspi_v2": 0.8957384080995632,
+          "hasqi_v2": 0.2461783550952881,
+          "si_sdr_db": 7.374038656521764,
+          "output_level_change_db": 0.7029847163970033
+        }
+      ],
+      "ild_error_db": 0.30969650074724075,
+      "itd_error_us": 0.0,
+      "clip_fraction_after_fitting": 0.0,
+      "metric_compute_s": 11.69437025700006,
+      "algorithmic_delay_ms": 10.666666666666666,
+      "doa_mean_absolute_error_deg": 110,
+      "doa_within_10deg_fraction": 0,
+      "target_only": {
+        "si_sdr_db": [
+          38.3967944459098,
+          38.59875543662481
+        ],
+        "level_change_db": [
+          0.006450760702883038,
+          0.006537564991562009
+        ],
+        "output_snr_db": [
+          5.567602157592773,
+          7.411911964416504
+        ]
+      }
+    },
+    {
+      "id": "7729_rt0.0_snr5",
+      "speaker": "7729",
+      "utterance": "7729-102255-0045",
+      "target_deg": 60,
+      "masker_deg": -50,
+      "nominal_rt60_s": 0.0,
+      "snr_left_db": 5,
+      "frames_48k": 144000,
+      "frames_calibration_48k": 48000,
+      "method": "das",
+      "ears": [
+        {
+          "haspi_v2": 0.8979932522729924,
+          "hasqi_v2": 0.30630438050112424,
+          "si_sdr_db": 9.572573071597535,
+          "output_level_change_db": 0.8901390995708558
+        },
+        {
+          "haspi_v2": 0.9123482118453093,
+          "hasqi_v2": 0.2990681242426679,
+          "si_sdr_db": 9.619555938305956,
+          "output_level_change_db": -0.08853738874812025
+        }
+      ],
+      "ild_error_db": 0.9751637965429198,
+      "itd_error_us": 0.0,
+      "clip_fraction_after_fitting": 0.0,
+      "metric_compute_s": 10.781154174999983,
+      "algorithmic_delay_ms": 10.666666666666666,
+      "doa_mean_absolute_error_deg": 110,
+      "doa_within_10deg_fraction": 0,
+      "target_only": {
+        "si_sdr_db": [
+          37.16650224304411,
+          36.79877684749462
+        ],
+        "level_change_db": [
+          0.44382128030349255,
+          -0.5298338432266969
+        ],
+        "output_snr_db": [
+          9.588714599609375,
+          9.637622833251953
+        ]
+      }
+    },
+    {
+      "id": "7729_rt0.0_snr5",
+      "speaker": "7729",
+      "utterance": "7729-102255-0045",
+      "target_deg": 60,
+      "masker_deg": -50,
+      "nominal_rt60_s": 0.0,
+      "snr_left_db": 5,
+      "frames_48k": 144000,
+      "frames_calibration_48k": 48000,
+      "method": "mvdr_known",
+      "ears": [
+        {
+          "haspi_v2": 0.9965833917749607,
+          "hasqi_v2": 0.7994236679353803,
+          "si_sdr_db": 21.900120554962292,
+          "output_level_change_db": 0.6496621784044223
+        },
+        {
+          "haspi_v2": 0.9968939571228638,
+          "hasqi_v2": 0.8027790727772457,
+          "si_sdr_db": 21.405318505237187,
+          "output_level_change_db": -0.31077014125221586
+        }
+      ],
+      "ild_error_db": 0.9709049479907934,
+      "itd_error_us": 0.0,
+      "clip_fraction_after_fitting": 0.0,
+      "metric_compute_s": 11.40931754199994,
+      "algorithmic_delay_ms": 10.666666666666666,
+      "doa_mean_absolute_error_deg": 110,
+      "doa_within_10deg_fraction": 0,
+      "target_only": {
+        "si_sdr_db": [
+          24.338069896318622,
+          23.33639886867556
+        ],
+        "level_change_db": [
+          0.6373396458094629,
+          -0.32246586871919847
+        ],
+        "output_snr_db": [
+          25.56476593017578,
+          25.878522872924805
+        ]
+      }
+    },
+    {
+      "id": "7729_rt0.0_snr5",
+      "speaker": "7729",
+      "utterance": "7729-102255-0045",
+      "target_deg": 60,
+      "masker_deg": -50,
+      "nominal_rt60_s": 0.0,
+      "snr_left_db": 5,
+      "frames_48k": 144000,
+      "frames_calibration_48k": 48000,
+      "method": "mvdr_estimated",
+      "ears": [
+        {
+          "haspi_v2": 0.9893931715088128,
+          "hasqi_v2": 0.5801234871210421,
+          "si_sdr_db": -0.036730343945582125,
+          "output_level_change_db": 13.924153802783458
+        },
+        {
+          "haspi_v2": 0.9916687478144439,
+          "hasqi_v2": 0.5699408711324195,
+          "si_sdr_db": 5.030069255020832,
+          "output_level_change_db": 12.983952873493749
+        }
+      ],
+      "ild_error_db": 0.9395971871900928,
+      "itd_error_us": 812.5,
+      "clip_fraction_after_fitting": 0.006229166666666667,
+      "metric_compute_s": 12.500680485999965,
+      "algorithmic_delay_ms": 10.666666666666666,
+      "doa_mean_absolute_error_deg": 110,
+      "doa_within_10deg_fraction": 0
+    },
+    {
+      "id": "7729_rt0.0_snr5",
+      "speaker": "7729",
+      "utterance": "7729-102255-0045",
+      "target_deg": 60,
+      "masker_deg": -50,
+      "nominal_rt60_s": 0.0,
+      "snr_left_db": 5,
+      "frames_48k": 144000,
+      "frames_calibration_48k": 48000,
+      "method": "mvdr_rnnoise",
+      "ears": [
+        {
+          "haspi_v2": 0.9806464802262835,
+          "hasqi_v2": 0.8486242343148955,
+          "si_sdr_db": 19.069580093539418,
+          "output_level_change_db": 0.5728383406667595
+        },
+        {
+          "haspi_v2": 0.9801762528673835,
+          "hasqi_v2": 0.8486044134442114,
+          "si_sdr_db": 19.465606831311376,
+          "output_level_change_db": -0.38268347855464135
+        }
+      ],
+      "ild_error_db": 0.9661664074275267,
+      "itd_error_us": 0.0,
+      "clip_fraction_after_fitting": 0.0,
+      "metric_compute_s": 11.428872527000067,
+      "algorithmic_delay_ms": 40.666666666666664,
+      "doa_mean_absolute_error_deg": 110,
+      "doa_within_10deg_fraction": 0
+    },
+    {
+      "id": "7729_rt0.0_snr5",
+      "speaker": "7729",
+      "utterance": "7729-102255-0045",
+      "target_deg": 60,
+      "masker_deg": -50,
+      "nominal_rt60_s": 0.0,
+      "snr_left_db": 5,
+      "frames_48k": 144000,
+      "frames_calibration_48k": 48000,
+      "method": "neural_mvdr",
+      "ears": [
+        {
+          "haspi_v2": 0.9818193919137406,
+          "hasqi_v2": 0.6059421624048605,
+          "si_sdr_db": 14.157113807647029,
+          "output_level_change_db": -0.8534696652937221
+        },
+        {
+          "haspi_v2": 0.988669353440047,
+          "hasqi_v2": 0.6234426037021904,
+          "si_sdr_db": 14.914461233032162,
+          "output_level_change_db": -0.9211332300786929
+        }
+      ],
+      "ild_error_db": 0.04299836300061666,
+      "itd_error_us": 0.0,
+      "clip_fraction_after_fitting": 0.0,
+      "metric_compute_s": 10.659180268,
+      "algorithmic_delay_ms": null
+    },
+    {
+      "id": "7729_rt0.3_snr0",
+      "speaker": "7729",
+      "utterance": "7729-102255-0045",
+      "target_deg": 60,
+      "masker_deg": -50,
+      "nominal_rt60_s": 0.3,
+      "snr_left_db": 0,
+      "frames_48k": 144000,
+      "frames_calibration_48k": 48000,
+      "method": "reference",
+      "ears": [
+        {
+          "haspi_v2": 0.6099288064280058,
+          "hasqi_v2": 0.16432990968646694,
+          "si_sdr_db": 0.610297772720519,
+          "output_level_change_db": 2.7901959705736497
+        },
+        {
+          "haspi_v2": 0.7125326405505708,
+          "hasqi_v2": 0.16708439512195822,
+          "si_sdr_db": 0.9449833422055365,
+          "output_level_change_db": 2.6190048326245736
+        }
+      ],
+      "ild_error_db": 0.020790747837591383,
+      "itd_error_us": 125.0,
+      "clip_fraction_after_fitting": 0.0,
+      "metric_compute_s": 11.102434872999993,
+      "algorithmic_delay_ms": 10.666666666666666,
+      "doa_mean_absolute_error_deg": 110.94017094017094,
+      "doa_within_10deg_fraction": 0,
+      "target_only": {
+        "si_sdr_db": [
+          36.63178062940174,
+          36.9737283271272
+        ],
+        "level_change_db": [
+          0.004659322648361751,
+          0.004862108697745268
+        ],
+        "output_snr_db": [
+          0.5100330114364624,
+          0.8604446649551392
+        ]
+      }
+    },
+    {
+      "id": "7729_rt0.3_snr0",
+      "speaker": "7729",
+      "utterance": "7729-102255-0045",
+      "target_deg": 60,
+      "masker_deg": -50,
+      "nominal_rt60_s": 0.3,
+      "snr_left_db": 0,
+      "frames_48k": 144000,
+      "frames_calibration_48k": 48000,
+      "method": "das",
+      "ears": [
+        {
+          "haspi_v2": 0.6426200951529422,
+          "hasqi_v2": 0.1670272132885635,
+          "si_sdr_db": 0.5164751277297851,
+          "output_level_change_db": 0.9898571184568438
+        },
+        {
+          "haspi_v2": 0.7079694781998063,
+          "hasqi_v2": 0.1645824836299882,
+          "si_sdr_db": 0.5479464301677748,
+          "output_level_change_db": 0.958139895599387
+        }
+      ],
+      "ild_error_db": 0.13687015464020946,
+      "itd_error_us": 125.0,
+      "clip_fraction_after_fitting": 0.0,
+      "metric_compute_s": 11.210876346999953,
+      "algorithmic_delay_ms": 10.666666666666666,
+      "doa_mean_absolute_error_deg": 110.94017094017094,
+      "doa_within_10deg_fraction": 0,
+      "target_only": {
+        "si_sdr_db": [
+          6.486414001482387,
+          6.385469808076852
+        ],
+        "level_change_db": [
+          -0.939650951166518,
+          -0.9583663726457308
+        ],
+        "output_snr_db": [
+          2.559548854827881,
+          2.596186399459839
+        ]
+      }
+    },
+    {
+      "id": "7729_rt0.3_snr0",
+      "speaker": "7729",
+      "utterance": "7729-102255-0045",
+      "target_deg": 60,
+      "masker_deg": -50,
+      "nominal_rt60_s": 0.3,
+      "snr_left_db": 0,
+      "frames_48k": 144000,
+      "frames_calibration_48k": 48000,
+      "method": "mvdr_known",
+      "ears": [
+        {
+          "haspi_v2": 0.588776604863361,
+          "hasqi_v2": 0.1625320046166385,
+          "si_sdr_db": 0.08070905232717457,
+          "output_level_change_db": -0.20350220075490788
+        },
+        {
+          "haspi_v2": 0.6322783054078523,
+          "hasqi_v2": 0.16363625503569293,
+          "si_sdr_db": 0.6757791280953761,
+          "output_level_change_db": -0.2263091569951185
+        }
+      ],
+      "ild_error_db": 0.13923154305158236,
+      "itd_error_us": 125.0,
+      "clip_fraction_after_fitting": 0.0,
+      "metric_compute_s": 11.520175300000005,
+      "algorithmic_delay_ms": 10.666666666666666,
+      "doa_mean_absolute_error_deg": 110.94017094017094,
+      "doa_within_10deg_fraction": 0,
+      "target_only": {
+        "si_sdr_db": [
+          3.6939507151658506,
+          4.729045866504233
+        ],
+        "level_change_db": [
+          -1.6950882037122197,
+          -1.7182684848556167
+        ],
+        "output_snr_db": [
+          3.9603729248046875,
+          3.959474563598633
+        ]
+      }
+    },
+    {
+      "id": "7729_rt0.3_snr0",
+      "speaker": "7729",
+      "utterance": "7729-102255-0045",
+      "target_deg": 60,
+      "masker_deg": -50,
+      "nominal_rt60_s": 0.3,
+      "snr_left_db": 0,
+      "frames_48k": 144000,
+      "frames_calibration_48k": 48000,
+      "method": "mvdr_estimated",
+      "ears": [
+        {
+          "haspi_v2": 0.1453103929238608,
+          "hasqi_v2": 0.09845317435133417,
+          "si_sdr_db": -40.1538994730036,
+          "output_level_change_db": -0.4663608539469668
+        },
+        {
+          "haspi_v2": 0.2535827810411037,
+          "hasqi_v2": 0.09593374215003025,
+          "si_sdr_db": -31.46242715944289,
+          "output_level_change_db": -0.38729620116597296
+        }
+      ],
+      "ild_error_db": 0.24713259236378649,
+      "itd_error_us": 750.0,
+      "clip_fraction_after_fitting": 0.0,
+      "metric_compute_s": 12.660798925999984,
+      "algorithmic_delay_ms": 10.666666666666666,
+      "doa_mean_absolute_error_deg": 110.94017094017094,
+      "doa_within_10deg_fraction": 0
+    },
+    {
+      "id": "7729_rt0.3_snr0",
+      "speaker": "7729",
+      "utterance": "7729-102255-0045",
+      "target_deg": 60,
+      "masker_deg": -50,
+      "nominal_rt60_s": 0.3,
+      "snr_left_db": 0,
+      "frames_48k": 144000,
+      "frames_calibration_48k": 48000,
+      "method": "mvdr_rnnoise",
+      "ears": [
+        {
+          "haspi_v2": 0.5568173573217944,
+          "hasqi_v2": 0.3550483849534782,
+          "si_sdr_db": 2.912777891776297,
+          "output_level_change_db": -2.1222604647840764
+        },
+        {
+          "haspi_v2": 0.6319434121633973,
+          "hasqi_v2": 0.3552524527196956,
+          "si_sdr_db": 3.774979491722278,
+          "output_level_change_db": -2.1442859543850696
+        }
+      ],
+      "ild_error_db": 0.1281085186587093,
+      "itd_error_us": 125.0,
+      "clip_fraction_after_fitting": 0.0,
+      "metric_compute_s": 11.283861299000023,
+      "algorithmic_delay_ms": 40.666666666666664,
+      "doa_mean_absolute_error_deg": 110.94017094017094,
+      "doa_within_10deg_fraction": 0
+    },
+    {
+      "id": "7729_rt0.3_snr0",
+      "speaker": "7729",
+      "utterance": "7729-102255-0045",
+      "target_deg": 60,
+      "masker_deg": -50,
+      "nominal_rt60_s": 0.3,
+      "snr_left_db": 0,
+      "frames_48k": 144000,
+      "frames_calibration_48k": 48000,
+      "method": "neural_mvdr",
+      "ears": [
+        {
+          "haspi_v2": 0.6703171130652281,
+          "hasqi_v2": 0.2124099941141548,
+          "si_sdr_db": 1.7154667656937808,
+          "output_level_change_db": -3.815709450786798
+        },
+        {
+          "haspi_v2": 0.7962477774680986,
+          "hasqi_v2": 0.22267303059183244,
+          "si_sdr_db": 2.080891148835371,
+          "output_level_change_db": -3.6500012356085514
+        }
+      ],
+      "ild_error_db": 0.3993536364265502,
+      "itd_error_us": 62.5,
+      "clip_fraction_after_fitting": 0.0,
+      "metric_compute_s": 10.565528512000014,
+      "algorithmic_delay_ms": null
+    },
+    {
+      "id": "7729_rt0.3_snr5",
+      "speaker": "7729",
+      "utterance": "7729-102255-0045",
+      "target_deg": 60,
+      "masker_deg": -50,
+      "nominal_rt60_s": 0.3,
+      "snr_left_db": 5,
+      "frames_48k": 144000,
+      "frames_calibration_48k": 48000,
+      "method": "reference",
+      "ears": [
+        {
+          "haspi_v2": 0.7565433424456643,
+          "hasqi_v2": 0.2764276128888728,
+          "si_sdr_db": 5.58958974996645,
+          "output_level_change_db": 1.0996775079042664
+        },
+        {
+          "haspi_v2": 0.8549806806400256,
+          "hasqi_v2": 0.27956843532961695,
+          "si_sdr_db": 5.932818895176614,
+          "output_level_change_db": 1.016867520044881
+        }
+      ],
+      "ild_error_db": 0.011295206384229872,
+      "itd_error_us": 62.5,
+      "clip_fraction_after_fitting": 0.0,
+      "metric_compute_s": 11.473282968000035,
+      "algorithmic_delay_ms": 10.666666666666666,
+      "doa_mean_absolute_error_deg": 107.17948717948718,
+      "doa_within_10deg_fraction": 0.03418803418803419,
+      "target_only": {
+        "si_sdr_db": [
+          36.63178062940174,
+          36.9737283271272
+        ],
+        "level_change_db": [
+          0.004659322648361751,
+          0.004862108697745268
+        ],
+        "output_snr_db": [
+          5.510032653808594,
+          5.860444068908691
+        ]
+      }
+    },
+    {
+      "id": "7729_rt0.3_snr5",
+      "speaker": "7729",
+      "utterance": "7729-102255-0045",
+      "target_deg": 60,
+      "masker_deg": -50,
+      "nominal_rt60_s": 0.3,
+      "snr_left_db": 5,
+      "frames_48k": 144000,
+      "frames_calibration_48k": 48000,
+      "method": "das",
+      "ears": [
+        {
+          "haspi_v2": 0.7857168405990592,
+          "hasqi_v2": 0.2629743242909678,
+          "si_sdr_db": 3.611744255641037,
+          "output_level_change_db": -0.22803201574986723
+        },
+        {
+          "haspi_v2": 0.8282196030533447,
+          "hasqi_v2": 0.25942078827564446,
+          "si_sdr_db": 3.605848737427555,
+          "output_level_change_db": -0.25218664317272316
+        }
+      ],
+      "ild_error_db": 0.1373933032104192,
+      "itd_error_us": 125.0,
+      "clip_fraction_after_fitting": 0.0,
+      "metric_compute_s": 10.599576662999993,
+      "algorithmic_delay_ms": 10.666666666666666,
+      "doa_mean_absolute_error_deg": 107.17948717948718,
+      "doa_within_10deg_fraction": 0.03418803418803419,
+      "target_only": {
+        "si_sdr_db": [
+          6.486414001482387,
+          6.385469808076852
+        ],
+        "level_change_db": [
+          -0.939650951166518,
+          -0.9583663726457308
+        ],
+        "output_snr_db": [
+          7.559549331665039,
+          7.596187114715576
+        ]
+      }
+    },
+    {
+      "id": "7729_rt0.3_snr5",
+      "speaker": "7729",
+      "utterance": "7729-102255-0045",
+      "target_deg": 60,
+      "masker_deg": -50,
+      "nominal_rt60_s": 0.3,
+      "snr_left_db": 5,
+      "frames_48k": 144000,
+      "frames_calibration_48k": 48000,
+      "method": "mvdr_known",
+      "ears": [
+        {
+          "haspi_v2": 0.7504133044071322,
+          "hasqi_v2": 0.25519006651347725,
+          "si_sdr_db": 2.191617961447265,
+          "output_level_change_db": -1.158266851974893
+        },
+        {
+          "haspi_v2": 0.7931834875826602,
+          "hasqi_v2": 0.2629951738909536,
+          "si_sdr_db": 2.993207468523638,
+          "output_level_change_db": -1.1812645555141623
+        }
+      ],
+      "ild_error_db": 0.13739692186428287,
+      "itd_error_us": 125.0,
+      "clip_fraction_after_fitting": 0.0,
+      "metric_compute_s": 11.529519075999929,
+      "algorithmic_delay_ms": 10.666666666666666,
+      "doa_mean_absolute_error_deg": 107.17948717948718,
+      "doa_within_10deg_fraction": 0.03418803418803419,
+      "target_only": {
+        "si_sdr_db": [
+          3.6939507148219572,
+          4.729045872307394
+        ],
+        "level_change_db": [
+          -1.6950882037122197,
+          -1.7182684848556167
+        ],
+        "output_snr_db": [
+          8.960372924804688,
+          8.959474563598633
+        ]
+      }
+    },
+    {
+      "id": "7729_rt0.3_snr5",
+      "speaker": "7729",
+      "utterance": "7729-102255-0045",
+      "target_deg": 60,
+      "masker_deg": -50,
+      "nominal_rt60_s": 0.3,
+      "snr_left_db": 5,
+      "frames_48k": 144000,
+      "frames_calibration_48k": 48000,
+      "method": "mvdr_estimated",
+      "ears": [
+        {
+          "haspi_v2": 0.37453495223374494,
+          "hasqi_v2": 0.16532209256106453,
+          "si_sdr_db": -30.78796189271959,
+          "output_level_change_db": -2.005931201300214
+        },
+        {
+          "haspi_v2": 0.5590114468232728,
+          "hasqi_v2": 0.16859122144064043,
+          "si_sdr_db": -21.867539271901318,
+          "output_level_change_db": -1.9403444316141727
+        }
+      ],
+      "ild_error_db": 0.2679700185493944,
+      "itd_error_us": 687.5,
+      "clip_fraction_after_fitting": 0.0,
+      "metric_compute_s": 12.327919688000065,
+      "algorithmic_delay_ms": 10.666666666666666,
+      "doa_mean_absolute_error_deg": 107.17948717948718,
+      "doa_within_10deg_fraction": 0.03418803418803419
+    },
+    {
+      "id": "7729_rt0.3_snr5",
+      "speaker": "7729",
+      "utterance": "7729-102255-0045",
+      "target_deg": 60,
+      "masker_deg": -50,
+      "nominal_rt60_s": 0.3,
+      "snr_left_db": 5,
+      "frames_48k": 144000,
+      "frames_calibration_48k": 48000,
+      "method": "mvdr_rnnoise",
+      "ears": [
+        {
+          "haspi_v2": 0.5971749773894374,
+          "hasqi_v2": 0.3999533037790019,
+          "si_sdr_db": 3.260405979712485,
+          "output_level_change_db": -1.991834945190005
+        },
+        {
+          "haspi_v2": 0.7534111947386808,
+          "hasqi_v2": 0.4150281458052555,
+          "si_sdr_db": 4.0302179191331895,
+          "output_level_change_db": -2.0157296349282423
+        }
+      ],
+      "ild_error_db": 0.13262474862350204,
+      "itd_error_us": 125.0,
+      "clip_fraction_after_fitting": 0.0,
+      "metric_compute_s": 11.408107134000034,
+      "algorithmic_delay_ms": 40.666666666666664,
+      "doa_mean_absolute_error_deg": 107.17948717948718,
+      "doa_within_10deg_fraction": 0.03418803418803419
+    },
+    {
+      "id": "7729_rt0.3_snr5",
+      "speaker": "7729",
+      "utterance": "7729-102255-0045",
+      "target_deg": 60,
+      "masker_deg": -50,
+      "nominal_rt60_s": 0.3,
+      "snr_left_db": 5,
+      "frames_48k": 144000,
+      "frames_calibration_48k": 48000,
+      "method": "neural_mvdr",
+      "ears": [
+        {
+          "haspi_v2": 0.9127376891688657,
+          "hasqi_v2": 0.37239454053699467,
+          "si_sdr_db": 6.654616651927464,
+          "output_level_change_db": -4.7916587189832
+        },
+        {
+          "haspi_v2": 0.9433715680612756,
+          "hasqi_v2": 0.36293904829318446,
+          "si_sdr_db": 6.636074141583039,
+          "output_level_change_db": -4.817389877960007
+        }
+      ],
+      "ild_error_db": 0.11769006906682766,
+      "itd_error_us": 0.0,
+      "clip_fraction_after_fitting": 0.0,
+      "metric_compute_s": 10.489695690999952,
+      "algorithmic_delay_ms": null
+    }
+  ],
+  "completed_rows": 96,
+  "complete": true,
+  "peak_process_rss_bytes": 400359424,
+  "scoring_execution": {
+    "workers": 4,
+    "rss_scope": "Maximum individual scoring-worker RSS; not sum of concurrent workers",
+    "worker_math_threads": 1
+  }
+}

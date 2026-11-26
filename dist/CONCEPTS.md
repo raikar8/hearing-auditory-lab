@@ -274,7 +274,7 @@ For a stronger next study, cross speakers with multiple geometries, use longer u
 - **[R4]** ASHA, [Hearing Aids for Adults](https://www.asha.org/practice-portal/professional-issues/hearing-aids-for-adults/). Assessment, verification and validation.
 - **[R5]** Byrne & Dillon (1986), *The National Acoustic Laboratories' (NAL) new procedure for selecting the gain and frequency response of a hearing aid*, [doi:10.1097/00003446-198608000-00007](https://doi.org/10.1097/00003446-198608000-00007).
 - **[R6]** Keidser et al. (2011), *The NAL-NL2 Prescription Procedure*, [doi:10.4081/audiores.2011.e24](https://doi.org/10.4081/audiores.2011.e24); [full text](https://pmc.ncbi.nlm.nih.gov/articles/PMC4627149/).
-- **[R7]** Spriet, Doclo, Moonen & Wouters (2006), *Adaptive feedback cancellation in hearing aids*, [author manuscript](https://ftp.esat.kuleuven.be/pub/SISTA/spriet/reports/05-243.pdf). Follow the closed-loop identification problem.
+- **[R7]** Spriet, Rombouts, Moonen & Wouters (2006), *Adaptive feedback cancellation in hearing aids*, [author manuscript](https://ftp.esat.kuleuven.be/pub/SISTA/spriet/reports/05-243.pdf). Follow the closed-loop identification problem.
 
 **Spatial and neural processing**
 

@@ -1,0 +1,12 @@
+\begin{table}[htbp]\centering\small
+\caption{Anechoic versus requested RT60 0.3 s; each averages both SNRs.}
+\begin{tabular}{lrrrr}\toprule
+Method & HASPI 0 & HASQI 0 & HASPI .3 & HASQI .3 \\
+\midrule
+Reference pair & 0.675 & 0.220 & 0.780 & 0.259 \\
+Delay-and-sum & 0.831 & 0.317 & 0.832 & 0.286 \\
+MVDR known & 0.998 & 0.876 & 0.851 & 0.378 \\
+MVDR estimated & 0.983 & 0.523 & 0.408 & 0.150 \\
+MVDR + RNNoise & 0.993 & 0.883 & 0.800 & 0.433 \\
+Neural MVDR (offline) & 0.806 & 0.407 & 0.820 & 0.299 \\
+\bottomrule\end{tabular}\end{table}

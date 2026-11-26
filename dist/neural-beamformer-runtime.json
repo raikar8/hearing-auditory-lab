@@ -1,0 +1,229 @@
+{
+  "provenance": {
+    "model": "speechbrain/metricgan-plus-voicebank",
+    "revision": "a196ce26b3bdace6fa1d819017584bdbcce462a8",
+    "sha256": "147bfb866bac8264603546e035bf283370e716ed2f4b7412d308d2bcee88304f",
+    "weight_file_bytes": 7586021,
+    "parameters": 1895514,
+    "parameter_bytes": 7582056,
+    "load_ms": 86.43316900008813,
+    "license": "Apache-2.0",
+    "scope": "Offline log-magnitude mask converted to power ratio, then multichannel Souden MVDR. Not original-paper beamformer weights."
+  },
+  "host": "Linux-6.18.57-x86_64-with-glibc2.41",
+  "cpu": "AMD EPYC 7763 64-Core Processor",
+  "torch_version": "2.5.1+cpu",
+  "peak_process_rss_bytes": 398991360,
+  "timing_protocol": "One warm-up inference, then 16 clips sequentially; one Torch CPU thread; checkpoint loaded once. No intentional concurrent research jobs. RSS includes Python, Torch, SpeechBrain and activations.",
+  "scope": "16 kHz offline full-utterance neural mask-based MVDR, two output ears. RTF is throughput, not streaming latency. Single CPU thread, initialized once.",
+  "rows": [
+    {
+      "scene": "1320_rt0.0_snr0",
+      "timings": {
+        "stft_ms": 0.9689089999938005,
+        "network_and_mask_ms": 40.20583000010447,
+        "covariance_and_solve_ms": 14.336684999989302,
+        "istft_ms": 1.427705000082824,
+        "total_ms": 56.94659400001001
+      },
+      "rtf": 0.018982198000003336,
+      "offline_context_seconds": 3.0,
+      "algorithmic_delay_ms": null
+    },
+    {
+      "scene": "1320_rt0.0_snr5",
+      "timings": {
+        "stft_ms": 0.961975999985043,
+        "network_and_mask_ms": 40.63234700004159,
+        "covariance_and_solve_ms": 12.777353999922525,
+        "istft_ms": 2.44310100003986,
+        "total_ms": 56.820708999907765
+      },
+      "rtf": 0.01894023633330259,
+      "offline_context_seconds": 3.0,
+      "algorithmic_delay_ms": null
+    },
+    {
+      "scene": "1320_rt0.3_snr0",
+      "timings": {
+        "stft_ms": 0.9556040000688881,
+        "network_and_mask_ms": 37.25075399995603,
+        "covariance_and_solve_ms": 11.892942999907063,
+        "istft_ms": 1.5430509999987407,
+        "total_ms": 51.64871299996321
+      },
+      "rtf": 0.017216237666654404,
+      "offline_context_seconds": 3.0,
+      "algorithmic_delay_ms": null
+    },
+    {
+      "scene": "1320_rt0.3_snr5",
+      "timings": {
+        "stft_ms": 0.8854940000446732,
+        "network_and_mask_ms": 36.460939999983566,
+        "covariance_and_solve_ms": 10.832904999915627,
+        "istft_ms": 1.2343239999381694,
+        "total_ms": 49.41915200004132
+      },
+      "rtf": 0.01647305066668044,
+      "offline_context_seconds": 3.0,
+      "algorithmic_delay_ms": null
+    },
+    {
+      "scene": "5639_rt0.0_snr0",
+      "timings": {
+        "stft_ms": 0.7853960000829829,
+        "network_and_mask_ms": 38.89010399996096,
+        "covariance_and_solve_ms": 11.634119999939685,
+        "istft_ms": 1.3363250000111293,
+        "total_ms": 52.6510849999795
+      },
+      "rtf": 0.017550361666659835,
+      "offline_context_seconds": 3.0,
+      "algorithmic_delay_ms": null
+    },
+    {
+      "scene": "5639_rt0.0_snr5",
+      "timings": {
+        "stft_ms": 1.9215170000279613,
+        "network_and_mask_ms": 36.690416999931585,
+        "covariance_and_solve_ms": 12.687626000001728,
+        "istft_ms": 1.485863999960202,
+        "total_ms": 52.79141600010462
+      },
+      "rtf": 0.01759713866670154,
+      "offline_context_seconds": 3.0,
+      "algorithmic_delay_ms": null
+    },
+    {
+      "scene": "5639_rt0.3_snr0",
+      "timings": {
+        "stft_ms": 0.8506579999902897,
+        "network_and_mask_ms": 44.48469900000873,
+        "covariance_and_solve_ms": 13.561328000037065,
+        "istft_ms": 1.575752000007924,
+        "total_ms": 60.478617999933704
+      },
+      "rtf": 0.020159539333311233,
+      "offline_context_seconds": 3.0,
+      "algorithmic_delay_ms": null
+    },
+    {
+      "scene": "5639_rt0.3_snr5",
+      "timings": {
+        "stft_ms": 0.8464009999897826,
+        "network_and_mask_ms": 69.63054100003774,
+        "covariance_and_solve_ms": 26.83702199999516,
+        "istft_ms": 2.783417000046029,
+        "total_ms": 100.10469399992417
+      },
+      "rtf": 0.03336823133330805,
+      "offline_context_seconds": 3.0,
+      "algorithmic_delay_ms": null
+    },
+    {
+      "scene": "260_rt0.0_snr0",
+      "timings": {
+        "stft_ms": 4.656393000004755,
+        "network_and_mask_ms": 65.62161900001229,
+        "covariance_and_solve_ms": 14.557337000042025,
+        "istft_ms": 1.2997960000120656,
+        "total_ms": 86.14175800005341
+      },
+      "rtf": 0.02871391933335114,
+      "offline_context_seconds": 3.0,
+      "algorithmic_delay_ms": null
+    },
+    {
+      "scene": "260_rt0.0_snr5",
+      "timings": {
+        "stft_ms": 0.9695299999066265,
+        "network_and_mask_ms": 38.344927000025564,
+        "covariance_and_solve_ms": 10.438157000066894,
+        "istft_ms": 1.2797389999832376,
+        "total_ms": 51.03810299999623
+      },
+      "rtf": 0.017012700999998742,
+      "offline_context_seconds": 3.0,
+      "algorithmic_delay_ms": null
+    },
+    {
+      "scene": "260_rt0.3_snr0",
+      "timings": {
+        "stft_ms": 1.1786410000240721,
+        "network_and_mask_ms": 35.56594799999857,
+        "covariance_and_solve_ms": 13.507246000017403,
+        "istft_ms": 1.4664980000134165,
+        "total_ms": 51.724475000014536
+      },
+      "rtf": 0.01724149166667151,
+      "offline_context_seconds": 3.0,
+      "algorithmic_delay_ms": null
+    },
+    {
+      "scene": "260_rt0.3_snr5",
+      "timings": {
+        "stft_ms": 0.9236839999857693,
+        "network_and_mask_ms": 37.717385000064496,
+        "covariance_and_solve_ms": 12.991724000016802,
+        "istft_ms": 3.3303479999631236,
+        "total_ms": 54.969061999941005
+      },
+      "rtf": 0.018323020666647,
+      "offline_context_seconds": 3.0,
+      "algorithmic_delay_ms": null
+    },
+    {
+      "scene": "7729_rt0.0_snr0",
+      "timings": {
+        "stft_ms": 2.993078000031346,
+        "network_and_mask_ms": 38.93604999996114,
+        "covariance_and_solve_ms": 15.215376000014658,
+        "istft_ms": 1.3856870000381605,
+        "total_ms": 58.53694400002496
+      },
+      "rtf": 0.019512314666674985,
+      "offline_context_seconds": 3.0,
+      "algorithmic_delay_ms": null
+    },
+    {
+      "scene": "7729_rt0.0_snr5",
+      "timings": {
+        "stft_ms": 2.021344000013414,
+        "network_and_mask_ms": 58.66205099994204,
+        "covariance_and_solve_ms": 10.302063000040107,
+        "istft_ms": 1.3220680000358698,
+        "total_ms": 72.31283600003735
+      },
+      "rtf": 0.024104278666679118,
+      "offline_context_seconds": 3.0,
+      "algorithmic_delay_ms": null
+    },
+    {
+      "scene": "7729_rt0.3_snr0",
+      "timings": {
+        "stft_ms": 0.8799930000122913,
+        "network_and_mask_ms": 40.00322199999573,
+        "covariance_and_solve_ms": 12.87350300003709,
+        "istft_ms": 1.3839040000220848,
+        "total_ms": 55.14714499997808
+      },
+      "rtf": 0.01838238166665936,
+      "offline_context_seconds": 3.0,
+      "algorithmic_delay_ms": null
+    },
+    {
+      "scene": "7729_rt0.3_snr5",
+      "timings": {
+        "stft_ms": 0.9175640000194107,
+        "network_and_mask_ms": 38.04878400001144,
+        "covariance_and_solve_ms": 9.706761999950686,
+        "istft_ms": 1.3287209999361949,
+        "total_ms": 50.007028999971226
+      },
+      "rtf": 0.016669009666657075,
+      "offline_context_seconds": 3.0,
+      "algorithmic_delay_ms": null
+    }
+  ]
+}

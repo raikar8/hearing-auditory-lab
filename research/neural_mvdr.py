@@ -3,7 +3,7 @@ This hybrid uses a published pretrained single-channel enhancer, not a retrained
 reproduced Heymann model. Its bidirectional LSTM and utterance PSD are noncausal.
 """
 from pathlib import Path
-import time,hashlib,json
+import time,hashlib,json,platform,resource
 import torch,numpy as np
 from speechbrain.lobes.models.MetricGAN import EnhancementGenerator
 REVISION='a196ce26b3bdace6fa1d819017584bdbcce462a8'
@@ -39,6 +39,7 @@ class NeuralMVDR:
   return y.numpy().astype(float),times
 if __name__=='__main__':
  m=NeuralMVDR();root=Path('research/work');scenes=json.loads((root/'scenes.json').read_text())['scenes'];rows=[]
+ m.process(np.load(root/(scenes[0]['id']+'.npz'))['mixture']) # warm inference; no reload
  for s in scenes:
   x=np.load(root/(s['id']+'.npz'))['mixture'];y,t=m.process(x);np.save(root/(s['id']+'_neural_mvdr.npy'),y);rows.append({'scene':s['id'],'timings':t,'rtf':t['total_ms']/(x.shape[-1]/16),'offline_context_seconds':x.shape[-1]/16000,'algorithmic_delay_ms':None});print(s['id'],round(t['total_ms'],2),flush=True)
- Path('dist/neural-beamformer-runtime.json').write_text(json.dumps({'provenance':m.provenance,'scope':'16 kHz offline full-utterance neural mask-based MVDR, two output ears. RTF is throughput, not streaming latency. Single CPU thread, initialized once.','rows':rows},indent=2))
+ Path('dist/neural-beamformer-runtime.json').write_text(json.dumps({'provenance':m.provenance,'host':platform.platform(),'cpu':next((line.split(':',1)[1].strip() for line in Path('/proc/cpuinfo').read_text().splitlines() if line.startswith('model name')),platform.processor()) if Path('/proc/cpuinfo').exists() else platform.processor(),'torch_version':torch.__version__,'peak_process_rss_bytes':resource.getrusage(resource.RUSAGE_SELF).ru_maxrss*1024,'timing_protocol':'One warm-up inference, then 16 clips sequentially; one Torch CPU thread; checkpoint loaded once. No intentional concurrent research jobs. RSS includes Python, Torch, SpeechBrain and activations.','scope':'16 kHz offline full-utterance neural mask-based MVDR, two output ears. RTF is throughput, not streaming latency. Single CPU thread, initialized once.','rows':rows},indent=2))

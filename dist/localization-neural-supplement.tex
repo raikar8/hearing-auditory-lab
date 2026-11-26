@@ -1,0 +1,86 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[margin=22mm]{geometry}
+\usepackage{amsmath,amssymb,booktabs,longtable,graphicx}
+\usepackage[colorlinks=true,urlcolor=blue,linkcolor=blue,citecolor=blue]{hyperref}
+\emergencystretch=2em
+\title{Hearing Auditory Lab 0.4\\Localization, Neural Mask Beamforming and Perceptual Evaluation}
+\author{Research implementation report}
+\date{26 November 2026}
+\begin{document}\maketitle
+\begin{abstract}
+This supplement adds live SRP-PHAT localization, an offline pretrained neural mask-based MVDR experiment, and hearing-loss-aware evaluation to the earlier lab. Four development-held-out LibriSpeech speakers supply 16 synthetic scenes and 96 method--scene comparisons. Known steering, estimated steering, noise calibration and future context are explicitly distinguished. Results describe this implementation and small stimulus set, not clinical benefit or a state-of-the-art ranking. CONCEPTS.md provides the accompanying course in physiology, hardware, DSP and assessment.
+\end{abstract}
+\section{Architecture and information access}
+The original 44.1 kHz demonstration renders measured KEMAR ear responses and illustrates audiogram-dependent attenuation, approximate NAL-R fitting and educational compression. The separate 48 kHz array demonstration simulates four ideal microphones, without head scattering or room reflections. Its delay-and-sum and regularized MVDR implementations operate on microphone mixtures. RNNoise is a pretrained postfilter; the offline neural spatial beamformer is a different path.
+
+A robot can detect, localize, select a target, associate observations over time, track, and steer. DOA alone does not identify a speaker. Neural mask beamformers can instead infer covariance without an explicit angle stage \cite{heymann,souden}. Drones add rotor noise, wind, vibration and changing orientation. DREGON and LOCATA are useful future real-recording tests; neither is evaluated here \cite{dregon,locata}.
+
+\section{Live localization}
+Microphone coordinates in metres are $(-.09,.008)$, $(-.09,-.008)$, $(.09,.008)$ and $(.09,-.008)$. The 512-point STFT at 48 kHz uses a 128-sample hop. We reuse its spectra to form pairwise PHAT-normalized cross spectra over 300--4000 Hz:
+\[
+ C_{ij}(k,t)=\frac{X_i(k,t)X_j^*(k,t)}{\max(|X_i(k,t)X_j^*(k,t)|,\epsilon)}.
+\]
+Exponential smoothing has a 100 ms time constant. Steering phases matching the renderer's fractional-delay interpolation define an SRP-like score on a 5-degree horizontal grid. Updates occur every eight hops (21.33 ms). Four-microphone mode uses six pairs; two-ear mode uses microphones 0 and 2. A user-selected sector restricts candidates; it is a prior, not target truth.
+
+Peak contrast compares the best score with the best candidate at least 25 degrees away, normalized by the best score magnitude. The controller accepts valid estimates with contrast at least 0.02, otherwise holding the previous direction. This is an engineering gate, not a calibrated probability. Silence does not create a direction. The symmetric two-microphone geometry has front/back ambiguity. Smoothing is not identity tracking and may follow noise.
+
+Localization introduces no additional audio queue but does introduce control lag. The STFT path retains its 10.667 ms alignment delay. The pinned RNNoise adapter adds 30 ms. Device buffering and propagation are separate. Component execution quantiles and numeric-buffer allocations are reported; desktop throughput does not establish wearable energy or latency suitability.
+
+\section{Offline neural mask-based MVDR}
+SpeechBrain's MetricGAN+ checkpoint is pinned to revision \texttt{a196ce26b3bdace6fa1d819017584bdbcce462a8} and loaded once across scenes \cite{metricgan,model}. It has 1,895,514 parameters. CPU inference uses one Torch thread. Checkpoint SHA-256, file size, parameter bytes, host and runtime versions are committed in the runtime JSON. Weights are separately downloaded under the model-card Apache-2.0 license.
+
+Analysis uses 16 kHz, a 512-sample Hamming window and 256-sample hop. The network predicts a multiplier for log magnitudes. We recover a linear magnitude estimate before defining a power-mask proxy:
+\[
+ \widehat A=\exp\{M_{\log}\log(1+|X_0|)\}-1,\quad
+ m_s=\operatorname{clip}\left[(\widehat A/(|X_0|+\epsilon))^2,.001,.999\right].
+\]
+Using $m_n=1-m_s$, each covariance is a normalized weighted sum of $\mathbf x\mathbf x^H$. Noise covariance receives diagonal loading of 0.01 times its mean diagonal, with a numerical floor. Reference microphones $r\in\{0,2\}$ have Souden-style weights
+\[
+ \mathbf w_r=\frac{\mathbf R_n^{-1}\mathbf R_s}{\operatorname{tr}(\mathbf R_n^{-1}\mathbf R_s)}\mathbf u_r,
+ \qquad Y_r=\mathbf w_r^H\mathbf x.
+\]
+No clean stems or true DOA enter inference. Combining this single-channel pretrained estimate with multichannel analytical filtering is an experimental hybrid, not reproduction of Heymann's trained system or MetricGAN+'s published scores. The bidirectional network and whole-utterance covariance are noncausal. Three-second context is disclosed; RTF describes offline throughput, not finite live latency.
+
+\section{Evaluation protocol}
+The locked utterances are 1320-122617-0003, 5639-40744-0032, 260-123440-0018 and 7729-102255-0045. These speakers were not used for earlier lab development; disjointness from every third-party training source is not guaranteed. Each supplies its first three seconds with short fades. Each speaker has one assigned target/masker geometry, so speaker and geometry are confounded.
+
+Image-source responses use a $6\times5\times3$ m room, array centre $(3,2.5,1.5)$ m, 1.4 m source distance, and requested RT60 values 0 and 0.3 s. Responses are truncated at 0.4 s; requested RT60 is not measured decay time. Directional Gaussian noise has independent calibration and evaluation realizations. Left-reference SNR is 0 or 5 dB. A common scale sets target level at the left reference to 65 dB SPL under an assumed 100 dB SPL at digital RMS 1. This does not calibrate headphone playback.
+
+Five methods run the actual causal JavaScript DSP at 48 kHz: reference pair, known-direction delay-and-sum, known-direction MVDR, estimated-direction MVDR and known-direction MVDR plus RNNoise. Classical covariance is learned from one second of target-muted calibration and frozen. The sixth method is offline neural MVDR at 16 kHz. Fixed delays are removed offline for scoring. Quality metrics discard the initial 0.2 s; DOA errors discard the initial 0.5 s.
+
+The target-only room-filtered ear image is the reference, so the test does not require dry-speech recovery. Every method receives identical NAL-R FIR fitting (order 220 at 16 kHz; 110-sample delay removed offline), audiogram $[10,15,25,40,55,60]$ dB HL at $[250,500,1000,2000,4000,6000]$ Hz, and a $\pm0.89$ digital ceiling. HASPI v2 and HASQI v2 use pyclarity 0.9.0, fixed seeds and declared level mapping; HASQI equalisation is 1 \cite{kates}. Calibration privileges and future context differ across methods, so this is not a matched causal leaderboard.
+
+Pre-fitting diagnostics include SI-SDR, output level change, ILD error over 300--4000 Hz and pooled GCC-PHAT ITD error over 300--1500 Hz at 62.5 microsecond resolution. Cue errors compare output mixtures with target images, not human localization performance. Fixed linear methods also process target stems through the same frozen weights for target-only distortion and output-SNR decomposition. Separate nonlinear inference on clean/noise signals would not decompose the mixture output.
+
+\section{Measured results and limitations}
+Tables are generated from complete committed JSON. Ears are averaged within scenes, conditions within speakers, and speakers equally. Four short speaker examples do not support population confidence claims. Scoring workers process independent scenes with one math-library thread each. Runtime profiling runs separately, with one warm-up neural inference and one persistent model.
+\input{dist/v04-quality-table.tex}
+\input{dist/v04-room-table.tex}
+\input{dist/v04-localization-table.tex}
+\input{dist/v04-runtime-table.tex}
+
+Known steering and stationary calibrated noise favor MVDR. Estimated steering asks the harder question of whether the selected peak belongs to the desired source. A confident wrong-source estimate can suppress speech. The neural hybrid has future context but does not uniformly outperform the calibrated known-direction baseline. All six outputs for one reverberant scene are available at common playback gain.
+
+\section{Assessment beyond simulation}
+Hearing aids need bench characterization, individual-ear verification and listener outcomes. IEC 60118-0:2022 covers electroacoustic performance; IEC 60118-15:2012 uses the speech-like ISTS signal; IEC 61669:2015 with Amendment 1:2025 addresses real-ear acoustical measurement. ISO 21388-1:2026 describes fitting management and replaces the 2020 edition. These roles differ from vehicle telephony procedures ITU-T P.1100 and P.1110 and objective quality predictor P.863 \cite{iec,iso,itu}.
+
+The lab does not verify ear-canal SPL, implement a clinical nonlinear prescription, perform a standards-compliant hardware test or measure listener benefit. HASPI/HASQI are predictions, not certification. CONCEPTS.md explains hearing-aid components, physiology, fitting, compression, feedback versus automotive AEC, spatial processing and the assessment stack, with exercises and references.
+
+\section{Reproduction and next steps}
+README.md provides ordered setup, restoration, rendering, inference, scoring and profiling commands. Scripts pin data hashes and checkpoint revision. Raw scenes and model weights are excluded from the source archive; result JSON and selected derived audio are included. Tests cover reconstruction, spatial constraints, ambiguity, silence, persistent state and known metric invariances. Browser checks cover startup, calibration, estimated steering and result filters.
+
+Next evidence requires crossed speakers/geometries, longer clips, more audiograms, competing speech, diffuse and moving noise, measured BRIRs, microphone mismatch, causal neural masks and target association. Real robot or drone recordings must precede domain claims. Feedback-loop stability, calibrated real-ear tests and participant studies remain separate requirements.
+
+\begin{thebibliography}{99}
+\bibitem{heymann} J. Heymann, L. Drude and R. Haeb-Umbach, ``Neural Network Based Spectral Mask Estimation for Acoustic Beamforming,'' ICASSP, 2016. \url{https://groups.uni-paderborn.de/nt/pubs/2016/icassp_2016_heymann_paper.pdf}.
+\bibitem{souden} M. Souden, J. Benesty and S. Affes, ``On Optimal Frequency-Domain Multichannel Linear Filtering for Noise Reduction,'' IEEE TASLP, 2010. doi:10.1109/TASL.2009.2025790.
+\bibitem{metricgan} S.-W. Fu et al., ``MetricGAN+: An Improved Version of MetricGAN for Speech Enhancement,'' Interspeech, 2021. \url{https://arxiv.org/abs/2104.03538}.
+\bibitem{model} SpeechBrain, MetricGAN+ VoiceBank checkpoint. \url{https://huggingface.co/speechbrain/metricgan-plus-voicebank}.
+\bibitem{kates} J. M. Kates and K. H. Arehart, ``An overview of the HASPI and HASQI metrics for predicting speech intelligibility and speech quality for normal hearing, hearing loss, and hearing aids,'' Hearing Research 426, 108608, 2022. doi:10.1016/j.heares.2022.108608.
+\bibitem{dregon} DREGON dataset and IROS 2018 paper. \url{https://members.loria.fr/ADeleforge/the-dregon-dataset/}; doi:10.1109/IROS.2018.8593581.
+\bibitem{locata} LOCATA corpus. \url{https://www.locata.lms.tf.fau.de/corpus/}.
+\bibitem{iec} IEC official scopes: \url{https://webstore.iec.ch/en/publication/62974}; \url{https://webstore.iec.ch/en/publication/793}; \url{https://webstore.iec.ch/en/publication/105114}.
+\bibitem{iso} ISO 21388-1:2026. \url{https://www.iso.org/standard/90817.html}.
+\bibitem{itu} ITU-T P.1100, P.1110 and P.863. \url{https://www.itu.int/rec/T-REC-P/en}.
+\end{thebibliography}
+\end{document}
